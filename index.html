@@ -1,1 +1,1864 @@
+<!DOCTYPE html>
 
+<html class="h-full bg-[#0C0B08] antialiased" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="#0C0B08" name="theme-color"/>
+<title>Desperados - Auténtica Comida Mexicana</title>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Young Serif & Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Young+Serif&amp;display=swap" rel="stylesheet"/>
+<!-- FontAwesome Icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script data-purpose="tailwind-config">
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          brand: {
+            black: '#0C0B08',
+            card: '#16140F',
+            cardSoft: '#1C1812',
+            border: '#2A241A',
+            red: '#EB3018',
+            yellow: '#FBC31C',
+            terracotta: '#B5873C',
+            olive: '#475323'
+          }
+        },
+        fontFamily: {
+          serif: ['"Young Serif"', 'serif'],
+          sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+        }
+      }
+    }
+  }
+</script>
+<style>
+  /* Custom scrollbar hiding */
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  /* Papel Picado Festive Garland Simulation */
+  .garland-banner {
+    background-image: radial-gradient(#FBC31C 1.5px, transparent 1.5px), radial-gradient(#EB3018 1.5px, #0C0B08 1.5px);
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
+  }
+
+  /* Screen Transition Smoothness */
+  .screen {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.25s ease-in-out;
+  }
+  .screen.active {
+    display: flex;
+    opacity: 1;
+  }
+
+  /* Smooth pulse & ripple */
+  @keyframes ripple {
+    0% { transform: scale(0.9); opacity: 0.8; }
+    50% { transform: scale(1.15); opacity: 0.3; }
+    100% { transform: scale(0.9); opacity: 0.8; }
+  }
+  .animate-pulse-ring {
+    animation: ripple 2s infinite ease-in-out;
+  }
+</style>
+</head>
+<body class="h-full bg-[#050504] text-stone-200 font-sans flex justify-center selection:bg-brand-red selection:text-white select-none">
+<!-- Mobile Frame Container (Strict 390px - 430px layout standard) -->
+<div class="w-full max-w-md min-h-screen bg-[#0C0B08] flex flex-col relative pb-20 shadow-2xl border-x border-[#221c13] overflow-x-hidden" id="appContainer">
+<!-- ================= TOP STATUS BAR (SIMULATED iOS) ================= -->
+<header class="sticky top-0 z-50 bg-[#0C0B08]/90 backdrop-blur-md px-6 pt-3 pb-2 flex justify-between items-center text-xs font-semibold text-stone-300">
+<span class="tracking-tight text-sm font-semibold" id="currentTime">9:41</span>
+<div class="flex items-center space-x-2">
+<i class="fa-solid fa-signal text-[11px]"></i>
+<i class="fa-solid fa-wifi text-[11px]"></i>
+<i class="fa-solid fa-battery-full text-sm text-brand-yellow"></i>
+</div>
+</header>
+<!-- ================= TOAST NOTIFICATION CONTAINER ================= -->
+<div class="fixed top-14 left-1/2 -translate-x-1/2 z-50 bg-brand-red text-white text-xs font-semibold px-4 py-2.5 rounded-full shadow-lg border border-brand-yellow/30 flex items-center gap-2 transition-all duration-300 opacity-0 pointer-events-none transform -translate-y-4" id="toast">
+<i class="fa-solid fa-circle-check text-brand-yellow"></i>
+<span id="toastMsg">Producto agregado al carrito</span>
+</div>
+<!-- ================= MODAL: EDITAR PERFIL ================= -->
+<div class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center px-6 transition-all" id="editProfileModal">
+<div class="w-full bg-[#16140F] border border-brand-border rounded-3xl p-6 shadow-2xl relative">
+<div class="flex justify-between items-center pb-3 border-b border-brand-border">
+<h3 class="font-serif text-lg text-stone-100">Editar Perfil</h3>
+<button class="w-8 h-8 rounded-full bg-[#201B12] text-stone-400 hover:text-white flex items-center justify-center" onclick="closeEditProfileModal()">
+<i class="fa-solid fa-xmark text-sm"></i>
+</button>
+</div>
+<div class="mt-4 space-y-4">
+<div>
+<label class="block text-xs font-semibold text-brand-yellow uppercase tracking-wider mb-1.5">Nombre y Apellido</label>
+<input class="w-full bg-[#100E0A] border border-brand-border rounded-xl px-4 py-3 text-sm text-stone-100 focus:outline-none focus:border-brand-yellow" id="modalInputName" placeholder="Ej. Ana Torres" type="text"/>
+</div>
+<div>
+<label class="block text-xs font-semibold text-brand-yellow uppercase tracking-wider mb-1.5">Correo electrónico</label>
+<input class="w-full bg-[#100E0A] border border-brand-border rounded-xl px-4 py-3 text-sm text-stone-100 focus:outline-none focus:border-brand-yellow" id="modalInputEmail" placeholder="ana.torres@email.com" type="email"/>
+</div>
+<div class="flex gap-3 pt-2">
+<button class="flex-1 py-3 rounded-xl border border-brand-border text-stone-300 font-semibold text-xs hover:bg-[#201B12]" onclick="closeEditProfileModal()" type="button">Cancelar</button>
+<button class="flex-1 py-3 rounded-xl bg-brand-red text-white font-bold text-xs shadow-md shadow-brand-red/30 hover:bg-[#c92510]" onclick="saveUserProfile()" type="button">Guardar cambios</button>
+</div>
+</div>
+</div>
+</div>
+<!-- ================= PANTALLA 1: SPLASH / BIENVENIDA ================= -->
+<main class="screen active flex-col flex-1 px-6 justify-between py-8 relative overflow-hidden text-center" id="screen-splash">
+<!-- Festive Papel Picado Garland Decoration (Referencia: IMAGE_10 & IMAGE_2) -->
+<div class="absolute top-0 left-0 right-0 h-14 flex justify-between items-center px-2 opacity-90 z-10 pointer-events-none">
+<div class="w-10 h-8 bg-brand-red rounded-b-lg border-t-2 border-brand-yellow flex items-center justify-center text-xs shadow">🌮</div>
+<div class="w-10 h-8 bg-brand-yellow rounded-b-lg border-t-2 border-brand-red flex items-center justify-center text-xs shadow">🌶️</div>
+<div class="w-10 h-8 bg-brand-olive rounded-b-lg border-t-2 border-brand-yellow flex items-center justify-center text-xs shadow">🌵</div>
+<div class="w-10 h-8 bg-brand-red rounded-b-lg border-t-2 border-brand-yellow flex items-center justify-center text-xs shadow">💀</div>
+<div class="w-10 h-8 bg-brand-yellow rounded-b-lg border-t-2 border-brand-red flex items-center justify-center text-xs shadow">✨</div>
+<div class="w-10 h-8 bg-brand-terracotta rounded-b-lg border-t-2 border-brand-yellow flex items-center justify-center text-xs shadow">🪅</div>
+</div>
+<!-- Central Branding -->
+<div class="my-auto flex flex-col items-center pt-8">
+<div class="relative mb-4">
+<div class="w-48 h-48 rounded-full bg-gradient-to-tr from-brand-red/30 via-brand-yellow/20 to-transparent absolute -inset-4 blur-2xl"></div>
+<img alt="Desperados Logo Oficial" class="w-48 h-48 object-contain relative drop-shadow-[0_16px_30px_rgba(235,48,24,0.5)] transform hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAF9IKEbdziGjdL5K6aIrlGML_ZnwXF9_YxI1-eSycJFH_01Xv-E0Fz-ibIExaYaagkxC4j2znqFjKKavOgQCLaPrgsPL9N8LPgB_8h3E-f5ulY56hXLKtBa6TuDg8WUo8vdqKhaDJG1iaoHXcLzE1Mp7u1fB0Eoynv50h9RGt5RxHv8ejop4xNeCq0ODp5e6-mlCFe9wQvQV2FkczmiedT6tTx5R8SNpChpOohSYHHPZ36xreEclU"/>
+</div>
+<h1 class="font-serif text-4xl text-stone-100 tracking-wide mt-2">Desperados</h1>
+<div class="flex items-center justify-center gap-2 mt-2">
+<span class="h-0.5 w-6 bg-brand-yellow"></span>
+<p class="text-[11px] uppercase tracking-widest text-brand-yellow font-extrabold">Auténtica Comida Mexicana</p>
+<span class="h-0.5 w-6 bg-brand-yellow"></span>
+</div>
+<p class="text-stone-300 text-xs mt-3 px-6 font-normal leading-relaxed">
+      Tradición familiar, chiles de cosecha propia y sabor genuino directo a tu mesa en Murcia.
+    </p>
+<!-- Traditional Decorative Border / Cacti Motifs -->
+<div class="flex items-center gap-5 mt-5 text-brand-terracotta opacity-85 text-lg">
+<i class="fa-solid fa-pepper-hot text-brand-red"></i>
+<span>•</span>
+<i class="fa-solid fa-cactus text-brand-yellow"></i>
+<span>•</span>
+<i class="fa-solid fa-skull text-stone-300"></i>
+<span>•</span>
+<i class="fa-solid fa-fire text-brand-yellow"></i>
+</div>
+</div>
+<!-- Splash Action Buttons -->
+<div class="w-full space-y-3 mt-4">
+<button class="w-full py-4 rounded-2xl bg-gradient-to-r from-brand-red to-[#b91e0a] text-white font-bold text-sm tracking-wide shadow-lg shadow-brand-red/40 active:scale-95 transition-all flex items-center justify-center gap-2" onclick="navigateTo('screen-login')">
+<span>Comenzar</span>
+<i class="fa-solid fa-arrow-right text-xs"></i>
+</button>
+<button class="text-xs text-brand-yellow hover:text-white py-1 block w-full tracking-wide" onclick="continueAsGuest()">
+      Continuar como invitado
+    </button>
+</div>
+</main>
+<!-- ================= PANTALLA 2: LOGIN / INICIAR SESIÓN ================= -->
+<main class="screen flex-col flex-1 px-6 py-6 justify-between" id="screen-login">
+<div>
+<div class="flex items-center justify-between mb-4">
+<button class="w-10 h-10 rounded-full bg-[#1A1712] border border-brand-border flex items-center justify-center text-stone-300 hover:text-brand-yellow" onclick="navigateTo('screen-splash')">
+<i class="fa-solid fa-chevron-left text-sm"></i>
+</button>
+<img alt="Desperados" class="h-10 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAF9IKEbdziGjdL5K6aIrlGML_ZnwXF9_YxI1-eSycJFH_01Xv-E0Fz-ibIExaYaagkxC4j2znqFjKKavOgQCLaPrgsPL9N8LPgB_8h3E-f5ulY56hXLKtBa6TuDg8WUo8vdqKhaDJG1iaoHXcLzE1Mp7u1fB0Eoynv50h9RGt5RxHv8ejop4xNeCq0ODp5e6-mlCFe9wQvQV2FkczmiedT6tTx5R8SNpChpOohSYHHPZ36xreEclU"/>
+<div class="w-10"></div>
+</div>
+<div class="mt-4">
+<h2 class="font-serif text-2xl text-stone-100">¡Bienvenido a Desperados!</h2>
+<p class="text-xs text-stone-400 mt-1">Tu antojo mexicano, más cerca de lo que imaginas.</p>
+</div>
+<!-- Login Form -->
+<form class="mt-6 space-y-4" onsubmit="handleLogin(event)">
+<div>
+<label class="block text-xs font-semibold text-brand-yellow uppercase tracking-wider mb-1.5">Correo electrónico</label>
+<div class="relative">
+<i class="fa-regular fa-envelope absolute left-4 top-3.5 text-stone-500 text-sm"></i>
+<input class="w-full bg-[#181510] text-sm text-stone-200 placeholder-stone-600 rounded-xl pl-11 pr-4 py-3 border border-brand-border focus:outline-none focus:border-brand-yellow focus:ring-1 focus:ring-brand-yellow" id="loginEmail" placeholder="tucorreo@ejemplo.com" required="" type="email" value="ana.torres@email.com"/>
+</div>
+</div>
+<div>
+<label class="block text-xs font-semibold text-brand-yellow uppercase tracking-wider mb-1.5">Contraseña</label>
+<div class="relative">
+<i class="fa-solid fa-lock absolute left-4 top-3.5 text-stone-500 text-sm"></i>
+<input class="w-full bg-[#181510] text-sm text-stone-200 placeholder-stone-600 rounded-xl pl-11 pr-11 py-3 border border-brand-border focus:outline-none focus:border-brand-yellow focus:ring-1 focus:ring-brand-yellow" id="loginPassword" placeholder="••••••••" required="" type="password" value="tacos123"/>
+<button class="absolute right-3.5 top-3.5 text-stone-400 hover:text-stone-200 text-xs" onclick="togglePasswordVisibility()" type="button">
+<i class="fa-regular fa-eye" id="loginEyeIcon"></i>
+</button>
+</div>
+</div>
+<div class="flex items-center justify-between text-xs pt-1">
+<label class="flex items-center gap-2 cursor-pointer text-stone-400">
+<input checked="" class="rounded bg-[#1A1712] border-brand-border text-brand-red focus:ring-brand-red" type="checkbox"/>
+<span>Recordarme</span>
+</label>
+<a class="text-brand-yellow hover:underline" href="#" onclick="showToast('Enlace de recuperación enviado por email'); return false;">¿Olvidaste tu contraseña?</a>
+</div>
+<button class="w-full mt-4 py-3.5 rounded-xl bg-gradient-to-r from-brand-red to-[#b91e0a] text-white font-bold text-sm tracking-wide shadow-lg shadow-brand-red/30 active:scale-95 transition-all" type="submit">
+        Iniciar sesión
+      </button>
+</form>
+<!-- Social Logins -->
+<div class="mt-6 text-center">
+<div class="relative flex py-2 items-center">
+<div class="flex-grow border-t border-brand-border"></div>
+<span class="flex-shrink mx-3 text-stone-500 text-xs uppercase tracking-wider">o continúa con</span>
+<div class="flex-grow border-t border-brand-border"></div>
+</div>
+<div class="flex justify-center gap-4 mt-3">
+<button class="w-12 h-12 rounded-xl bg-[#1A1712] border border-brand-border flex items-center justify-center text-stone-200 hover:text-brand-yellow hover:border-brand-yellow/40 transition-colors" onclick="quickSocialLogin('Google')">
+<i class="fa-brands fa-google text-lg text-red-400"></i>
+</button>
+<button class="w-12 h-12 rounded-xl bg-[#1A1712] border border-brand-border flex items-center justify-center text-stone-200 hover:text-brand-yellow hover:border-brand-yellow/40 transition-colors" onclick="quickSocialLogin('Apple')">
+<i class="fa-brands fa-apple text-xl"></i>
+</button>
+<button class="w-12 h-12 rounded-xl bg-[#1A1712] border border-brand-border flex items-center justify-center text-stone-200 hover:text-brand-yellow hover:border-brand-yellow/40 transition-colors" onclick="quickSocialLogin('Facebook')">
+<i class="fa-brands fa-facebook-f text-lg text-blue-400"></i>
+</button>
+</div>
+</div>
+</div>
+<div class="text-center text-xs text-stone-400 pt-4">
+    ¿No tienes una cuenta? <a class="text-brand-yellow font-bold hover:underline" href="#" onclick="showQuickRegisterModal()">Regístrate</a>
+</div>
+</main>
+<!-- ================= PANTALLA 3: HOME / INICIO ================= -->
+<main class="screen flex-col flex-1 px-5 pt-3" id="screen-home">
+<!-- Top Garland -->
+<div class="flex justify-between items-center -mx-5 px-3 py-1 opacity-80 mb-2 border-b border-[#2A241A]/50 bg-[#120F0A]">
+<span class="text-xs">🌮</span>
+<span class="text-xs">🌶️</span>
+<span class="text-xs">🌵</span>
+<span class="text-xs">💀</span>
+<span class="text-xs">✨</span>
+<span class="text-xs">🪅</span>
+<span class="text-xs">🌮</span>
+</div>
+<!-- Top Bar -->
+<div class="flex items-center justify-between">
+<button class="w-10 h-10 rounded-full bg-[#1A1712] border border-brand-border flex items-center justify-center text-brand-yellow hover:text-white" onclick="openMenu()">
+<i class="fa-solid fa-bars-staggered text-sm"></i>
+</button>
+<div class="flex items-center gap-2 cursor-pointer" onclick="navigateTo('screen-home')">
+<img alt="Desperados Logo" class="h-12 w-auto object-contain drop-shadow-[0_4px_12px_rgba(235,48,24,0.4)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAF9IKEbdziGjdL5K6aIrlGML_ZnwXF9_YxI1-eSycJFH_01Xv-E0Fz-ibIExaYaagkxC4j2znqFjKKavOgQCLaPrgsPL9N8LPgB_8h3E-f5ulY56hXLKtBa6TuDg8WUo8vdqKhaDJG1iaoHXcLzE1Mp7u1fB0Eoynv50h9RGt5RxHv8ejop4xNeCq0ODp5e6-mlCFe9wQvQV2FkczmiedT6tTx5R8SNpChpOohSYHHPZ36xreEclU"/>
+</div>
+<button class="w-10 h-10 rounded-full bg-[#1A1712] border border-brand-border flex items-center justify-center text-brand-yellow relative" onclick="navigateTo('screen-tracking')">
+<i class="fa-regular fa-bell text-sm"></i>
+<span class="absolute top-2 right-2 w-2.5 h-2.5 bg-brand-red rounded-full ring-2 ring-[#0C0B08]"></span>
+</button>
+</div>
+<!-- Welcome Greeting con Nombre Dinámico -->
+<div class="mt-4">
+<h1 class="font-serif text-2xl text-stone-100 tracking-wide mt-1">
+      Hola, <span id="homeUserName">Ana</span> <span class="inline-block animate-pulse">👋</span>
+</h1>
+<p class="text-xs text-brand-terracotta font-medium mt-0.5">
+      ¿Qué antojo mexicano tienes hoy?
+    </p>
+</div>
+<!-- Live Search Bar -->
+<div class="relative mt-4">
+<i class="fa-solid fa-magnifying-glass absolute left-4 top-3.5 text-brand-terracotta text-sm"></i>
+<input class="w-full bg-[#181510] text-sm text-stone-200 placeholder-stone-500 rounded-2xl pl-11 pr-11 py-3 border border-[#2c2419] focus:outline-none focus:border-brand-yellow focus:ring-1 focus:ring-brand-yellow" id="homeSearchInput" oninput="filterHomeProducts(this.value)" placeholder="Buscar tacos, burritos, quesadillas..." type="text"/>
+<button class="absolute right-2.5 top-2.5 w-7 h-7 rounded-xl bg-brand-red/20 border border-brand-red/30 flex items-center justify-center text-brand-yellow hover:bg-brand-red hover:text-white" onclick="navigateTo('screen-products-list')">
+<i class="fa-solid fa-sliders text-xs"></i>
+</button>
+</div>
+<!-- Category Quick Chips (exactos de IMAGE_2 y referencia) -->
+<div class="mt-5">
+<div class="flex justify-between items-center mb-2.5">
+<h2 class="font-serif text-lg text-stone-100">Categorías</h2>
+<button class="text-xs text-brand-yellow font-semibold hover:underline" onclick="navigateTo('screen-categories')">Ver carta</button>
+</div>
+<div class="grid grid-cols-4 gap-2.5 text-center">
+<button class="flex flex-col items-center gap-1.5" onclick="filterCategoryAndOpen('Tacos')">
+<div class="w-14 h-14 rounded-full bg-brand-red border-2 border-brand-yellow/60 flex items-center justify-center shadow-lg text-white">
+<i class="fa-solid fa-utensils text-base"></i>
+</div>
+<span class="text-xs font-semibold text-brand-yellow">Tacos</span>
+</button>
+<button class="flex flex-col items-center gap-1.5" onclick="filterCategoryAndOpen('Burritos')">
+<div class="w-14 h-14 rounded-full bg-brand-terracotta/40 border border-brand-border flex items-center justify-center text-brand-yellow hover:border-brand-yellow">
+<i class="fa-solid fa-bread-slice text-base"></i>
+</div>
+<span class="text-xs text-stone-400">Burritos</span>
+</button>
+<button class="flex flex-col items-center gap-1.5" onclick="filterCategoryAndOpen('Quesadillas')">
+<div class="w-14 h-14 rounded-full bg-brand-red/30 border border-brand-border flex items-center justify-center text-brand-yellow hover:border-brand-yellow">
+<i class="fa-solid fa-cheese text-base"></i>
+</div>
+<span class="text-xs text-stone-400">Quesadillas</span>
+</button>
+<button class="flex flex-col items-center gap-1.5" onclick="filterCategoryAndOpen('Enchiladas')">
+<div class="w-14 h-14 rounded-full bg-brand-terracotta/30 border border-brand-border flex items-center justify-center text-brand-yellow hover:border-brand-yellow">
+<i class="fa-solid fa-pepper-hot text-base text-brand-red"></i>
+</div>
+<span class="text-xs text-stone-400">Enchiladas</span>
+</button>
+</div>
+</div>
+<!-- Platillo Estrella Hero Card (exacto de IMAGE_2) -->
+<div class="mt-5 relative bg-brand-red rounded-3xl p-4 border border-brand-yellow/40 shadow-xl overflow-hidden flex items-center justify-between text-white">
+<div class="max-w-[55%] z-10">
+<h3 class="font-serif text-xl font-bold leading-tight">Tacos al pastor</h3>
+<p class="text-xs text-stone-200 mt-1">El clásico que nunca falla</p>
+<div class="mt-2 text-brand-yellow font-serif text-lg font-bold">$22.00</div>
+<button class="mt-2.5 inline-flex items-center gap-1.5 bg-[#B91E0A] hover:bg-black text-white text-xs font-bold px-4 py-2 rounded-xl shadow-md border border-brand-yellow/30 active:scale-95 transition-all" onclick="openProductDetail(0)">
+<span>Ordenar ahora</span>
+</button>
+</div>
+<div class="w-32 h-32 rounded-2xl overflow-hidden relative shadow-lg border border-brand-yellow/50 flex-shrink-0">
+<img alt="Tacos al pastor" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsoVdxwBdXikMa8TwPJqz6dF6ZU_5WK97EqKma7AsEoC2TpQjXEiOToH63aJnVbfwILGN6dvzN0C2jMlSxSFpw4W7XYsYKpuNC49q2vw5qIsqiQ091ED3vSqlJrflPiyvVzF5cV97-VFKtDqFI2OOzj307MPvzodT2tiXj9js6-FBeRvszDkY0m3uCFuMiN9L_thdFMpP8yWuOKlgk7uDoaR-1JiB98SgIH51gOQ"/>
+</div>
+</div>
+<!-- Platillos Populares Dynamic Section (tres miniaturas como IMAGE_2) -->
+<div class="mt-6 mb-4">
+<div class="flex justify-between items-center mb-3">
+<h2 class="font-serif text-lg text-stone-100">Platillos populares</h2>
+<button class="text-xs text-brand-yellow font-semibold hover:underline" onclick="navigateTo('screen-products-list')">Ver todos ›</button>
+</div>
+<div class="grid grid-cols-3 gap-2.5" id="homePopularGallery">
+<div class="rounded-2xl overflow-hidden border border-brand-border bg-[#16140F] cursor-pointer hover:border-brand-yellow" onclick="openProductDetail(0)">
+<img alt="Pastor" class="w-full h-20 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArhPdDiO690VUIgqQqrU0L4kOnLl54MDXNa6CXttWJR3gyqZff82outC9oXj6Lz5bzTb63YaQQ3h_uUAvuUFtVve1fCzzNE0y1cOyxKneQc4xcfcsmUR9nxWtEhr8zxB8tTHHfe1Rko8V8a0N2RjR6xJIeCjSwxblR0m0n9HeHVAdAxUV3G-uz7S212X2YIfoG8l-MEai8ceMwOjD-9iIJHeBaaOcA9Wx5alyCCg"/>
+<p class="p-1.5 text-[11px] font-bold text-center truncate">Al pastor</p>
+</div>
+<div class="rounded-2xl overflow-hidden border border-brand-border bg-[#16140F] cursor-pointer hover:border-brand-yellow" onclick="openProductDetail(4)">
+<img alt="Burrito" class="w-full h-20 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuByMPt0Mqj5x3XAFFt6tuNPZZQzN7NVS_zPflGakxQE3aaCpcC-NEC-u3Rw0Ph8oDHG2uIwMlHPYcb0bYfLBrnazgtmrx7jz8azQESswLkr3AETOCVNFXNUK6qilTuMjP_BkoJvHw-BUc53HAVLJLtx8iwKlRJVrvLRpZ1XUC9gg8kHtKb-bhOKrNUqD0VDQl-x2S4hTxVfsz5w5x3_y8PiOF4yTACuSzrHLHp4Fw"/>
+<p class="p-1.5 text-[11px] font-bold text-center truncate">Burrito res</p>
+</div>
+<div class="rounded-2xl overflow-hidden border border-brand-border bg-[#16140F] cursor-pointer hover:border-brand-yellow" onclick="openProductDetail(6)">
+<img alt="Quesadilla" class="w-full h-20 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2Qk_49FdtgT287jv6W-GQTUj5mWADGbYazocXWlBA8fa8bNZvkSB9IpfwrEp0YRwOj0MGwCrK-XCLyK0CwafPKAb9r3FS6TBh58UmPfrDd4KJplxDm0ZSQ3YVFAwoGHqMqGhDryCBknRF7HkX6yjPhyf9wqrScsvnJoIHvP6P74_RFo6dNvW6t66a8yl2NBZWwG8OY3nCxEzDfsXL4eoV_I44NLipgqqxwBj_Jg"/>
+<p class="p-1.5 text-[11px] font-bold text-center truncate">Quesadillas</p>
+</div>
+</div>
+</div>
+</main>
+<!-- ================= PANTALLA 4: CATEGORÍAS (exacto de IMAGE_4) ================= -->
+<main class="screen flex-col flex-1 px-5 pt-3" id="screen-categories">
+<!-- Top Garland -->
+<div class="flex justify-between items-center -mx-5 px-3 py-1 opacity-80 mb-2 border-b border-[#2A241A]/50 bg-[#120F0A]">
+<span class="text-xs">🌮</span>
+<span class="text-xs">🌶️</span>
+<span class="text-xs">🌵</span>
+<span class="text-xs">💀</span>
+<span class="text-xs">✨</span>
+<span class="text-xs">🪅</span>
+<span class="text-xs">🌮</span>
+</div>
+<!-- Header -->
+<div class="flex items-center justify-between pb-3 border-b border-brand-border">
+<button class="w-9 h-9 rounded-full bg-[#1A1712] border border-brand-border flex items-center justify-center text-stone-300" onclick="navigateBack()">
+<i class="fa-solid fa-chevron-left text-sm"></i>
+</button>
+<h2 class="font-serif text-lg text-stone-100">Categorías</h2>
+<button class="w-9 h-9 rounded-full bg-[#1A1712] border border-brand-border flex items-center justify-center text-brand-yellow relative" onclick="navigateTo('screen-cart')">
+<i class="fa-solid fa-cart-shopping text-sm"></i>
+<span class="cartBadgeCount absolute -top-1 -right-1 bg-brand-red text-white text-[9px] font-bold rounded-full w-4 h-4 flex items-center justify-center">0</span>
+</button>
+</div>
+<!-- Search in categories -->
+<div class="relative mt-3">
+<i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-stone-500 text-xs"></i>
+<input class="w-full bg-[#181510] text-xs text-stone-200 placeholder-stone-500 rounded-xl pl-9 pr-3 py-2.5 border border-brand-border" id="categorySearchInput" oninput="filterCategoriesList(this.value)" placeholder="Buscar platillos..." type="text"/>
+</div>
+<!-- Category List Grid (con fotos reales estilo IMAGE_4) -->
+<div class="space-y-3 mt-4 mb-6" id="categoriesContainer">
+<!-- Tacos -->
+<div class="cursor-pointer bg-[#14120D] border border-brand-border hover:border-brand-yellow/40 rounded-2xl p-2.5 flex items-center justify-between" onclick="filterCategoryAndOpen('Tacos')">
+<div class="flex items-center gap-3">
+<img alt="Tacos" class="w-16 h-16 rounded-xl object-cover border border-brand-border" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgTKsBbiQlaR1kU60a7yh27Uncs751jZ0b5IK-FohWiRSDiGhc0BKk-XQ2yRtyOF2KHUJnbKyuJDpHl_OJLE8mj3Xu6lVtUrnxURYfP4Yc93m7cUGUDBloy6us-qGdsm3O4FIjOKTli_iQZQ1YH9f_qXTEzTWMLQrf7c-pjS_UZdYFNLMtrIs3dodlFwCW0dU67IVtxEi_lymqIbauWfhs3cg8-OrQuiyQ7rDVlg"/>
+<div>
+<h3 class="font-serif text-base text-stone-100 font-bold">Tacos</h3>
+<p class="text-xs text-stone-400">Los clásicos de siempre</p>
+</div>
+</div>
+<i class="fa-solid fa-chevron-right text-xs text-brand-yellow pr-2"></i>
+</div>
+<!-- Burritos -->
+<div class="cursor-pointer bg-[#14120D] border border-brand-border hover:border-brand-yellow/40 rounded-2xl p-2.5 flex items-center justify-between" onclick="filterCategoryAndOpen('Burritos')">
+<div class="flex items-center gap-3">
+<img alt="Burritos" class="w-16 h-16 rounded-xl object-cover border border-brand-border" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnMCNsksK1fjirvHXwO0yTnB8Jgw2xFH4ly4gSrCRa7LKvTZHqaQ1Q8l3njdR-uU6MZSDHvqzjOdZnNKCdfoZ_iyMQAh3qvtWgpPBNFam6EHacOlRMGMVKhCQjZcqmsbSm5pyxhOVhz6c8jQ5RdnipZ37cs_6trElv3Hpt06UADrlRcjqwgWVsoRdefdODJxrvJNGpGDahFPsRF8VDT6sPk2Jfg6bH2DR3nRMYkA"/>
+<div>
+<h3 class="font-serif text-base text-stone-100 font-bold">Burritos</h3>
+<p class="text-xs text-stone-400">Grandes y llenos de sabor</p>
+</div>
+</div>
+<i class="fa-solid fa-chevron-right text-xs text-brand-yellow pr-2"></i>
+</div>
+<!-- Quesadillas -->
+<div class="cursor-pointer bg-[#14120D] border border-brand-border hover:border-brand-yellow/40 rounded-2xl p-2.5 flex items-center justify-between" onclick="filterCategoryAndOpen('Quesadillas')">
+<div class="flex items-center gap-3">
+<img alt="Quesadillas" class="w-16 h-16 rounded-xl object-cover border border-brand-border" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcgzY90lXihvmDeRXYZgXoBzayVoV_PSgCYWj91ZkFN2vlwSgDH0moHxG4dv6j-HxxQHrnro3DRaS19je1FUKsDia8Sxqy-n3hxkCqSwl2YAYKOeFhKVW4fjOTy6VJan2yjrcXvItXrVRG9m-e5YIGHCDo2t8dEf6kIZgwf6aaWTfnpNuZsJseKV0RC49cebQhFKSCxkfO6e3W0LlC_5oAVzPAJmIaNVraNtKhrA"/>
+<div>
+<h3 class="font-serif text-base text-stone-100 font-bold">Quesadillas</h3>
+<p class="text-xs text-stone-400">Crujientes y deliciosas</p>
+</div>
+</div>
+<i class="fa-solid fa-chevron-right text-xs text-brand-yellow pr-2"></i>
+</div>
+<!-- Enchiladas -->
+<div class="cursor-pointer bg-[#14120D] border border-brand-border hover:border-brand-yellow/40 rounded-2xl p-2.5 flex items-center justify-between" onclick="filterCategoryAndOpen('Enchiladas')">
+<div class="flex items-center gap-3">
+<img alt="Enchiladas" class="w-16 h-16 rounded-xl object-cover border border-brand-border" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmxiMW4IWASjfwqhERD6X3KvtrpfC4V9V5_olCgCqj-YH9OhcvpYWYSv0m2vW7uVh8b2XDN9WmRe2oI4qFxQ2vT1yA735sPaXCoVtE87eHjDTi2wVqJXIyw5rWnko1MLaDvnq5vJRb3PXfJ_vCrDkQ226plCgt2pzfGC6hDpLjQaq7QjfkgMHV6VyKqs5ydv8Qe5hh7g6nYXniclLqkFqCuv-skIu0xGPcpaGZIA"/>
+<div>
+<h3 class="font-serif text-base text-stone-100 font-bold">Enchiladas</h3>
+<p class="text-xs text-stone-400">Tradición en cada bocado</p>
+</div>
+</div>
+<i class="fa-solid fa-chevron-right text-xs text-brand-yellow pr-2"></i>
+</div>
+<!-- Pozole -->
+<div class="cursor-pointer bg-[#14120D] border border-brand-border hover:border-brand-yellow/40 rounded-2xl p-2.5 flex items-center justify-between" onclick="filterCategoryAndOpen('Pozole')">
+<div class="flex items-center gap-3">
+<img alt="Pozole" class="w-16 h-16 rounded-xl object-cover border border-brand-border" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCu7Z5aK0Hy0ZcSu5DUjP0F40pdzBlK7x7GPR-V9RBl5Wwi5m4wNi1i96FqeNUMl6oXelkA2jrixr_uHbkxlxEVPwmyblHQwBkKXeH0KcEjWk6RNITq3b8qX9EsakE0qsIduANdMHb8v8RcV7Hz8888k9CdAHPBzqP67EaczMWsaQaVnmg3N-EGeC0ep0yQXTXcWFYI_B_a_nquVwV_-3TBFtxPc4t7UhdYkaMwUA"/>
+<div>
+<h3 class="font-serif text-base text-stone-100 font-bold">Pozole</h3>
+<p class="text-xs text-stone-400">Sabor de México</p>
+</div>
+</div>
+<i class="fa-solid fa-chevron-right text-xs text-brand-yellow pr-2"></i>
+</div>
+<!-- Bebidas -->
+<div class="cursor-pointer bg-[#14120D] border border-brand-border hover:border-brand-yellow/40 rounded-2xl p-2.5 flex items-center justify-between" onclick="filterCategoryAndOpen('Bebidas')">
+<div class="flex items-center gap-3">
+<img alt="Bebidas" class="w-16 h-16 rounded-xl object-cover border border-brand-border" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6HkXJOG31rm-0pSq0CWtRgHOVVwLtV1gqshT-GXKlfMLyjQp7neE211c24XS8LHZlwN1YUwkRL4BdAEG3z2NPKsSICThMvRDBD0p4x4Qbm0EdrKZPFGLTM2rAPwTe4Vhe8wxxZofUat7kELCWkl5p47dy_7Ho-lA4N8mfJ8c-eocPEuKK6T3db3DPMkwLQZeX7Hpq0olh-q888EChK0zB0AQkwbFLLY8w7rLjSw"/>
+<div>
+<h3 class="font-serif text-base text-stone-100 font-bold">Bebidas</h3>
+<p class="text-xs text-stone-400">Refresca tu antojo</p>
+</div>
+</div>
+<i class="fa-solid fa-chevron-right text-xs text-brand-yellow pr-2"></i>
+</div>
+</div>
+</main>
+<!-- ================= PANTALLA 5: LISTADO DE PRODUCTOS (exacto de IMAGE_3) ================= -->
+<main class="screen flex-col flex-1 px-5 pt-3" id="screen-products-list">
+<!-- Garland -->
+<div class="flex justify-between items-center -mx-5 px-3 py-1 opacity-80 mb-2 border-b border-[#2A241A]/50 bg-[#120F0A]">
+<span class="text-xs">🌮</span>
+<span class="text-xs">🌶️</span>
+<span class="text-xs">🌵</span>
+<span class="text-xs">💀</span>
+<span class="text-xs">✨</span>
+<span class="text-xs">🪅</span>
+<span class="text-xs">🌮</span>
+</div>
+<!-- Header -->
+<div class="flex items-center justify-between pb-3 border-b border-brand-border">
+<button class="w-9 h-9 rounded-full bg-[#1A1712] border border-brand-border flex items-center justify-center text-stone-300" onclick="navigateBack()">
+<i class="fa-solid fa-chevron-left text-sm"></i>
+</button>
+<h2 class="font-serif text-lg text-stone-100" id="productsListTitle">Carta de Platillos</h2>
+<button class="w-9 h-9 rounded-full bg-[#1A1712] border border-brand-border flex items-center justify-center text-brand-yellow relative" onclick="navigateTo('screen-cart')">
+<i class="fa-solid fa-bag-shopping text-sm"></i>
+<span class="cartBadgeCount absolute -top-1 -right-1 bg-brand-red text-white text-[9px] font-bold rounded-full w-4 h-4 flex items-center justify-center">0</span>
+</button>
+</div>
+<!-- Filter Tabs (Todos, Pastor, Asada, Pollo, Burritos, etc.) -->
+<div class="flex gap-2 overflow-x-auto no-scrollbar py-3">
+<button class="tab-btn px-4 py-1.5 rounded-full text-xs font-bold bg-brand-red text-white flex-shrink-0" onclick="setProductFilter('all')">Todos</button>
+<button class="tab-btn px-4 py-1.5 rounded-full text-xs font-bold bg-[#1C1812] text-stone-400 border border-brand-border flex-shrink-0" onclick="setProductFilter('Pastor')">Pastor</button>
+<button class="tab-btn px-4 py-1.5 rounded-full text-xs font-bold bg-[#1C1812] text-stone-400 border border-brand-border flex-shrink-0" onclick="setProductFilter('Asada')">Asada</button>
+<button class="tab-btn px-4 py-1.5 rounded-full text-xs font-bold bg-[#1C1812] text-stone-400 border border-brand-border flex-shrink-0" onclick="setProductFilter('Pollo')">Pollo</button>
+<button class="tab-btn px-4 py-1.5 rounded-full text-xs font-bold bg-[#1C1812] text-stone-400 border border-brand-border flex-shrink-0" onclick="setProductFilter('Burritos')">Burritos</button>
+<button class="tab-btn px-4 py-1.5 rounded-full text-xs font-bold bg-[#1C1812] text-stone-400 border border-brand-border flex-shrink-0" onclick="setProductFilter('Quesadillas')">Quesadillas</button>
+<button class="tab-btn px-4 py-1.5 rounded-full text-xs font-bold bg-[#1C1812] text-stone-400 border border-brand-border flex-shrink-0" onclick="setProductFilter('Bebida')">Bebidas</button>
+</div>
+<!-- Products List Container (Tarjeta con borde dorado sutil exactamente como IMAGE_3) -->
+<div class="space-y-3 pb-6" id="fullProductsContainer">
+<!-- Poblado dinámicamente con catálogo completo -->
+</div>
+</main>
+<!-- ================= PANTALLA 6: DETALLE DEL PLATILLO ================= -->
+<main class="screen flex-col flex-1 pb-6" id="screen-product-detail">
+<!-- Top Floating Header over picture -->
+<div class="relative w-full h-64 bg-[#14120D] flex items-center justify-center overflow-hidden border-b border-brand-border">
+<img alt="Detalle" class="w-full h-full object-cover" id="detailImg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDugfzIQlzwJVgOzjK8_3lHs4B0lZqUnuXvY7JVoK4BPjgq4L298brcZrC0i_pMIHQYheh4QMnti4p62086sgBFsv-3YtXal9wz8mbZdYBfygLlaVt0YkcNrVGQcDvvGhkfi7xuCTWVAhqaZkz_9ssrn3qJCvaQUicomJ0Ep5nb2Vfm_0ssH7ONHx6afskbvLy3wTn7lqENkFdSD-mwjZ8BaTvdsfNHHmAbvHQFBA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-[#0C0B08] via-transparent to-black/60"></div>
+<!-- Top Actions Bar -->
+<div class="absolute top-4 left-4 right-4 flex justify-between z-10">
+<button class="w-10 h-10 rounded-full bg-[#0C0B08]/80 backdrop-blur-md border border-brand-border flex items-center justify-center text-stone-200" onclick="navigateBack()">
+<i class="fa-solid fa-chevron-left text-sm"></i>
+</button>
+<button class="w-10 h-10 rounded-full bg-[#0C0B08]/80 backdrop-blur-md border border-brand-border flex items-center justify-center text-brand-yellow" onclick="toggleFavorite()">
+<i class="fa-regular fa-heart text-sm" id="favIcon"></i>
+</button>
+</div>
+</div>
+<div class="px-5 pt-4 flex-1">
+<div class="flex justify-between items-start">
+<div>
+<h2 class="font-serif text-2xl text-stone-100 font-bold" id="detailTitle">Tacos al pastor</h2>
+<div class="flex items-center gap-1.5 mt-1 text-xs text-brand-yellow">
+<i class="fa-solid fa-star text-xs"></i>
+<span class="font-bold">4.8</span>
+<span class="text-stone-500">(124 reseñas)</span>
+</div>
+</div>
+<span class="font-serif text-2xl font-bold text-brand-yellow" id="detailPrice">$22.00</span>
+</div>
+<p class="text-xs text-stone-400 mt-2 leading-relaxed" id="detailDesc">
+      Tortilla de maíz, carne al pastor, piña, cilantro y cebolla.
+    </p>
+<!-- Quantity Selector -->
+<div class="flex items-center justify-between mt-5 py-3 border-y border-brand-border">
+<span class="text-xs font-bold text-stone-300">Cantidad</span>
+<div class="flex items-center gap-4 bg-[#181510] border border-brand-border rounded-xl px-3 py-1.5">
+<button class="text-brand-yellow hover:text-white text-base font-bold px-1" onclick="changeDetailQty(-1)">−</button>
+<span class="font-serif text-sm font-bold w-4 text-center" id="detailQty">1</span>
+<button class="text-brand-yellow hover:text-white text-base font-bold px-1" onclick="changeDetailQty(1)">+</button>
+</div>
+</div>
+<!-- Extras Options -->
+<div class="mt-4">
+<h4 class="font-serif text-sm text-stone-200 mb-2">Extras (opcional)</h4>
+<div class="space-y-2 text-xs">
+<label class="flex items-center justify-between p-3 rounded-xl bg-[#16140F] border border-brand-border cursor-pointer">
+<span class="flex items-center gap-2">
+<input class="rounded bg-[#0C0B08] border-brand-border text-brand-red focus:ring-brand-red" id="extraSalsaRoja" type="checkbox"/>
+<span>Salsa roja</span>
+</span>
+<span class="text-brand-yellow font-medium">+$0.00</span>
+</label>
+<label class="flex items-center justify-between p-3 rounded-xl bg-[#16140F] border border-brand-border cursor-pointer">
+<span class="flex items-center gap-2">
+<input checked="" class="rounded bg-[#0C0B08] border-brand-border text-brand-red focus:ring-brand-red" id="extraSalsaVerde" type="checkbox"/>
+<span>Salsa verde</span>
+</span>
+<span class="text-brand-yellow font-medium">+$0.00</span>
+</label>
+<label class="flex items-center justify-between p-3 rounded-xl bg-[#16140F] border border-brand-border cursor-pointer">
+<span class="flex items-center gap-2">
+<input class="rounded bg-[#0C0B08] border-brand-border text-brand-red focus:ring-brand-red" id="extraAguacate" onchange="calculateDetailTotal()" type="checkbox"/>
+<span>Aguacate fresco</span>
+</span>
+<span class="text-brand-yellow font-medium">+$2.00</span>
+</label>
+</div>
+</div>
+<!-- Add to Cart Button -->
+<button class="w-full mt-6 py-3.5 rounded-xl bg-gradient-to-r from-brand-red to-[#b91e0a] text-white font-bold text-sm tracking-wide shadow-lg shadow-brand-red/30 active:scale-95 transition-all flex items-center justify-center gap-2" onclick="confirmAddToCart()">
+<span>Agregar al carrito</span>
+<span class="ml-1 text-xs opacity-90" id="detailBtnPrice">• $22.00</span>
+</button>
+</div>
+</main>
+<!-- ================= PANTALLA 7: CARRITO DE COMPRA ================= -->
+<main class="screen flex-col flex-1 px-5 pt-3 pb-6" id="screen-cart">
+<!-- Header -->
+<div class="flex items-center justify-between pb-3 border-b border-brand-border">
+<button class="w-9 h-9 rounded-full bg-[#1A1712] border border-brand-border flex items-center justify-center text-stone-300" onclick="navigateBack()">
+<i class="fa-solid fa-chevron-left text-sm"></i>
+</button>
+<h2 class="font-serif text-lg text-stone-100 flex items-center gap-2">
+<span>Tu carrito</span>
+<span class="text-xs text-brand-yellow">(<span class="cartBadgeCount">0</span>)</span>
+</h2>
+<button class="text-xs text-stone-400 hover:text-brand-red" onclick="clearCart()">
+<i class="fa-regular fa-trash-can text-sm"></i>
+</button>
+</div>
+<!-- Cart Items Container -->
+<div class="space-y-3 mt-4 flex-1 overflow-y-auto no-scrollbar" id="cartItemsList">
+<!-- Populated dynamically -->
+</div>
+<!-- Cart Order Summary -->
+<div class="mt-4 pt-3 border-t border-brand-border space-y-2 text-xs">
+<div class="flex justify-between text-stone-400">
+<span>Subtotal</span>
+<span class="font-semibold text-stone-200" id="cartSubtotal">$0.00</span>
+</div>
+<div class="flex justify-between text-stone-400">
+<span>Envío</span>
+<span class="font-semibold text-stone-200" id="cartShipping">$15.00</span>
+</div>
+<div class="flex justify-between text-sm font-bold text-stone-100 pt-1 border-t border-brand-border/60">
+<span>Total</span>
+<span class="font-serif text-base text-brand-yellow" id="cartTotal">$0.00</span>
+</div>
+<button class="w-full mt-4 py-3.5 rounded-xl bg-gradient-to-r from-brand-red to-[#b91e0a] text-white font-bold text-sm tracking-wide shadow-lg shadow-brand-red/30 active:scale-95 transition-all flex items-center justify-center gap-2" id="checkoutBtn" onclick="goToDeliveryScreen()">
+<span>Continuar con la compra</span>
+<i class="fa-solid fa-arrow-right text-xs"></i>
+</button>
+</div>
+</main>
+<!-- ================= PANTALLA 8: DIRECCIÓN DE ENTREGA ================= -->
+<main class="screen flex-col flex-1 px-5 pt-3 pb-6" id="screen-delivery">
+<div class="flex items-center justify-between pb-3 border-b border-brand-border">
+<button class="w-9 h-9 rounded-full bg-[#1A1712] border border-brand-border flex items-center justify-center text-stone-300" onclick="navigateBack()">
+<i class="fa-solid fa-chevron-left text-sm"></i>
+</button>
+<h2 class="font-serif text-lg text-stone-100">Dirección de entrega</h2>
+<div class="w-9"></div>
+</div>
+<!-- Active Address Card -->
+<div class="mt-4 bg-[#16140F] border border-brand-border rounded-2xl p-4">
+<div class="flex items-start justify-between">
+<div class="flex items-start gap-3">
+<i class="fa-solid fa-location-dot text-brand-red text-base mt-1"></i>
+<div>
+<span class="text-[10px] text-brand-yellow uppercase tracking-wider font-bold">Dirección actual</span>
+<p class="text-sm font-bold text-stone-100 mt-0.5" id="currentAddressText">Av. Insurgentes Sur 123, Col. Del Valle, CDMX</p>
+<p class="text-xs text-stone-400">Entrega rápida garantizada</p>
+</div>
+</div>
+<button class="text-xs text-brand-yellow font-bold hover:underline" onclick="editAddressPrompt()">Cambiar</button>
+</div>
+</div>
+<!-- Optional Reference Input -->
+<div class="mt-4">
+<label class="block text-xs font-semibold text-stone-300 mb-1.5">Agregar referencia (opcional)</label>
+<input class="w-full bg-[#181510] text-xs text-stone-200 placeholder-stone-500 rounded-xl px-4 py-3 border border-brand-border focus:outline-none focus:border-brand-yellow" id="addressRefInput" placeholder="Ej. Casa blanca, entre calles..." type="text"/>
+</div>
+<!-- Visual Interactive Map Simulation (estilo IMAGE_10) -->
+<div class="mt-4 relative rounded-2xl overflow-hidden border border-brand-border bg-[#1A1915] h-52 flex items-center justify-center">
+<div class="absolute inset-0 opacity-30" style="background-image: linear-gradient(#2A241A 1px, transparent 1px), linear-gradient(90deg, #2A241A 1px, transparent 1px); background-size: 24px 24px;"></div>
+<div class="absolute w-full h-3 bg-[#383125] top-1/2 -translate-y-1/2 transform rotate-12"></div>
+<div class="absolute h-full w-3 bg-[#383125] left-1/3"></div>
+<div class="absolute h-full w-2.5 bg-brand-yellow/30 right-1/4 transform -rotate-12"></div>
+<!-- Map Pin Marker -->
+<div class="relative z-10 flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-brand-red text-white flex items-center justify-center shadow-lg border-2 border-brand-yellow">
+<i class="fa-solid fa-location-dot text-base"></i>
+</div>
+<span class="bg-[#0C0B08] text-brand-yellow border border-brand-yellow text-[9px] font-bold px-2 py-0.5 rounded-full mt-1">Tu ubicación</span>
+</div>
+</div>
+<div class="mt-auto pt-6">
+<button class="w-full py-3.5 rounded-xl bg-gradient-to-r from-brand-red to-[#b91e0a] text-white font-bold text-sm tracking-wide shadow-lg shadow-brand-red/30 active:scale-95 transition-all" onclick="navigateTo('screen-payment')">
+      Guardar dirección
+    </button>
+</div>
+</main>
+<!-- ================= PANTALLA 9: MÉTODO DE PAGO ================= -->
+<main class="screen flex-col flex-1 px-5 pt-3 pb-6" id="screen-payment">
+<div class="flex items-center justify-between pb-3 border-b border-brand-border">
+<button class="w-9 h-9 rounded-full bg-[#1A1712] border border-brand-border flex items-center justify-center text-stone-300" onclick="navigateBack()">
+<i class="fa-solid fa-chevron-left text-sm"></i>
+</button>
+<h2 class="font-serif text-lg text-stone-100">Método de pago</h2>
+<div class="w-9"></div>
+</div>
+<div class="space-y-3 mt-4">
+<!-- Tarjeta -->
+<div class="payment-method-card bg-[#16140F] border-2 border-brand-red rounded-2xl p-3.5 cursor-pointer transition-all" id="pay-option-card" onclick="selectPaymentMethod('card')">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-[#201B12] border border-brand-border flex items-center justify-center text-brand-yellow">
+<i class="fa-regular fa-credit-card text-lg"></i>
+</div>
+<div>
+<p class="text-xs font-bold text-stone-200">Tarjeta de crédito o débito</p>
+<p class="text-[10px] text-stone-400">•••• 4242</p>
+</div>
+</div>
+<div class="w-4 h-4 rounded-full border-2 border-brand-red bg-brand-red flex items-center justify-center text-[8px] text-white">✓</div>
+</div>
+</div>
+<!-- PayPal -->
+<div class="payment-method-card bg-[#16140F] border border-brand-border rounded-2xl p-3.5 cursor-pointer transition-all" id="pay-option-paypal" onclick="selectPaymentMethod('paypal')">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-[#201B12] border border-brand-border flex items-center justify-center text-sky-400">
+<i class="fa-brands fa-paypal text-lg"></i>
+</div>
+<p class="text-xs font-bold text-stone-200">PayPal</p>
+</div>
+<div class="w-4 h-4 rounded-full border border-stone-500"></div>
+</div>
+</div>
+<!-- Mercado Pago -->
+<div class="payment-method-card bg-[#16140F] border border-brand-border rounded-2xl p-3.5 cursor-pointer transition-all" id="pay-option-mercadopago" onclick="selectPaymentMethod('mercadopago')">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-[#201B12] border border-brand-border flex items-center justify-center text-cyan-400">
+<i class="fa-solid fa-hand-holding-dollar text-lg"></i>
+</div>
+<p class="text-xs font-bold text-stone-200">Mercado Pago</p>
+</div>
+<div class="w-4 h-4 rounded-full border border-stone-500"></div>
+</div>
+</div>
+<!-- Apple Pay -->
+<div class="payment-method-card bg-[#16140F] border border-brand-border rounded-2xl p-3.5 cursor-pointer transition-all" id="pay-option-apple" onclick="selectPaymentMethod('apple')">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-[#201B12] border border-brand-border flex items-center justify-center text-white">
+<i class="fa-brands fa-apple text-xl"></i>
+</div>
+<p class="text-xs font-bold text-stone-200">Apple Pay</p>
+</div>
+<div class="w-4 h-4 rounded-full border border-stone-500"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-center gap-2 mt-6 text-[11px] text-stone-500">
+<i class="fa-solid fa-lock text-brand-yellow"></i>
+<span>Tus datos están protegidos</span>
+</div>
+<div class="mt-auto pt-6">
+<button class="w-full py-3.5 rounded-xl bg-gradient-to-r from-brand-red to-[#b91e0a] text-white font-bold text-sm tracking-wide shadow-lg shadow-brand-red/30 active:scale-95 transition-all" onclick="processOrderPlacement()">
+      Continuar
+    </button>
+</div>
+</main>
+<!-- ================= PANTALLA 10: PEDIDO CONFIRMADO ================= -->
+<main class="screen flex-col flex-1 px-5 pt-6 pb-6 text-center justify-between" id="screen-order-confirmed">
+<div class="flex flex-col items-center">
+<!-- Sombrero Decorativo -->
+<div class="text-3xl mb-1">🎉</div>
+<!-- Animated Checkmark Icon -->
+<div class="relative w-24 h-24 flex items-center justify-center mb-3">
+<div class="absolute inset-0 bg-brand-yellow/15 rounded-full animate-ping"></div>
+<div class="w-20 h-20 rounded-full bg-brand-yellow flex items-center justify-center shadow-xl border-4 border-[#0C0B08]">
+<i class="fa-solid fa-check text-3xl text-black"></i>
+</div>
+</div>
+<h2 class="font-serif text-2xl text-stone-100">¡Pedido confirmado!</h2>
+<p class="text-xs text-brand-yellow mt-1 font-semibold">Tu antojo mexicano está en camino.</p>
+<!-- Receipt Box -->
+<div class="w-full bg-[#16140F] border border-brand-border rounded-2xl p-4 mt-6 text-left">
+<div class="flex justify-between items-center pb-2 border-b border-brand-border text-xs">
+<span class="text-stone-400">Pedido <span class="font-bold text-brand-yellow" id="confirmedOrderId">#D9P4587</span></span>
+<span class="text-stone-400" id="confirmedOrderTime">12 may, 2025 • 1:42 p.m.</span>
+</div>
+<!-- Stepper vertical -->
+<div class="mt-3 space-y-3">
+<div class="flex items-center gap-3">
+<div class="w-5 h-5 rounded-full bg-brand-yellow text-black flex items-center justify-center text-[10px] font-bold">✓</div>
+<span class="text-xs font-semibold text-stone-200">Confirmado</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-5 h-5 rounded-full bg-brand-red text-white flex items-center justify-center text-[10px]">
+<i class="fa-solid fa-fire text-[9px]"></i>
+</div>
+<span class="text-xs font-semibold text-brand-yellow">En preparación</span>
+</div>
+<div class="flex items-center gap-3 opacity-40">
+<div class="w-5 h-5 rounded-full bg-[#201B12] text-stone-400 flex items-center justify-center text-[10px]">
+<i class="fa-solid fa-motorcycle text-[9px]"></i>
+</div>
+<span class="text-xs text-stone-400">En camino</span>
+</div>
+<div class="flex items-center gap-3 opacity-40">
+<div class="w-5 h-5 rounded-full bg-[#201B12] text-stone-400 flex items-center justify-center text-[10px]">
+<i class="fa-solid fa-house text-[9px]"></i>
+</div>
+<span class="text-xs text-stone-400">Entregado</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-8 space-y-2">
+<button class="w-full py-3.5 rounded-xl bg-gradient-to-r from-brand-red to-[#b91e0a] text-white font-bold text-sm tracking-wide shadow-lg shadow-brand-red/30 active:scale-95 transition-all" onclick="navigateTo('screen-tracking')">
+      Ver detalles del pedido
+    </button>
+</div>
+</main>
+<!-- ================= PANTALLA 11: SEGUIMIENTO EN TIEMPO REAL (5 MINUTOS DINÁMICOS) ================= -->
+<main class="screen flex-col flex-1 px-5 pt-3 pb-6" id="screen-tracking">
+<div class="flex items-center justify-between pb-3 border-b border-brand-border">
+<button class="w-9 h-9 rounded-full bg-[#1A1712] border border-brand-border flex items-center justify-center text-stone-300" onclick="navigateBack()">
+<i class="fa-solid fa-chevron-left text-sm"></i>
+</button>
+<h2 class="font-serif text-lg text-stone-100">Seguimiento del pedido</h2>
+<button class="text-brand-yellow text-xs p-2" onclick="restartTrackingTimer()" title="Reiniciar 5 minutos">
+<i class="fa-solid fa-rotate-right"></i>
+</button>
+</div>
+<!-- Stage Status Banner -->
+<div class="mt-4 bg-[#16140F] border border-brand-border rounded-2xl p-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-brand-yellow/15 border border-brand-yellow/40 text-brand-yellow flex items-center justify-center" id="stageBannerIcon">
+<i class="fa-solid fa-fire text-lg text-brand-red"></i>
+</div>
+<div>
+<h3 class="font-serif text-sm font-bold text-stone-100" id="trackingStageTitle">En preparación</h3>
+<p class="text-[11px] text-stone-400" id="trackingStageSubtitle">Tu pedido ya se está preparando en la cocina.</p>
+</div>
+</div>
+<!-- Stepper horizontal sincronizado -->
+<div class="flex items-center justify-between text-[10px] text-stone-400 mt-4 px-1" id="horizontalStepper">
+<div class="flex flex-col items-center gap-1 font-bold text-brand-yellow" id="step-node-1">
+<div class="w-5 h-5 rounded-full bg-brand-yellow text-black flex items-center justify-center text-[9px]">✓</div>
+<span>Recibido</span>
+</div>
+<div class="h-0.5 w-6 bg-brand-yellow" id="step-bar-1"></div>
+<div class="flex flex-col items-center gap-1 font-bold text-brand-yellow" id="step-node-2">
+<div class="w-5 h-5 rounded-full bg-brand-red text-white flex items-center justify-center text-[9px]">
+<i class="fa-solid fa-fire text-[8px]"></i>
+</div>
+<span>En cocina</span>
+</div>
+<div class="h-0.5 w-6 bg-stone-700" id="step-bar-2"></div>
+<div class="flex flex-col items-center gap-1 text-stone-500" id="step-node-3">
+<div class="w-5 h-5 rounded-full bg-[#201B12] text-stone-400 flex items-center justify-center text-[9px]">
+<i class="fa-solid fa-motorcycle text-[8px]"></i>
+</div>
+<span>En camino</span>
+</div>
+<div class="h-0.5 w-6 bg-stone-700" id="step-bar-3"></div>
+<div class="flex flex-col items-center gap-1 text-stone-500" id="step-node-4">
+<div class="w-5 h-5 rounded-full bg-[#201B12] text-stone-400 flex items-center justify-center text-[9px]">
+<i class="fa-solid fa-house text-[8px]"></i>
+</div>
+<span>Entregado</span>
+</div>
+</div>
+</div>
+<!-- Dynamic Map Container with Moving Courier Bike -->
+<div class="mt-4 relative rounded-2xl overflow-hidden border border-brand-border bg-[#181612] h-48 flex items-center justify-center" id="trackingMapBox">
+<div class="absolute inset-0 opacity-20" style="background-image: linear-gradient(#2A241A 1px, transparent 1px), linear-gradient(90deg, #2A241A 1px, transparent 1px); background-size: 20px 20px;"></div>
+<!-- Path Route Graphic -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none" viewbox="0 0 350 180">
+<path d="M 45 135 C 100 135, 120 50, 190 70 S 260 120, 305 50" fill="none" id="deliverySvgPath" stroke="#FBC31C" stroke-dasharray="6,6" stroke-width="3"></path>
+</svg>
+<!-- Origin Restaurant Marker -->
+<div class="absolute left-6 bottom-6 flex flex-col items-center z-10">
+<div class="w-8 h-8 rounded-full bg-brand-red border-2 border-brand-yellow text-white flex items-center justify-center text-xs shadow-md">
+        🌮
+      </div>
+<span class="text-[8px] text-stone-400 mt-0.5 font-bold">Desperados</span>
+</div>
+<!-- Dynamic Courier Marker (moves smoothly along path via JS) -->
+<div class="absolute z-20 transition-all duration-700 ease-linear flex flex-col items-center" id="courierMapMarker" style="left: 45px; top: 110px;">
+<div class="w-9 h-9 rounded-full bg-brand-yellow text-black flex items-center justify-center shadow-2xl border-2 border-[#0C0B08] animate-pulse">
+<i class="fa-solid fa-motorcycle text-sm"></i>
+</div>
+<span class="bg-[#0C0B08] text-white text-[8px] font-bold px-1.5 py-0.5 rounded border border-brand-yellow/60 mt-0.5 whitespace-nowrap" id="courierMarkerName">Luis R.</span>
+</div>
+<!-- Destination Marker -->
+<div class="absolute right-6 top-6 flex flex-col items-center z-10">
+<div class="w-8 h-8 rounded-full bg-white text-brand-red flex items-center justify-center text-xs shadow-md border-2 border-brand-red">
+<i class="fa-solid fa-location-dot"></i>
+</div>
+<span class="text-[8px] text-stone-400 mt-0.5 font-bold">Tu casa</span>
+</div>
+</div>
+<!-- Countdown Timer Card (Inicia en 05:00) -->
+<div class="mt-4 bg-[#16140F] border border-brand-border rounded-2xl p-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-brand-yellow/10 border border-brand-yellow/30 flex items-center justify-center text-brand-yellow">
+<i class="fa-regular fa-clock text-lg"></i>
+</div>
+<div>
+<span class="text-[10px] text-stone-400 uppercase tracking-wider">Tiempo estimado de entrega</span>
+<p class="font-serif text-2xl font-bold text-brand-yellow tracking-tight" id="countdownDisplay">05:00</p>
+</div>
+</div>
+<span class="text-xs bg-emerald-950 text-emerald-400 border border-emerald-800 px-2.5 py-1 rounded-full font-bold" id="deliveryStatusBadge">En tiempo</span>
+</div>
+<!-- Courier Contact Card (repartidores variados y realistas) -->
+<div class="mt-3 bg-[#16140F] border border-brand-border rounded-2xl p-3.5 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-11 h-11 rounded-full bg-gradient-to-tr from-brand-red to-brand-yellow p-0.5 flex items-center justify-center">
+<div class="w-full h-full rounded-full bg-[#181510] flex items-center justify-center text-lg" id="courierAvatarEmoji">
+          🛵
+        </div>
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<p class="text-xs font-bold text-stone-200" id="courierFullName">Luis R.</p>
+<span class="text-[10px] text-brand-yellow flex items-center">
+<i class="fa-solid fa-star text-[8px] mr-0.5"></i> <span id="courierRating">4.9</span>
+</span>
+</div>
+<p class="text-[10px] text-stone-400" id="courierVehicle">Repartidor certificado en moto</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<a class="w-9 h-9 rounded-full bg-[#201B12] border border-brand-border flex items-center justify-center text-brand-yellow hover:bg-brand-yellow hover:text-black" href="tel:+34968000000">
+<i class="fa-solid fa-phone text-xs"></i>
+</a>
+<button class="w-9 h-9 rounded-full bg-[#201B12] border border-brand-border flex items-center justify-center text-brand-yellow hover:bg-brand-yellow hover:text-black" onclick="showToast('Abriendo chat con el repartidor...')">
+<i class="fa-regular fa-message text-xs"></i>
+</button>
+</div>
+</div>
+</main>
+<!-- ================= PANTALLA 12: PERFIL DE USUARIO ================= -->
+<main class="screen flex-col flex-1 px-5 pt-4 pb-6" id="screen-profile">
+<div class="flex items-center justify-between pb-3 border-b border-brand-border">
+<h2 class="font-serif text-lg text-stone-100">Mi Perfil</h2>
+<button class="text-xs text-brand-yellow font-bold hover:underline" onclick="openEditProfileModal()">Editar</button>
+</div>
+<!-- User Avatar & Identity (Interactivo con cambio de nombre) -->
+<div class="flex flex-col items-center mt-5 text-center cursor-pointer group" onclick="openEditProfileModal()" title="Toca para editar">
+<div class="relative">
+<div class="w-20 h-20 rounded-full bg-gradient-to-tr from-brand-red via-brand-yellow to-brand-terracotta p-1 shadow-xl">
+<div class="w-full h-full rounded-full bg-[#181510] flex items-center justify-center text-3xl" id="profileAvatarDisplay">
+          👩🏻
+        </div>
+</div>
+<button class="absolute bottom-0 right-0 w-6 h-6 rounded-full bg-brand-red text-white flex items-center justify-center border-2 border-[#0C0B08] text-[10px]">
+<i class="fa-solid fa-pen"></i>
+</button>
+</div>
+<h3 class="font-serif text-xl font-bold text-stone-100 mt-2 flex items-center gap-1.5 justify-center">
+<span id="profileNameDisplay">Ana Torres</span>
+<i class="fa-solid fa-pen-to-square text-xs text-brand-yellow opacity-70 group-hover:opacity-100"></i>
+</h3>
+<p class="text-xs text-stone-400" id="profileEmailDisplay">ana.torres@email.com</p>
+<span class="inline-block mt-1.5 px-3 py-0.5 rounded-full bg-brand-yellow/15 border border-brand-yellow/30 text-brand-yellow text-[10px] font-bold">
+      🌶️ Cliente Fanático de los Tacos
+    </span>
+</div>
+<!-- Profile Action Menu Items (estilo exacto de IMAGE_10) -->
+<div class="mt-6 space-y-2 text-xs">
+<button class="w-full bg-[#16140F] border border-brand-border rounded-xl p-3 flex items-center justify-between hover:border-brand-yellow/40" onclick="navigateTo('screen-tracking')">
+<span class="flex items-center gap-3 text-stone-200">
+<i class="fa-solid fa-clock-rotate-left text-brand-yellow text-sm"></i>
+<span>Mis pedidos</span>
+</span>
+<i class="fa-solid fa-chevron-right text-stone-500 text-[10px]"></i>
+</button>
+<button class="w-full bg-[#16140F] border border-brand-border rounded-xl p-3 flex items-center justify-between hover:border-brand-yellow/40" onclick="navigateTo('screen-delivery')">
+<span class="flex items-center gap-3 text-stone-200">
+<i class="fa-solid fa-location-dot text-brand-yellow text-sm"></i>
+<span>Direcciones</span>
+</span>
+<i class="fa-solid fa-chevron-right text-stone-500 text-[10px]"></i>
+</button>
+<button class="w-full bg-[#16140F] border border-brand-border rounded-xl p-3 flex items-center justify-between hover:border-brand-yellow/40" onclick="navigateTo('screen-payment')">
+<span class="flex items-center gap-3 text-stone-200">
+<i class="fa-regular fa-credit-card text-brand-yellow text-sm"></i>
+<span>Métodos de pago</span>
+</span>
+<i class="fa-solid fa-chevron-right text-stone-500 text-[10px]"></i>
+</button>
+<button class="w-full bg-[#16140F] border border-brand-border rounded-xl p-3 flex items-center justify-between hover:border-brand-yellow/40" onclick="showToast('Tienes 1 cupón disponible: DESPERADOS10 (10% OFF)')">
+<span class="flex items-center gap-3 text-stone-200">
+<i class="fa-solid fa-tag text-brand-yellow text-sm"></i>
+<span>Cupones y promociones</span>
+</span>
+<span class="bg-brand-red text-white text-[9px] font-bold px-2 py-0.5 rounded-full">1 nuevo</span>
+</button>
+<button class="w-full bg-[#16140F] border border-brand-border rounded-xl p-3 flex items-center justify-between hover:border-brand-yellow/40" onclick="showToast('Notificaciones activas')">
+<span class="flex items-center gap-3 text-stone-200">
+<i class="fa-regular fa-bell text-brand-yellow text-sm"></i>
+<span>Notificaciones</span>
+</span>
+<i class="fa-solid fa-chevron-right text-stone-500 text-[10px]"></i>
+</button>
+<button class="w-full bg-[#16140F] border border-brand-border rounded-xl p-3 flex items-center justify-between hover:border-brand-yellow/40" onclick="showToast('Soporte Desperados: WhatsApp +34 600 000 000')">
+<span class="flex items-center gap-3 text-stone-200">
+<i class="fa-regular fa-circle-question text-brand-yellow text-sm"></i>
+<span>Ayuda y soporte</span>
+</span>
+<i class="fa-solid fa-chevron-right text-stone-500 text-[10px]"></i>
+</button>
+<button class="w-full bg-[#16140F] border border-brand-border rounded-xl p-3 flex items-center justify-between hover:border-brand-yellow/40" onclick="openEditProfileModal()">
+<span class="flex items-center gap-3 text-stone-200">
+<i class="fa-solid fa-gear text-brand-yellow text-sm"></i>
+<span>Configuración</span>
+</span>
+<i class="fa-solid fa-chevron-right text-stone-500 text-[10px]"></i>
+</button>
+</div>
+<!-- Sign out button -->
+<div class="mt-6">
+<button class="w-full py-3 rounded-xl border border-brand-red/40 bg-brand-red/10 text-brand-red font-bold text-xs hover:bg-brand-red hover:text-white transition-colors flex items-center justify-center gap-2" onclick="handleLogout()">
+<i class="fa-solid fa-arrow-right-from-bracket text-xs"></i>
+<span>Cerrar sesión</span>
+</button>
+</div>
+</main>
+<!-- ================= FIXED BOTTOM NAVIGATION BAR ================= -->
+<nav class="fixed bottom-0 max-w-md w-full bg-[#0C0B08]/95 backdrop-blur-lg border-t border-[#2A241A] px-6 py-2 z-50 flex items-center justify-between" id="bottomNav">
+<!-- Inicio -->
+<button class="flex flex-col items-center gap-1 text-brand-yellow group" id="nav-btn-home" onclick="navigateTo('screen-home')">
+<div class="relative">
+<i class="fa-solid fa-house text-lg"></i>
+<span class="nav-indicator absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-brand-red rounded-full"></span>
+</div>
+<span class="text-[10px] font-bold tracking-tight">Inicio</span>
+</button>
+<!-- Buscar -->
+<button class="flex flex-col items-center gap-1 text-stone-400 hover:text-brand-yellow transition-colors group" id="nav-btn-products" onclick="navigateTo('screen-categories')">
+<div class="relative">
+<i class="fa-solid fa-magnifying-glass text-lg group-hover:scale-110 transition-transform"></i>
+<span class="nav-indicator hidden absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-brand-red rounded-full"></span>
+</div>
+<span class="text-[10px] font-medium tracking-tight">Buscar</span>
+</button>
+<!-- Pedidos -->
+<button class="flex flex-col items-center gap-1 text-stone-400 hover:text-brand-yellow transition-colors group relative" id="nav-btn-cart" onclick="navigateTo('screen-cart')">
+<div class="relative">
+<i class="fa-solid fa-clipboard-list text-lg group-hover:scale-110 transition-transform"></i>
+<span class="cartBadgeCount absolute -top-1.5 -right-2.5 bg-brand-red text-white text-[9px] font-bold rounded-full w-4 h-4 flex items-center justify-center border border-[#0C0B08]">0</span>
+<span class="nav-indicator hidden absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-brand-red rounded-full"></span>
+</div>
+<span class="text-[10px] font-medium tracking-tight">Pedidos</span>
+</button>
+<!-- Perfil -->
+<button class="flex flex-col items-center gap-1 text-stone-400 hover:text-brand-yellow transition-colors group" id="nav-btn-profile" onclick="navigateTo('screen-profile')">
+<div class="relative">
+<i class="fa-regular fa-user text-lg group-hover:scale-110 transition-transform"></i>
+<span class="nav-indicator hidden absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-brand-red rounded-full"></span>
+</div>
+<span class="text-[10px] font-medium tracking-tight">Perfil</span>
+</button>
+</nav>
+</div>
+<!-- ================= JAVASCRIPT STATE ENGINE COMPLETO ================= -->
+<script>
+  // 1. Catálogo Completo de Productos Exactos (solicitados)
+  const products = [
+    // Tacos
+    {
+      id: 0,
+      title: "Tacos al pastor",
+      category: "Pastor",
+      mainCategory: "Tacos",
+      price: 22.00,
+      desc: "Tortilla de maíz, carne al pastor, piña, cilantro y cebolla.",
+      img: "https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?auto=format&fit=crop&w=400&q=80",
+      rating: 4.8,
+      reviews: 124
+    },
+    {
+      id: 1,
+      title: "Tacos de asada",
+      category: "Asada",
+      mainCategory: "Tacos",
+      price: 20.00,
+      desc: "Carne de res, cilantro, cebolla y salsa.",
+      img: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=400&q=80",
+      rating: 4.8,
+      reviews: 98
+    },
+    {
+      id: 2,
+      title: "Tacos de pollo",
+      category: "Pollo",
+      mainCategory: "Tacos",
+      price: 18.00,
+      desc: "Pollo marinado, cilantro, cebolla y salsa.",
+      img: "https://images.unsplash.com/photo-1615870216519-2f9fa575fa5c?auto=format&fit=crop&w=400&q=80",
+      rating: 4.7,
+      reviews: 84
+    },
+    {
+      id: 3,
+      title: "Tacos de chorizo",
+      category: "Asada",
+      mainCategory: "Tacos",
+      price: 18.00,
+      desc: "Chorizo, papa, cilantro y cebolla.",
+      img: "https://images.unsplash.com/photo-1599974579688-8dbdd335c77f?auto=format&fit=crop&w=400&q=80",
+      rating: 4.8,
+      reviews: 62
+    },
+
+    // Burritos
+    {
+      id: 4,
+      title: "Burrito de res",
+      category: "Burritos",
+      mainCategory: "Burritos",
+      price: 28.00,
+      desc: "Frijoles refritos, queso fundido, arroz mexicano y guacamole.",
+      img: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=400&q=80",
+      rating: 4.9,
+      reviews: 110
+    },
+    {
+      id: 5,
+      title: "Burrito mixto / pastor",
+      category: "Burritos",
+      mainCategory: "Burritos",
+      price: 26.00,
+      desc: "Carne al pastor, queso Oaxaca y salsa taquera.",
+      img: "https://images.unsplash.com/photo-1566740933430-b5e70b06d2d5?auto=format&fit=crop&w=400&q=80",
+      rating: 4.8,
+      reviews: 95
+    },
+
+    // Quesadillas
+    {
+      id: 6,
+      title: "Quesadillas al pastor",
+      category: "Quesadillas",
+      mainCategory: "Quesadillas",
+      price: 24.00,
+      desc: "Crujientes y deliciosas con queso fundido y carne al pastor.",
+      img: "https://images.unsplash.com/photo-1618040996337-56904b7850b9?auto=format&fit=crop&w=400&q=80",
+      rating: 4.9,
+      reviews: 82
+    },
+    {
+      id: 7,
+      title: "Quesadillas de tinga de pollo",
+      category: "Quesadillas",
+      mainCategory: "Quesadillas",
+      price: 22.00,
+      desc: "Con chipotle suave, pollo tierno y crema agria.",
+      img: "https://images.unsplash.com/photo-1599974579688-8dbdd335c77f?auto=format&fit=crop&w=400&q=80",
+      rating: 4.7,
+      reviews: 58
+    },
+
+    // Enchiladas
+    {
+      id: 8,
+      title: "Enchiladas verdes / rojas",
+      category: "Enchiladas",
+      mainCategory: "Enchiladas",
+      price: 24.00,
+      desc: "Tradición en cada bocado con pollo deshebrado y queso fresco.",
+      img: "https://images.unsplash.com/photo-1534352956036-cd81e27dd615?auto=format&fit=crop&w=400&q=80",
+      rating: 4.9,
+      reviews: 77
+    },
+
+    // Pozole
+    {
+      id: 9,
+      title: "Pozole tradicional rojo",
+      category: "Pozole",
+      mainCategory: "Pozole",
+      price: 26.00,
+      desc: "Sabor de México con maíz cacahuazintle, rábano, lechuga y orégano.",
+      img: "https://images.unsplash.com/photo-1547928576-a4a33237cbc3?auto=format&fit=crop&w=400&q=80",
+      rating: 4.9,
+      reviews: 89
+    },
+
+    // Bebidas
+    {
+      id: 10,
+      title: "Agua de jamaica",
+      category: "Bebida",
+      mainCategory: "Bebidas",
+      price: 15.00,
+      desc: "Refresca tu antojo natural con flor de jamaica pura.",
+      img: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=400&q=80",
+      rating: 4.9,
+      reviews: 50
+    },
+    {
+      id: 11,
+      title: "Agua de horchata",
+      category: "Bebida",
+      mainCategory: "Bebidas",
+      price: 15.00,
+      desc: "Receta artesanal con arroz, leche, vainilla y canela recién molida.",
+      img: "https://images.unsplash.com/photo-1556881286-fc6915169721?auto=format&fit=crop&w=400&q=80",
+      rating: 4.9,
+      reviews: 64
+    },
+    {
+      id: 12,
+      title: "Jarritos mexicanos",
+      category: "Bebida",
+      mainCategory: "Bebidas",
+      price: 16.00,
+      desc: "Sabores auténticos de Tamarindo o Mandarina bien fríos.",
+      img: "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=400&q=80",
+      rating: 4.8,
+      reviews: 42
+    },
+    {
+      id: 13,
+      title: "Cerveza Desperados",
+      category: "Bebida",
+      mainCategory: "Bebidas",
+      price: 18.00,
+      desc: "Con un toque de tequila y corteza de lima.",
+      img: "https://images.unsplash.com/photo-1608270192770-b74aa68d29b7?auto=format&fit=crop&w=400&q=80",
+      rating: 4.9,
+      reviews: 73
+    }
+  ];
+
+  // 2. Repartidores Realistas
+  const couriersList = [
+    { name: "Luis R.", rating: "4.9", vehicle: "Moto Yamaha 150cc", emoji: "🛵" },
+    { name: "Carlos Mendoza", rating: "5.0", vehicle: "Scooter Italika roja", emoji: "🏍️" },
+    { name: "Mateo Morales", rating: "4.8", vehicle: "Moto Honda Blanca", emoji: "🛵" },
+    { name: "Javier Peña", rating: "4.9", vehicle: "Moto de reparto express", emoji: "🏍️" },
+    { name: "Valeria Salazar", rating: "5.0", vehicle: "Scooter eléctrica", emoji: "🛵" },
+    { name: "Rodrigo Vega", rating: "4.8", vehicle: "Moto Suzuki Negra", emoji: "🏍️" }
+  ];
+
+  // 3. Estado Global con Persistencia LocalStorage
+  let currentUser = {
+    name: "Ana Torres",
+    email: "ana.torres@email.com",
+    avatar: "👩🏻"
+  };
+
+  let activeCourier = couriersList[0];
+  let currentScreen = 'screen-splash';
+  const navigationHistory = ['screen-splash'];
+  let currentDetailProduct = products[0];
+  let detailQty = 1;
+
+  let cart = [
+    { product: products[0], qty: 1, extras: "Salsa verde" },
+    { product: products[4], qty: 1, extras: "Guacamole" },
+    { product: products[10], qty: 1, extras: "Normal" }
+  ];
+  let shippingCost = 15.00;
+
+  // Seguimiento y Temporizador de 5 Minutos (300 segundos)
+  const TOTAL_TRACKING_SECONDS = 300;
+  let remainingSeconds = TOTAL_TRACKING_SECONDS;
+  let trackingTimerInterval = null;
+
+  // Carga inicial de datos de Usuario
+  function loadStoredUser() {
+    try {
+      const stored = localStorage.getItem('desperados_user');
+      if (stored) {
+        currentUser = JSON.parse(stored);
+      }
+    } catch(e) {
+      console.warn("Storage not available, using defaults", e);
+    }
+    applyUserToUI();
+  }
+
+  function saveStoredUser() {
+    try {
+      localStorage.setItem('desperados_user', JSON.stringify(currentUser));
+    } catch(e) {}
+    applyUserToUI();
+  }
+
+  function applyUserToUI() {
+    const firstName = currentUser.name.split(' ')[0] || currentUser.name;
+    const homeGreeting = document.getElementById('homeUserName');
+    if (homeGreeting) homeGreeting.textContent = firstName;
+
+    const profileName = document.getElementById('profileNameDisplay');
+    if (profileName) profileName.textContent = currentUser.name;
+
+    const profileEmail = document.getElementById('profileEmailDisplay');
+    if (profileEmail) profileEmail.textContent = currentUser.email;
+
+    const modalName = document.getElementById('modalInputName');
+    if (modalName) modalName.value = currentUser.name;
+
+    const modalEmail = document.getElementById('modalInputEmail');
+    if (modalEmail) modalEmail.value = currentUser.email;
+  }
+
+  // Navegación
+  function navigateTo(screenId, pushHistory = true) {
+    if (pushHistory && currentScreen !== screenId) {
+      navigationHistory.push(screenId);
+    }
+    
+    document.querySelectorAll('.screen').forEach(scr => {
+      scr.classList.remove('active');
+    });
+
+    const target = document.getElementById(screenId);
+    if (target) {
+      target.classList.add('active');
+      currentScreen = screenId;
+      window.scrollTo(0, 0);
+    }
+
+    const bottomNav = document.getElementById('bottomNav');
+    if (screenId === 'screen-splash' || screenId === 'screen-login') {
+      bottomNav.style.display = 'none';
+    } else {
+      bottomNav.style.display = 'flex';
+    }
+
+    updateBottomNavState(screenId);
+  }
+
+  function navigateBack() {
+    if (navigationHistory.length > 1) {
+      navigationHistory.pop();
+      const prevScreen = navigationHistory[navigationHistory.length - 1];
+      navigateTo(prevScreen, false);
+    } else {
+      navigateTo('screen-home', false);
+    }
+  }
+
+  function updateBottomNavState(screenId) {
+    const navItems = [
+      { id: 'nav-btn-home', match: ['screen-home'] },
+      { id: 'nav-btn-products', match: ['screen-products-list', 'screen-categories'] },
+      { id: 'nav-btn-cart', match: ['screen-cart', 'screen-delivery', 'screen-payment', 'screen-order-confirmed'] },
+      { id: 'nav-btn-profile', match: ['screen-profile'] }
+    ];
+
+    navItems.forEach(item => {
+      const btn = document.getElementById(item.id);
+      if (!btn) return;
+      const indicator = btn.querySelector('.nav-indicator');
+      const isCurrent = item.match.includes(screenId);
+      
+      if (isCurrent) {
+        btn.classList.add('text-brand-yellow');
+        btn.classList.remove('text-stone-400');
+        if (indicator) indicator.classList.remove('hidden');
+      } else {
+        btn.classList.remove('text-brand-yellow');
+        btn.classList.add('text-stone-400');
+        if (indicator) indicator.classList.add('hidden');
+      }
+    });
+  }
+
+  // Toast
+  function showToast(msg) {
+    const toast = document.getElementById('toast');
+    const toastMsg = document.getElementById('toastMsg');
+    toastMsg.textContent = msg;
+    toast.classList.remove('opacity-0', '-translate-y-4');
+    toast.classList.add('opacity-100', 'translate-y-0');
+    setTimeout(() => {
+      toast.classList.remove('opacity-100', 'translate-y-0');
+      toast.classList.add('opacity-0', '-translate-y-4');
+    }, 2200);
+  }
+
+  // Login y Auth Interactivo
+  function handleLogin(e) {
+    e.preventDefault();
+    const emailVal = document.getElementById('loginEmail').value.trim();
+    if (emailVal) {
+      currentUser.email = emailVal;
+      // Derivar nombre del email si no existe
+      const derived = emailVal.split('@')[0].replace(/[._-]/g, ' ');
+      currentUser.name = derived.charAt(0).toUpperCase() + derived.slice(1);
+      saveStoredUser();
+    }
+    showToast('¡Bienvenido a Desperados!');
+    setTimeout(() => navigateTo('screen-home'), 350);
+  }
+
+  function quickSocialLogin(provider) {
+    showToast(`Autenticado con ${provider}`);
+    setTimeout(() => navigateTo('screen-home'), 350);
+  }
+
+  function showQuickRegisterModal() {
+    const emailInput = document.getElementById('loginEmail');
+    const emailVal = emailInput ? emailInput.value : '';
+    const newName = prompt("Ingresa tu nombre para el registro:", currentUser.name);
+    if (newName) {
+      currentUser.name = newName;
+      if (emailVal) currentUser.email = emailVal;
+      saveStoredUser();
+      showToast('¡Cuenta creada con éxito!');
+      setTimeout(() => navigateTo('screen-home'), 300);
+    }
+  }
+
+  function continueAsGuest() {
+    currentUser.name = "Invitado";
+    currentUser.email = "invitado@desperados.com";
+    saveStoredUser();
+    navigateTo('screen-home');
+  }
+
+  function handleLogout() {
+    showToast('Sesión cerrada con éxito');
+    navigationHistory.length = 0;
+    setTimeout(() => navigateTo('screen-login'), 350);
+  }
+
+  function togglePasswordVisibility() {
+    const p = document.getElementById('loginPassword');
+    const icon = document.getElementById('loginEyeIcon');
+    if (p.type === 'password') {
+      p.type = 'text';
+      icon.className = 'fa-regular fa-eye-slash';
+    } else {
+      p.type = 'password';
+      icon.className = 'fa-regular fa-eye';
+    }
+  }
+
+  // Perfil Interactivo Modal
+  function openEditProfileModal() {
+    const modal = document.getElementById('editProfileModal');
+    document.getElementById('modalInputName').value = currentUser.name;
+    document.getElementById('modalInputEmail').value = currentUser.email;
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+  }
+
+  function closeEditProfileModal() {
+    const modal = document.getElementById('editProfileModal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+  }
+
+  function saveUserProfile() {
+    const newName = document.getElementById('modalInputName').value.trim();
+    const newEmail = document.getElementById('modalInputEmail').value.trim();
+    if (newName) currentUser.name = newName;
+    if (newEmail) currentUser.email = newEmail;
+    saveStoredUser();
+    closeEditProfileModal();
+    showToast('Perfil actualizado instantáneamente');
+  }
+
+  // Filtrado de Carta y Renderizado
+  function filterCategoryAndOpen(cat) {
+    navigateTo('screen-products-list');
+    setProductFilter(cat);
+  }
+
+  function setProductFilter(filterType) {
+    const title = document.getElementById('productsListTitle');
+    if (title) {
+      title.textContent = filterType === 'all' ? 'Carta de Platillos' : filterType;
+    }
+
+    const buttons = document.querySelectorAll('.tab-btn');
+    buttons.forEach(b => {
+      if (b.innerText.toLowerCase().includes(filterType.toLowerCase())) {
+        b.className = 'tab-btn px-4 py-1.5 rounded-full text-xs font-bold bg-brand-red text-white flex-shrink-0';
+      } else {
+        b.className = 'tab-btn px-4 py-1.5 rounded-full text-xs font-bold bg-[#1C1812] text-stone-400 border border-brand-border flex-shrink-0';
+      }
+    });
+
+    const container = document.getElementById('fullProductsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    
+    let list = products;
+    if (filterType !== 'all') {
+      const q = filterType.toLowerCase();
+      list = products.filter(p => 
+        p.category.toLowerCase().includes(q) || 
+        p.mainCategory.toLowerCase().includes(q) ||
+        p.title.toLowerCase().includes(q)
+      );
+    }
+
+    list.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'bg-[#14120D] border border-brand-border rounded-2xl p-3 flex items-center justify-between hover:border-brand-yellow/40 transition-all';
+      card.innerHTML = `
+        <div onclick="openProductDetail(${item.id})" class="flex items-center gap-3 cursor-pointer flex-1 pr-2">
+          <img class="w-16 h-16 rounded-xl object-cover border border-brand-border flex-shrink-0" src="${item.img}" alt="${item.title}"/>
+          <div>
+            <h3 class="font-serif text-sm font-bold text-stone-100">${item.title}</h3>
+            <p class="text-[11px] text-stone-400 line-clamp-2 mt-0.5">${item.desc}</p>
+            <span class="font-serif text-sm font-bold text-stone-200 mt-1 block">$${item.price.toFixed(2)}</span>
+          </div>
+        </div>
+        <button onclick="addToCartQuick(${item.id})" class="w-8 h-8 rounded-full border border-brand-yellow/40 text-brand-yellow flex items-center justify-center hover:bg-brand-yellow hover:text-black transition-colors shadow-sm flex-shrink-0">
+          <i class="fa-solid fa-plus text-xs"></i>
+        </button>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  function filterHomeProducts(val) {
+    if (!val) {
+      setProductFilter('all');
+      return;
+    }
+    navigateTo('screen-products-list');
+    setProductFilter(val);
+  }
+
+  function filterCategoriesList(val) {
+    const q = val.toLowerCase();
+    const rows = document.querySelectorAll('#categoriesContainer > div');
+    rows.forEach(r => {
+      const txt = r.textContent.toLowerCase();
+      r.style.display = txt.includes(q) ? 'flex' : 'none';
+    });
+  }
+
+  // Detalle del Platillo
+  function openProductDetail(productId) {
+    const prod = products.find(p => p.id === productId) || products[0];
+    currentDetailProduct = prod;
+    detailQty = 1;
+
+    document.getElementById('detailTitle').textContent = prod.title;
+    document.getElementById('detailDesc').textContent = prod.desc;
+    document.getElementById('detailPrice').textContent = `$${prod.price.toFixed(2)}`;
+    document.getElementById('detailImg').src = prod.img;
+    document.getElementById('detailQty').textContent = detailQty;
+    
+    document.getElementById('extraSalsaRoja').checked = false;
+    document.getElementById('extraSalsaVerde').checked = true;
+    document.getElementById('extraAguacate').checked = false;
+
+    calculateDetailTotal();
+    navigateTo('screen-product-detail');
+  }
+
+  function changeDetailQty(delta) {
+    detailQty = Math.max(1, detailQty + delta);
+    document.getElementById('detailQty').textContent = detailQty;
+    calculateDetailTotal();
+  }
+
+  function calculateDetailTotal() {
+    let price = currentDetailProduct.price;
+    if (document.getElementById('extraAguacate').checked) {
+      price += 2.00;
+    }
+    const total = price * detailQty;
+    document.getElementById('detailBtnPrice').textContent = `• $${total.toFixed(2)}`;
+  }
+
+  function toggleFavorite() {
+    const icon = document.getElementById('favIcon');
+    if (icon.classList.contains('fa-regular')) {
+      icon.classList.remove('fa-regular');
+      icon.classList.add('fa-solid', 'text-brand-red');
+      showToast('Guardado en favoritos');
+    } else {
+      icon.classList.remove('fa-solid', 'text-brand-red');
+      icon.classList.add('fa-regular');
+      showToast('Eliminado de favoritos');
+    }
+  }
+
+  function confirmAddToCart() {
+    const hasAguacate = document.getElementById('extraAguacate').checked;
+    const finalPrice = hasAguacate ? currentDetailProduct.price + 2.00 : currentDetailProduct.price;
+    
+    cart.push({
+      product: { ...currentDetailProduct, price: finalPrice },
+      qty: detailQty,
+      extras: hasAguacate ? 'Con aguacate extra' : 'Salsa verde'
+    });
+
+    updateCartUI();
+    showToast(`¡${detailQty}x ${currentDetailProduct.title} añadido!`);
+    navigateTo('screen-cart');
+  }
+
+  function addToCartQuick(productId) {
+    const prod = products.find(p => p.id === productId);
+    if (!prod) return;
+    
+    const existing = cart.find(c => c.product.id === prod.id);
+    if (existing) {
+      existing.qty += 1;
+    } else {
+      cart.push({ product: prod, qty: 1, extras: 'Normal' });
+    }
+    
+    updateCartUI();
+    showToast(`+1 ${prod.title} al carrito`);
+  }
+
+  // Carrito de compras
+  function updateCartUI() {
+    const cartContainer = document.getElementById('cartItemsList');
+    if (!cartContainer) return;
+    cartContainer.innerHTML = '';
+
+    let subtotal = 0;
+    let totalItems = 0;
+
+    if (cart.length === 0) {
+      cartContainer.innerHTML = `
+        <div class="text-center py-12 text-stone-500">
+          <i class="fa-solid fa-basket-shopping text-4xl mb-3 text-stone-600"></i>
+          <p class="text-sm">Tu carrito está vacío</p>
+          <button onclick="navigateTo('screen-products-list')" class="mt-4 px-4 py-2 bg-brand-red text-white text-xs font-bold rounded-xl shadow-md">
+            Explorar Menú
+          </button>
+        </div>
+      `;
+    } else {
+      cart.forEach((item, index) => {
+        const itemTotal = item.product.price * item.qty;
+        subtotal += itemTotal;
+        totalItems += item.qty;
+
+        const cartCard = document.createElement('div');
+        cartCard.className = 'bg-[#14120D] border border-brand-border rounded-2xl p-3 flex items-center justify-between';
+        cartCard.innerHTML = `
+          <div class="flex items-center gap-3">
+            <img class="w-14 h-14 rounded-xl object-cover border border-brand-border" src="${item.product.img}" alt="${item.product.title}"/>
+            <div>
+              <h4 class="font-serif text-xs font-bold text-stone-100">${item.product.title}</h4>
+              <p class="text-[10px] text-brand-yellow">$${item.product.price.toFixed(2)}</p>
+              <div class="flex items-center gap-2 mt-1">
+                <button onclick="updateCartItemQty(${index}, -1)" class="w-5 h-5 rounded bg-[#201B12] text-brand-yellow font-bold text-xs flex items-center justify-center">−</button>
+                <span class="text-xs font-bold px-1">${item.qty}</span>
+                <button onclick="updateCartItemQty(${index}, 1)" class="w-5 h-5 rounded bg-[#201B12] text-brand-yellow font-bold text-xs flex items-center justify-center">+</button>
+              </div>
+            </div>
+          </div>
+          <button onclick="removeCartItem(${index})" class="text-stone-500 hover:text-brand-red text-sm p-2">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        `;
+        cartContainer.appendChild(cartCard);
+      });
+    }
+
+    document.querySelectorAll('.cartBadgeCount').forEach(badge => {
+      badge.textContent = totalItems;
+    });
+
+    const total = subtotal > 0 ? (subtotal + shippingCost) : 0;
+    document.getElementById('cartSubtotal').textContent = `$${subtotal.toFixed(2)}`;
+    document.getElementById('cartShipping').textContent = subtotal > 0 ? `$${shippingCost.toFixed(2)}` : '$0.00';
+    document.getElementById('cartTotal').textContent = `$${total.toFixed(2)}`;
+  }
+
+  function updateCartItemQty(index, delta) {
+    if (!cart[index]) return;
+    cart[index].qty += delta;
+    if (cart[index].qty <= 0) {
+      cart.splice(index, 1);
+    }
+    updateCartUI();
+  }
+
+  function removeCartItem(index) {
+    cart.splice(index, 1);
+    updateCartUI();
+    showToast('Producto eliminado');
+  }
+
+  function clearCart() {
+    cart = [];
+    updateCartUI();
+    showToast('Carrito vaciado');
+  }
+
+  function goToDeliveryScreen() {
+    if (cart.length === 0) {
+      showToast('Agrega platillos antes de continuar');
+      return;
+    }
+    navigateTo('screen-delivery');
+  }
+
+  function editAddressPrompt() {
+    const cur = document.getElementById('currentAddressText').textContent;
+    const n = prompt("Ingresa tu nueva dirección:", cur);
+    if (n) {
+      document.getElementById('currentAddressText').textContent = n;
+      showToast('Dirección actualizada');
+    }
+  }
+
+  function selectPaymentMethod(type) {
+    document.querySelectorAll('.payment-method-card').forEach(c => {
+      c.classList.remove('border-2', 'border-brand-red');
+      c.classList.add('border', 'border-brand-border');
+    });
+
+    const selected = document.getElementById(`pay-option-${type}`);
+    if (selected) {
+      selected.classList.remove('border-brand-border');
+      selected.classList.add('border-2', 'border-brand-red');
+    }
+  }
+
+  function processOrderPlacement() {
+    showToast('Procesando pago seguro...');
+    
+    // Seleccionar aleatoriamente un repartidor realista para este pedido
+    const randCourierIndex = Math.floor(Math.random() * couriersList.length);
+    activeCourier = couriersList[randCourierIndex];
+    updateCourierUI();
+
+    setTimeout(() => {
+      const randomNum = Math.floor(1000 + Math.random() * 9000);
+      const orderId = `#D9P${randomNum}`;
+      document.getElementById('confirmedOrderId').textContent = orderId;
+      
+      const now = new Date();
+      const timeStr = `${now.toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })} • ${now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+      document.getElementById('confirmedOrderTime').textContent = timeStr;
+
+      // Iniciar el temporizador de 5 minutos y seguimiento de ruta
+      startTrackingTimer();
+      navigateTo('screen-order-confirmed');
+    }, 800);
+  }
+
+  function updateCourierUI() {
+    const nameEl = document.getElementById('courierFullName');
+    const markerEl = document.getElementById('courierMarkerName');
+    const ratingEl = document.getElementById('courierRating');
+    const vehicleEl = document.getElementById('courierVehicle');
+    const avatarEl = document.getElementById('courierAvatarEmoji');
+
+    if (nameEl) nameEl.textContent = activeCourier.name;
+    if (markerEl) markerEl.textContent = activeCourier.name;
+    if (ratingEl) ratingEl.textContent = activeCourier.rating;
+    if (vehicleEl) vehicleEl.textContent = activeCourier.vehicle;
+    if (avatarEl) avatarEl.textContent = activeCourier.emoji;
+  }
+
+  // ================= SEGUIMIENTO DINÁMICO EN TIEMPO REAL (5 MINUTOS) =================
+  function startTrackingTimer() {
+    if (trackingTimerInterval) clearInterval(trackingTimerInterval);
+    remainingSeconds = TOTAL_TRACKING_SECONDS; // 300 segundos (05:00)
+    updateTrackingUI();
+
+    trackingTimerInterval = setInterval(() => {
+      remainingSeconds--;
+      if (remainingSeconds <= 0) {
+        remainingSeconds = 0;
+        clearInterval(trackingTimerInterval);
+        showToast('¡Tu pedido ha sido entregado en tu puerta! Buen provecho 🌮');
+      }
+      updateTrackingUI();
+    }, 1000);
+  }
+
+  function restartTrackingTimer() {
+    // Al reiniciar, asignar otro repartidor realista
+    const randCourierIndex = Math.floor(Math.random() * couriersList.length);
+    activeCourier = couriersList[randCourierIndex];
+    updateCourierUI();
+    startTrackingTimer();
+    showToast(`Seguimiento reiniciado a 5 min con ${activeCourier.name}`);
+  }
+
+  function updateTrackingUI() {
+    // 1. Reloj Countdown (05:00)
+    const mins = Math.floor(remainingSeconds / 60);
+    const secs = remainingSeconds % 60;
+    const formatted = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    const cd = document.getElementById('countdownDisplay');
+    if (cd) cd.textContent = formatted;
+
+    // 2. Progreso fraccional de 0 (inicio) a 1 (llegada)
+    const progress = (TOTAL_TRACKING_SECONDS - remainingSeconds) / TOTAL_TRACKING_SECONDS;
+
+    // 3. Fases y Sincronización de Stepper
+    // Fase 1: 0 - 60s (Recibido)
+    // Fase 2: 60 - 180s (En cocina)
+    // Fase 3: 180 - 290s (En camino)
+    // Fase 4: 290 - 300s (Entregado)
+    const stageTitle = document.getElementById('trackingStageTitle');
+    const stageSub = document.getElementById('trackingStageSubtitle');
+    const statusBadge = document.getElementById('deliveryStatusBadge');
+
+    const node1 = document.getElementById('step-node-1');
+    const bar1 = document.getElementById('step-bar-1');
+    const node2 = document.getElementById('step-node-2');
+    const bar2 = document.getElementById('step-bar-2');
+    const node3 = document.getElementById('step-node-3');
+    const bar3 = document.getElementById('step-bar-3');
+    const node4 = document.getElementById('step-node-4');
+
+    if (remainingSeconds > 240) {
+      // Recibido / confirmación
+      if (stageTitle) stageTitle.textContent = "Pedido Recibido";
+      if (stageSub) stageSub.textContent = "El restaurante está verificando tus platillos.";
+      if (statusBadge) statusBadge.textContent = "Confirmado";
+      
+      bar1.className = "h-0.5 w-6 bg-brand-yellow";
+      bar2.className = "h-0.5 w-6 bg-stone-700";
+      bar3.className = "h-0.5 w-6 bg-stone-700";
+      node3.className = "flex flex-col items-center gap-1 text-stone-500";
+      node4.className = "flex flex-col items-center gap-1 text-stone-500";
+    } else if (remainingSeconds > 120) {
+      // En cocina
+      if (stageTitle) stageTitle.textContent = "En preparación";
+      if (stageSub) stageSub.textContent = "El maestro taquero corta el pastor y dora las tortillas.";
+      if (statusBadge) statusBadge.textContent = "En cocina";
+
+      bar1.className = "h-0.5 w-6 bg-brand-yellow";
+      bar2.className = "h-0.5 w-6 bg-brand-yellow/60";
+      bar3.className = "h-0.5 w-6 bg-stone-700";
+      node3.className = "flex flex-col items-center gap-1 text-brand-yellow font-bold";
+    } else if (remainingSeconds > 0) {
+      // En camino
+      if (stageTitle) stageTitle.textContent = `En camino con ${activeCourier.name}`;
+      if (stageSub) stageSub.textContent = "El repartidor acelera por la ruta hacia tu casa.";
+      if (statusBadge) statusBadge.textContent = "En camino";
+
+      bar1.className = "h-0.5 w-6 bg-brand-yellow";
+      bar2.className = "h-0.5 w-6 bg-brand-yellow";
+      bar3.className = "h-0.5 w-6 bg-brand-yellow/70";
+      node3.className = "flex flex-col items-center gap-1 text-brand-yellow font-bold";
+      node4.className = "flex flex-col items-center gap-1 text-stone-400";
+    } else {
+      // Entregado
+      if (stageTitle) stageTitle.textContent = "¡Pedido Entregado!";
+      if (stageSub) stageSub.textContent = "Tu pedido llegó con éxito. ¡A disfrutar!";
+      if (statusBadge) statusBadge.textContent = "Entregado";
+
+      bar1.className = "h-0.5 w-6 bg-brand-yellow";
+      bar2.className = "h-0.5 w-6 bg-brand-yellow";
+      bar3.className = "h-0.5 w-6 bg-brand-yellow";
+      node4.className = "flex flex-col items-center gap-1 text-emerald-400 font-bold";
+    }
+
+    // 4. Mover físicamente el marcador del repartidor a lo largo del SVG Path
+    moveCourierAlongPath(progress);
+  }
+
+  function moveCourierAlongPath(fraction) {
+    const path = document.getElementById('deliverySvgPath');
+    const marker = document.getElementById('courierMapMarker');
+    if (!path || !marker) return;
+
+    try {
+      const pathLength = path.getTotalLength();
+      const point = path.getPointAtLength(pathLength * Math.min(1, Math.max(0, fraction)));
+      
+      // Coordenadas calculadas relativas a viewBox 350x180 mapeadas a %
+      const xPercent = (point.x / 350) * 100;
+      const yPercent = (point.y / 180) * 100;
+
+      marker.style.left = `calc(${xPercent}% - 18px)`;
+      marker.style.top = `calc(${yPercent}% - 22px)`;
+    } catch(e) {
+      // Fallback interpolación lineal
+      const startX = 45, endX = 300;
+      const startY = 120, endY = 50;
+      const currX = startX + (endX - startX) * fraction;
+      const currY = startY + (endY - startY) * fraction;
+      marker.style.left = `${currX}px`;
+      marker.style.top = `${currY}px`;
+    }
+  }
+
+  function openMenu() {
+    showToast('Taquería Desperados: 100% sabor mexicano');
+  }
+
+  // Inicio de la Aplicación
+  window.addEventListener('DOMContentLoaded', () => {
+    // Reloj dinámico superior
+    const clockEl = document.getElementById('currentTime');
+    const updateTime = () => {
+      const d = new Date();
+      clockEl.textContent = d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    };
+    updateTime();
+    setInterval(updateTime, 30000);
+
+    // Cargar usuario y renderizar UI
+    loadStoredUser();
+    updateCourierUI();
+    setProductFilter('all');
+    updateCartUI();
+    startTrackingTimer();
+  });
+</script>
+</body></html>
