@@ -1,20 +1,18 @@
-<!DOCTYPE html>
-
-<html class="h-full bg-[#0C0B08] antialiased" lang="es"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
-<meta content="yes" name="apple-mobile-web-app-capable"/>
-<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
-<meta content="#0C0B08" name="theme-color"/>
+<!DOCTYPE html><html class="h-full bg-[#0C0B08] antialiased" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport">
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style">
+<meta content="#0C0B08" name="theme-color">
 <title>Desperados - Auténtica Comida Mexicana</title>
 <!-- Tailwind CSS CDN -->
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <!-- Google Fonts: Young Serif & Plus Jakarta Sans -->
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Young+Serif&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Young+Serif&amp;display=swap" rel="stylesheet">
 <!-- FontAwesome Icons -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 <!-- Tailwind Configuration -->
 <script data-purpose="tailwind-config">
   tailwind.config = {
@@ -79,7 +77,7 @@
 <div class="w-full max-w-md min-h-screen bg-[#0C0B08] flex flex-col relative pb-20 shadow-2xl border-x border-[#221c13] overflow-x-hidden" id="appContainer">
 <!-- ================= TOP STATUS BAR (SIMULATED iOS) ================= -->
 <header class="sticky top-0 z-50 bg-[#0C0B08]/90 backdrop-blur-md px-6 pt-3 pb-2 flex justify-between items-center text-xs font-semibold text-stone-300">
-<span class="tracking-tight text-sm font-semibold" id="currentTime">9:41</span>
+<span class="tracking-tight text-sm font-semibold" id="currentTime">20:07</span>
 <div class="flex items-center space-x-2">
 <i class="fa-solid fa-signal text-[11px]"></i>
 <i class="fa-solid fa-wifi text-[11px]"></i>
@@ -87,51 +85,23 @@
 </div>
 </header>
 <!-- ================= TOAST NOTIFICATION CONTAINER ================= -->
-<div class="fixed top-14 left-1/2 -translate-x-1/2 z-50 bg-brand-red text-white text-xs font-semibold px-4 py-2.5 rounded-full shadow-lg border border-brand-yellow/30 flex items-center gap-2 transition-all duration-300 opacity-0 pointer-events-none transform -translate-y-4" id="toast">
+<div class="fixed top-14 left-1/2 -translate-x-1/2 z-50 bg-brand-red text-white text-xs font-semibold px-4 py-2.5 rounded-full shadow-lg border border-brand-yellow/30 flex items-center gap-2 transition-all duration-300 pointer-events-none transform opacity-0 -translate-y-4" id="toast">
 <i class="fa-solid fa-circle-check text-brand-yellow"></i>
-<span id="toastMsg">Producto agregado al carrito</span>
+<span id="toastMsg" class="">¡Tu pedido ha sido entregado en tu puerta! Buen provecho 🌮</span>
 </div>
 <!-- ================= MODAL: EDITAR PERFIL ================= -->
-<div class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center px-6 transition-all" id="editProfileModal">
-<div class="w-full bg-[#16140F] border border-brand-border rounded-3xl p-6 shadow-2xl relative">
-<div class="flex justify-between items-center pb-3 border-b border-brand-border">
-<h3 class="font-serif text-lg text-stone-100">Editar Perfil</h3>
-<button class="w-8 h-8 rounded-full bg-[#201B12] text-stone-400 hover:text-white flex items-center justify-center" onclick="closeEditProfileModal()">
-<i class="fa-solid fa-xmark text-sm"></i>
-</button>
-</div>
-<div class="mt-4 space-y-4">
-<div>
-<label class="block text-xs font-semibold text-brand-yellow uppercase tracking-wider mb-1.5">Nombre y Apellido</label>
-<input class="w-full bg-[#100E0A] border border-brand-border rounded-xl px-4 py-3 text-sm text-stone-100 focus:outline-none focus:border-brand-yellow" id="modalInputName" placeholder="Ej. Ana Torres" type="text"/>
-</div>
-<div>
-<label class="block text-xs font-semibold text-brand-yellow uppercase tracking-wider mb-1.5">Correo electrónico</label>
-<input class="w-full bg-[#100E0A] border border-brand-border rounded-xl px-4 py-3 text-sm text-stone-100 focus:outline-none focus:border-brand-yellow" id="modalInputEmail" placeholder="ana.torres@email.com" type="email"/>
-</div>
-<div class="flex gap-3 pt-2">
-<button class="flex-1 py-3 rounded-xl border border-brand-border text-stone-300 font-semibold text-xs hover:bg-[#201B12]" onclick="closeEditProfileModal()" type="button">Cancelar</button>
-<button class="flex-1 py-3 rounded-xl bg-brand-red text-white font-bold text-xs shadow-md shadow-brand-red/30 hover:bg-[#c92510]" onclick="saveUserProfile()" type="button">Guardar cambios</button>
-</div>
-</div>
-</div>
+<!-- ================= SIDE DRAWER NAVEGACIÓN ================= --><div class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden transition-all duration-300" id="sideDrawerOverlay" onclick="closeSideDrawer()"><div class="w-72 max-w-[85%] h-full bg-[#120F0A] border-r border-brand-border p-5 flex flex-col justify-between shadow-2xl transform -translate-x-full transition-transform duration-300" id="sideDrawer" onclick="event.stopPropagation()"><div class="overflow-y-auto no-scrollbar"><div class="flex items-center justify-between pb-4 border-b border-brand-border"><div class="flex items-center gap-2.5"><img alt="Desperados Logo" class="h-10 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAF9IKEbdziGjdL5K6aIrlGML_ZnwXF9_YxI1-eSycJFH_01Xv-E0Fz-ibIExaYaagkxC4j2znqFjKKavOgQCLaPrgsPL9N8LPgB_8h3E-f5ulY56hXLKtBa6TuDg8WUo8vdqKhaDJG1iaoHXcLzE1Mp7u1fB0Eoynv50h9RGt5RxHv8ejop4xNeCq0ODp5e6-mlCFe9wQvQV2FkczmiedT6tTx5R8SNpChpOohSYHHPZ36xreEclU"><span class="font-serif text-lg font-bold text-stone-100">Desperados</span></div><button class="w-8 h-8 rounded-full bg-[#1C1812] border border-brand-border text-stone-400 hover:text-white flex items-center justify-center" onclick="closeSideDrawer()"><i class="fa-solid fa-xmark text-sm"></i></button></div><div class="mt-4 p-3 rounded-2xl bg-[#181510] border border-brand-border flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-brand-yellow/20 flex items-center justify-center text-xl" id="drawerAvatarDisplay">🌮</div><div class="overflow-hidden"><p class="text-xs font-bold text-stone-100 truncate" id="drawerUserName">Invitado</p><p class="text-[10px] text-stone-400 truncate" id="drawerUserEmail">cliente@desperados.com</p></div></div><nav class="mt-4 space-y-1 text-xs"><button class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-stone-200 hover:bg-[#1C1812] hover:text-brand-yellow transition-colors" onclick="drawerNavigate('screen-home')"><i class="fa-solid fa-house text-brand-yellow w-4 text-center"></i><span class="">Inicio</span></button><button class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-stone-200 hover:bg-[#1C1812] hover:text-brand-yellow transition-colors" onclick="drawerNavigate('screen-categories')"><i class="fa-solid fa-utensils text-brand-yellow w-4 text-center"></i><span class="">Carta y Menú</span></button><button class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-stone-200 hover:bg-[#1C1812] hover:text-brand-yellow transition-colors" onclick="drawerNavigate('screen-cart')"><i class="fa-solid fa-cart-shopping text-brand-yellow w-4 text-center"></i><span class="">Tu Carrito</span></button><button class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-stone-200 hover:bg-[#1C1812] hover:text-brand-yellow transition-colors" onclick="drawerNavigate('screen-tracking')"><i class="fa-solid fa-clock-rotate-left text-brand-yellow w-4 text-center"></i><span class="">Mis Pedidos</span></button><button class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-stone-200 hover:bg-[#1C1812] hover:text-brand-yellow transition-colors" onclick="drawerNavigate('screen-payment')"><i class="fa-regular fa-credit-card text-brand-yellow w-4 text-center"></i><span class="">Métodos de Pago</span></button><div class="my-2 border-t border-brand-border/60"></div><button class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-stone-200 hover:bg-[#1C1812] hover:text-brand-yellow transition-colors" onclick="drawerNavigate('screen-faq')"><i class="fa-regular fa-circle-question text-brand-yellow w-4 text-center"></i><span class="">Centro de Ayuda &amp; FAQ</span></button><button class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-stone-200 hover:bg-[#1C1812] hover:text-brand-yellow transition-colors" onclick="drawerNavigate('screen-privacy')"><i class="fa-solid fa-lock text-brand-yellow w-4 text-center"></i><span class="">Política de Privacidad</span></button></nav><div class="mt-4 p-3 rounded-2xl bg-gradient-to-br from-[#1C1812] to-[#201B12] border border-brand-yellow/30 text-xs"><p class="font-bold text-brand-yellow flex items-center gap-1.5 mb-1"><i class="fa-solid fa-phone text-xs"></i><span class="">Atención al Cliente</span></p><p class="text-[11px] text-stone-400 mb-2">¿Tienes alguna duda con tu pedido? Llámanos directamente:</p><a class="w-full py-2 bg-brand-red hover:bg-[#c92510] text-white rounded-xl font-bold flex items-center justify-center gap-2 text-xs shadow-md" href="tel:663746873"><i class="fa-solid fa-phone text-xs"></i><span class="">663 74 68 73</span></a></div></div><div class="pt-4 border-t border-brand-border text-center"><p class="text-[10px] text-stone-500">Desperados Murcia © 2025</p></div></div></div><div class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center px-6 transition-all" id="editProfileModal">
+<div class="w-full bg-[#16140F] border border-brand-border rounded-3xl p-6 shadow-2xl relative"><div class="flex justify-between items-center pb-3 border-b border-brand-border"><h3 class="font-serif text-lg text-stone-100">Editar Perfil</h3><button class="w-8 h-8 rounded-full bg-[#201B12] text-stone-400 hover:text-white flex items-center justify-center" onclick="closeEditProfileModal()"><i class="fa-solid fa-xmark text-sm"></i></button></div><div class="mt-4 space-y-4"><div><label class="block text-xs font-semibold text-brand-yellow uppercase tracking-wider mb-2">Selecciona tu Avatar</label><div class="grid grid-cols-5 gap-2 text-center" id="avatarSelectGroup"><button type="button" onclick="pickAvatar('👨🏽')" class="avatar-choice p-2 rounded-xl bg-[#100E0A] border border-brand-border hover:border-brand-yellow text-xl">👨🏽</button><button type="button" onclick="pickAvatar('👩🏻')" class="avatar-choice p-2 rounded-xl bg-[#100E0A] border border-brand-yellow text-xl">👩🏻</button><button type="button" onclick="pickAvatar('💀')" class="avatar-choice p-2 rounded-xl bg-[#100E0A] border border-brand-border hover:border-brand-yellow text-xl">💀</button><button type="button" onclick="pickAvatar('🌮')" class="avatar-choice p-2 rounded-xl bg-[#100E0A] border border-brand-border hover:border-brand-yellow text-xl">🌮</button><button type="button" onclick="pickAvatar('🌶️')" class="avatar-choice p-2 rounded-xl bg-[#100E0A] border border-brand-border hover:border-brand-yellow text-xl">🌶️</button></div></div><div><label class="block text-xs font-semibold text-brand-yellow uppercase tracking-wider mb-1.5">Nombre completo</label><input class="w-full bg-[#100E0A] border border-brand-border rounded-xl px-4 py-3 text-sm text-stone-100 focus:outline-none focus:border-brand-yellow" id="modalInputName" placeholder="Ej. Tu Nombre" type="text"></div><div><label class="block text-xs font-semibold text-brand-yellow uppercase tracking-wider mb-1.5">Correo o Gmail</label><input class="w-full bg-[#100E0A] border border-brand-border rounded-xl px-4 py-3 text-sm text-stone-100 focus:outline-none focus:border-brand-yellow" id="modalInputEmail" placeholder="tu.correo@gmail.com" type="email"></div><div class="flex gap-3 pt-2"><button class="flex-1 py-3 rounded-xl border border-brand-border text-stone-300 font-semibold text-xs hover:bg-[#201B12]" onclick="closeEditProfileModal()" type="button">Cancelar</button><button class="flex-1 py-3 rounded-xl bg-brand-red text-white font-bold text-xs shadow-md shadow-brand-red/30 hover:bg-[#c92510]" onclick="saveUserProfile()" type="button">Guardar cambios</button></div></div></div>
 </div>
 <!-- ================= PANTALLA 1: SPLASH / BIENVENIDA ================= -->
-<main class="screen active flex-col flex-1 px-6 justify-between py-8 relative overflow-hidden text-center" id="screen-splash">
+<main class="screen flex-col flex-1 px-6 justify-between py-8 relative overflow-hidden text-center" id="screen-splash">
 <!-- Festive Papel Picado Garland Decoration (Referencia: IMAGE_10 & IMAGE_2) -->
-<div class="absolute top-0 left-0 right-0 h-14 flex justify-between items-center px-2 opacity-90 z-10 pointer-events-none">
-<div class="w-10 h-8 bg-brand-red rounded-b-lg border-t-2 border-brand-yellow flex items-center justify-center text-xs shadow">🌮</div>
-<div class="w-10 h-8 bg-brand-yellow rounded-b-lg border-t-2 border-brand-red flex items-center justify-center text-xs shadow">🌶️</div>
-<div class="w-10 h-8 bg-brand-olive rounded-b-lg border-t-2 border-brand-yellow flex items-center justify-center text-xs shadow">🌵</div>
-<div class="w-10 h-8 bg-brand-red rounded-b-lg border-t-2 border-brand-yellow flex items-center justify-center text-xs shadow">💀</div>
-<div class="w-10 h-8 bg-brand-yellow rounded-b-lg border-t-2 border-brand-red flex items-center justify-center text-xs shadow">✨</div>
-<div class="w-10 h-8 bg-brand-terracotta rounded-b-lg border-t-2 border-brand-yellow flex items-center justify-center text-xs shadow">🪅</div>
-</div>
+<div class="absolute top-0 left-0 right-0 h-14 flex justify-between items-center px-2 opacity-90 z-10 pointer-events-none"><div class="w-full flex items-start justify-between px-1 pointer-events-none"><svg class="w-full h-12" viewBox="0 0 380 48" fill="none" preserveAspectRatio="none"><path d="M0 4 Q 95 16 190 4 Q 285 16 380 4" stroke="#FBC31C" stroke-width="1.5" stroke-dasharray="3,3" fill="none"></path><g transform="translate(8, 6)"><polygon points="0,0 48,0 48,34 24,24 0,34" fill="#EB3018"></polygon><circle cx="24" cy="14" r="5" fill="#0C0B08" opacity="0.5"></circle><circle cx="14" cy="12" r="2" fill="#FBC31C"></circle><circle cx="34" cy="12" r="2" fill="#FBC31C"></circle><path d="M20 20 L28 20" stroke="#FBC31C" stroke-width="1.5"></path></g><g transform="translate(70, 8)"><polygon points="0,0 48,0 48,34 24,24 0,34" fill="#FBC31C"></polygon><circle cx="24" cy="14" r="5" fill="#0C0B08" opacity="0.5"></circle><circle cx="14" cy="12" r="2" fill="#EB3018"></circle><circle cx="34" cy="12" r="2" fill="#EB3018"></circle><path d="M20 20 L28 20" stroke="#EB3018" stroke-width="1.5"></path></g><g transform="translate(134, 7)"><polygon points="0,0 48,0 48,34 24,24 0,34" fill="#475323"></polygon><circle cx="24" cy="14" r="5" fill="#0C0B08" opacity="0.5"></circle><circle cx="14" cy="12" r="2" fill="#FBC31C"></circle><circle cx="34" cy="12" r="2" fill="#FBC31C"></circle><path d="M20 20 L28 20" stroke="#FBC31C" stroke-width="1.5"></path></g><g transform="translate(198, 7)"><polygon points="0,0 48,0 48,34 24,24 0,34" fill="#EB3018"></polygon><circle cx="24" cy="14" r="5" fill="#0C0B08" opacity="0.5"></circle><circle cx="14" cy="12" r="2" fill="#FBC31C"></circle><circle cx="34" cy="12" r="2" fill="#FBC31C"></circle><path d="M20 20 L28 20" stroke="#FBC31C" stroke-width="1.5"></path></g><g transform="translate(262, 8)"><polygon points="0,0 48,0 48,34 24,24 0,34" fill="#B5873C"></polygon><circle cx="24" cy="14" r="5" fill="#0C0B08" opacity="0.5"></circle><circle cx="14" cy="12" r="2" fill="#EB3018"></circle><circle cx="34" cy="12" r="2" fill="#EB3018"></circle><path d="M20 20 L28 20" stroke="#EB3018" stroke-width="1.5"></path></g><g transform="translate(324, 6)"><polygon points="0,0 48,0 48,34 24,24 0,34" fill="#FBC31C"></polygon><circle cx="24" cy="14" r="5" fill="#0C0B08" opacity="0.5"></circle><circle cx="14" cy="12" r="2" fill="#475323"></circle><circle cx="34" cy="12" r="2" fill="#475323"></circle><path d="M20 20 L28 20" stroke="#475323" stroke-width="1.5"></path></g></svg></div></div>
 <!-- Central Branding -->
 <div class="my-auto flex flex-col items-center pt-8">
 <div class="relative mb-4">
 <div class="w-48 h-48 rounded-full bg-gradient-to-tr from-brand-red/30 via-brand-yellow/20 to-transparent absolute -inset-4 blur-2xl"></div>
-<img alt="Desperados Logo Oficial" class="w-48 h-48 object-contain relative drop-shadow-[0_16px_30px_rgba(235,48,24,0.5)] transform hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAF9IKEbdziGjdL5K6aIrlGML_ZnwXF9_YxI1-eSycJFH_01Xv-E0Fz-ibIExaYaagkxC4j2znqFjKKavOgQCLaPrgsPL9N8LPgB_8h3E-f5ulY56hXLKtBa6TuDg8WUo8vdqKhaDJG1iaoHXcLzE1Mp7u1fB0Eoynv50h9RGt5RxHv8ejop4xNeCq0ODp5e6-mlCFe9wQvQV2FkczmiedT6tTx5R8SNpChpOohSYHHPZ36xreEclU"/>
+<img alt="Desperados Logo Oficial" class="w-48 h-48 object-contain relative drop-shadow-[0_16px_30px_rgba(235,48,24,0.5)] transform hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAF9IKEbdziGjdL5K6aIrlGML_ZnwXF9_YxI1-eSycJFH_01Xv-E0Fz-ibIExaYaagkxC4j2znqFjKKavOgQCLaPrgsPL9N8LPgB_8h3E-f5ulY56hXLKtBa6TuDg8WUo8vdqKhaDJG1iaoHXcLzE1Mp7u1fB0Eoynv50h9RGt5RxHv8ejop4xNeCq0ODp5e6-mlCFe9wQvQV2FkczmiedT6tTx5R8SNpChpOohSYHHPZ36xreEclU">
 </div>
 <h1 class="font-serif text-4xl text-stone-100 tracking-wide mt-2">Desperados</h1>
 <div class="flex items-center justify-center gap-2 mt-2">
@@ -145,18 +115,18 @@
 <!-- Traditional Decorative Border / Cacti Motifs -->
 <div class="flex items-center gap-5 mt-5 text-brand-terracotta opacity-85 text-lg">
 <i class="fa-solid fa-pepper-hot text-brand-red"></i>
-<span>•</span>
+<span class="">•</span>
 <i class="fa-solid fa-cactus text-brand-yellow"></i>
-<span>•</span>
+<span class="">•</span>
 <i class="fa-solid fa-skull text-stone-300"></i>
-<span>•</span>
+<span class="">•</span>
 <i class="fa-solid fa-fire text-brand-yellow"></i>
 </div>
 </div>
 <!-- Splash Action Buttons -->
 <div class="w-full space-y-3 mt-4">
 <button class="w-full py-4 rounded-2xl bg-gradient-to-r from-brand-red to-[#b91e0a] text-white font-bold text-sm tracking-wide shadow-lg shadow-brand-red/40 active:scale-95 transition-all flex items-center justify-center gap-2" onclick="navigateTo('screen-login')">
-<span>Comenzar</span>
+<span class="">Comenzar</span>
 <i class="fa-solid fa-arrow-right text-xs"></i>
 </button>
 <button class="text-xs text-brand-yellow hover:text-white py-1 block w-full tracking-wide" onclick="continueAsGuest()">
@@ -171,7 +141,7 @@
 <button class="w-10 h-10 rounded-full bg-[#1A1712] border border-brand-border flex items-center justify-center text-stone-300 hover:text-brand-yellow" onclick="navigateTo('screen-splash')">
 <i class="fa-solid fa-chevron-left text-sm"></i>
 </button>
-<img alt="Desperados" class="h-10 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAF9IKEbdziGjdL5K6aIrlGML_ZnwXF9_YxI1-eSycJFH_01Xv-E0Fz-ibIExaYaagkxC4j2znqFjKKavOgQCLaPrgsPL9N8LPgB_8h3E-f5ulY56hXLKtBa6TuDg8WUo8vdqKhaDJG1iaoHXcLzE1Mp7u1fB0Eoynv50h9RGt5RxHv8ejop4xNeCq0ODp5e6-mlCFe9wQvQV2FkczmiedT6tTx5R8SNpChpOohSYHHPZ36xreEclU"/>
+<img alt="Desperados" class="h-10 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAF9IKEbdziGjdL5K6aIrlGML_ZnwXF9_YxI1-eSycJFH_01Xv-E0Fz-ibIExaYaagkxC4j2znqFjKKavOgQCLaPrgsPL9N8LPgB_8h3E-f5ulY56hXLKtBa6TuDg8WUo8vdqKhaDJG1iaoHXcLzE1Mp7u1fB0Eoynv50h9RGt5RxHv8ejop4xNeCq0ODp5e6-mlCFe9wQvQV2FkczmiedT6tTx5R8SNpChpOohSYHHPZ36xreEclU">
 <div class="w-10"></div>
 </div>
 <div class="mt-4">
@@ -179,35 +149,7 @@
 <p class="text-xs text-stone-400 mt-1">Tu antojo mexicano, más cerca de lo que imaginas.</p>
 </div>
 <!-- Login Form -->
-<form class="mt-6 space-y-4" onsubmit="handleLogin(event)">
-<div>
-<label class="block text-xs font-semibold text-brand-yellow uppercase tracking-wider mb-1.5">Correo electrónico</label>
-<div class="relative">
-<i class="fa-regular fa-envelope absolute left-4 top-3.5 text-stone-500 text-sm"></i>
-<input class="w-full bg-[#181510] text-sm text-stone-200 placeholder-stone-600 rounded-xl pl-11 pr-4 py-3 border border-brand-border focus:outline-none focus:border-brand-yellow focus:ring-1 focus:ring-brand-yellow" id="loginEmail" placeholder="tucorreo@ejemplo.com" required="" type="email" value="ana.torres@email.com"/>
-</div>
-</div>
-<div>
-<label class="block text-xs font-semibold text-brand-yellow uppercase tracking-wider mb-1.5">Contraseña</label>
-<div class="relative">
-<i class="fa-solid fa-lock absolute left-4 top-3.5 text-stone-500 text-sm"></i>
-<input class="w-full bg-[#181510] text-sm text-stone-200 placeholder-stone-600 rounded-xl pl-11 pr-11 py-3 border border-brand-border focus:outline-none focus:border-brand-yellow focus:ring-1 focus:ring-brand-yellow" id="loginPassword" placeholder="••••••••" required="" type="password" value="tacos123"/>
-<button class="absolute right-3.5 top-3.5 text-stone-400 hover:text-stone-200 text-xs" onclick="togglePasswordVisibility()" type="button">
-<i class="fa-regular fa-eye" id="loginEyeIcon"></i>
-</button>
-</div>
-</div>
-<div class="flex items-center justify-between text-xs pt-1">
-<label class="flex items-center gap-2 cursor-pointer text-stone-400">
-<input checked="" class="rounded bg-[#1A1712] border-brand-border text-brand-red focus:ring-brand-red" type="checkbox"/>
-<span>Recordarme</span>
-</label>
-<a class="text-brand-yellow hover:underline" href="#" onclick="showToast('Enlace de recuperación enviado por email'); return false;">¿Olvidaste tu contraseña?</a>
-</div>
-<button class="w-full mt-4 py-3.5 rounded-xl bg-gradient-to-r from-brand-red to-[#b91e0a] text-white font-bold text-sm tracking-wide shadow-lg shadow-brand-red/30 active:scale-95 transition-all" type="submit">
-        Iniciar sesión
-      </button>
-</form>
+<form class="mt-6 space-y-4" onsubmit="handleLogin(event)"><div><label class="block text-xs font-semibold text-brand-yellow uppercase tracking-wider mb-1.5">Tu Nombre</label><div class="relative"><i class="fa-regular fa-user absolute left-4 top-3.5 text-stone-500 text-sm"></i><input class="w-full bg-[#181510] text-sm text-stone-200 placeholder-stone-600 rounded-xl pl-11 pr-4 py-3 border border-brand-border focus:outline-none focus:border-brand-yellow focus:ring-1 focus:ring-brand-yellow" id="loginName" placeholder="Introduce tu nombre" required="" type="text" value=""></div></div><div><label class="block text-xs font-semibold text-brand-yellow uppercase tracking-wider mb-1.5">Correo electrónico / Gmail</label><div class="relative"><i class="fa-regular fa-envelope absolute left-4 top-3.5 text-stone-500 text-sm"></i><input class="w-full bg-[#181510] text-sm text-stone-200 placeholder-stone-600 rounded-xl pl-11 pr-4 py-3 border border-brand-border focus:outline-none focus:border-brand-yellow focus:ring-1 focus:ring-brand-yellow" id="loginEmail" placeholder="ejemplo@gmail.com" required="" type="email" value=""></div></div><div><label class="block text-xs font-semibold text-brand-yellow uppercase tracking-wider mb-1.5">Contraseña</label><div class="relative"><i class="fa-solid fa-lock absolute left-4 top-3.5 text-stone-500 text-sm"></i><input class="w-full bg-[#181510] text-sm text-stone-200 placeholder-stone-600 rounded-xl pl-11 pr-11 py-3 border border-brand-border focus:outline-none focus:border-brand-yellow focus:ring-1 focus:ring-brand-yellow" id="loginPassword" placeholder="••••••••" required="" type="password" value=""><button class="absolute right-3.5 top-3.5 text-stone-400 hover:text-stone-200 text-xs" onclick="togglePasswordVisibility()" type="button"><i class="fa-regular fa-eye" id="loginEyeIcon"></i></button></div></div><div class="flex items-center justify-between text-xs pt-1"><label class="flex items-center gap-2 cursor-pointer text-stone-400"><input checked="" class="rounded bg-[#1A1712] border-brand-border text-brand-red focus:ring-brand-red" type="checkbox"><span class="">Recordarme</span></label><a class="text-brand-yellow hover:underline" href="#" onclick="showToast('Enlace de recuperación enviado por email'); return false;">¿Olvidaste tu contraseña?</a></div><button class="w-full mt-4 py-3.5 rounded-xl bg-gradient-to-r from-brand-red to-[#b91e0a] text-white font-bold text-sm tracking-wide shadow-lg shadow-brand-red/30 active:scale-95 transition-all" type="submit">Iniciar sesión</button></form>
 <!-- Social Logins -->
 <div class="mt-6 text-center">
 <div class="relative flex py-2 items-center">
@@ -233,24 +175,16 @@
 </div>
 </main>
 <!-- ================= PANTALLA 3: HOME / INICIO ================= -->
-<main class="screen flex-col flex-1 px-5 pt-3" id="screen-home">
+<main class="screen flex-col flex-1 px-5 pt-3 active" id="screen-home">
 <!-- Top Garland -->
-<div class="flex justify-between items-center -mx-5 px-3 py-1 opacity-80 mb-2 border-b border-[#2A241A]/50 bg-[#120F0A]">
-<span class="text-xs">🌮</span>
-<span class="text-xs">🌶️</span>
-<span class="text-xs">🌵</span>
-<span class="text-xs">💀</span>
-<span class="text-xs">✨</span>
-<span class="text-xs">🪅</span>
-<span class="text-xs">🌮</span>
-</div>
+<div class="-mx-5 mb-2 border-b border-[#2A241A]/60 bg-[#120F0A] overflow-hidden"><svg class="w-full h-8" viewBox="0 0 380 32" fill="none" preserveAspectRatio="none"><path d="M0 2 Q 95 10 190 2 Q 285 10 380 2" stroke="#FBC31C" stroke-width="1.5" stroke-dasharray="2,2" fill="none"></path><g transform="translate(6, 4)"><polygon points="0,0 42,0 42,24 21,17 0,24" fill="#EB3018"></polygon><circle cx="21" cy="10" r="3.5" fill="#0C0B08" opacity="0.4"></circle><circle cx="12" cy="8" r="1.5" fill="#FBC31C"></circle><circle cx="30" cy="8" r="1.5" fill="#FBC31C"></circle></g><g transform="translate(68, 5)"><polygon points="0,0 42,0 42,24 21,17 0,24" fill="#FBC31C"></polygon><circle cx="21" cy="10" r="3.5" fill="#0C0B08" opacity="0.4"></circle><circle cx="12" cy="8" r="1.5" fill="#EB3018"></circle><circle cx="30" cy="8" r="1.5" fill="#EB3018"></circle></g><g transform="translate(132, 4)"><polygon points="0,0 42,0 42,24 21,17 0,24" fill="#475323"></polygon><circle cx="21" cy="10" r="3.5" fill="#0C0B08" opacity="0.4"></circle><circle cx="12" cy="8" r="1.5" fill="#FBC31C"></circle><circle cx="30" cy="8" r="1.5" fill="#FBC31C"></circle></g><g transform="translate(196, 4)"><polygon points="0,0 42,0 42,24 21,17 0,24" fill="#EB3018"></polygon><circle cx="21" cy="10" r="3.5" fill="#0C0B08" opacity="0.4"></circle><circle cx="12" cy="8" r="1.5" fill="#FBC31C"></circle><circle cx="30" cy="8" r="1.5" fill="#FBC31C"></circle></g><g transform="translate(260, 5)"><polygon points="0,0 42,0 42,24 21,17 0,24" fill="#B5873C"></polygon><circle cx="21" cy="10" r="3.5" fill="#0C0B08" opacity="0.4"></circle><circle cx="12" cy="8" r="1.5" fill="#EB3018"></circle><circle cx="30" cy="8" r="1.5" fill="#EB3018"></circle></g><g transform="translate(324, 4)"><polygon points="0,0 42,0 42,24 21,17 0,24" fill="#FBC31C"></polygon><circle cx="21" cy="10" r="3.5" fill="#0C0B08" opacity="0.4"></circle><circle cx="12" cy="8" r="1.5" fill="#475323"></circle><circle cx="30" cy="8" r="1.5" fill="#475323"></circle></g></svg></div>
 <!-- Top Bar -->
 <div class="flex items-center justify-between">
 <button class="w-10 h-10 rounded-full bg-[#1A1712] border border-brand-border flex items-center justify-center text-brand-yellow hover:text-white" onclick="openMenu()">
 <i class="fa-solid fa-bars-staggered text-sm"></i>
 </button>
 <div class="flex items-center gap-2 cursor-pointer" onclick="navigateTo('screen-home')">
-<img alt="Desperados Logo" class="h-12 w-auto object-contain drop-shadow-[0_4px_12px_rgba(235,48,24,0.4)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAF9IKEbdziGjdL5K6aIrlGML_ZnwXF9_YxI1-eSycJFH_01Xv-E0Fz-ibIExaYaagkxC4j2znqFjKKavOgQCLaPrgsPL9N8LPgB_8h3E-f5ulY56hXLKtBa6TuDg8WUo8vdqKhaDJG1iaoHXcLzE1Mp7u1fB0Eoynv50h9RGt5RxHv8ejop4xNeCq0ODp5e6-mlCFe9wQvQV2FkczmiedT6tTx5R8SNpChpOohSYHHPZ36xreEclU"/>
+<img alt="Desperados Logo" class="h-12 w-auto object-contain drop-shadow-[0_4px_12px_rgba(235,48,24,0.4)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAF9IKEbdziGjdL5K6aIrlGML_ZnwXF9_YxI1-eSycJFH_01Xv-E0Fz-ibIExaYaagkxC4j2znqFjKKavOgQCLaPrgsPL9N8LPgB_8h3E-f5ulY56hXLKtBa6TuDg8WUo8vdqKhaDJG1iaoHXcLzE1Mp7u1fB0Eoynv50h9RGt5RxHv8ejop4xNeCq0ODp5e6-mlCFe9wQvQV2FkczmiedT6tTx5R8SNpChpOohSYHHPZ36xreEclU">
 </div>
 <button class="w-10 h-10 rounded-full bg-[#1A1712] border border-brand-border flex items-center justify-center text-brand-yellow relative" onclick="navigateTo('screen-tracking')">
 <i class="fa-regular fa-bell text-sm"></i>
@@ -260,7 +194,7 @@
 <!-- Welcome Greeting con Nombre Dinámico -->
 <div class="mt-4">
 <h1 class="font-serif text-2xl text-stone-100 tracking-wide mt-1">
-      Hola, <span id="homeUserName">Ana</span> <span class="inline-block animate-pulse">👋</span>
+      Hola, <span id="homeUserName" class="">Ana</span> <span class="inline-block animate-pulse">👋</span>
 </h1>
 <p class="text-xs text-brand-terracotta font-medium mt-0.5">
       ¿Qué antojo mexicano tienes hoy?
@@ -269,7 +203,7 @@
 <!-- Live Search Bar -->
 <div class="relative mt-4">
 <i class="fa-solid fa-magnifying-glass absolute left-4 top-3.5 text-brand-terracotta text-sm"></i>
-<input class="w-full bg-[#181510] text-sm text-stone-200 placeholder-stone-500 rounded-2xl pl-11 pr-11 py-3 border border-[#2c2419] focus:outline-none focus:border-brand-yellow focus:ring-1 focus:ring-brand-yellow" id="homeSearchInput" oninput="filterHomeProducts(this.value)" placeholder="Buscar tacos, burritos, quesadillas..." type="text"/>
+<input class="w-full bg-[#181510] text-sm text-stone-200 placeholder-stone-500 rounded-2xl pl-11 pr-11 py-3 border border-[#2c2419] focus:outline-none focus:border-brand-yellow focus:ring-1 focus:ring-brand-yellow" id="homeSearchInput" oninput="filterHomeProducts(this.value)" placeholder="Buscar tacos, burritos, quesadillas..." type="text">
 <button class="absolute right-2.5 top-2.5 w-7 h-7 rounded-xl bg-brand-red/20 border border-brand-red/30 flex items-center justify-center text-brand-yellow hover:bg-brand-red hover:text-white" onclick="navigateTo('screen-products-list')">
 <i class="fa-solid fa-sliders text-xs"></i>
 </button>
@@ -314,11 +248,11 @@
 <p class="text-xs text-stone-200 mt-1">El clásico que nunca falla</p>
 <div class="mt-2 text-brand-yellow font-serif text-lg font-bold">$22.00</div>
 <button class="mt-2.5 inline-flex items-center gap-1.5 bg-[#B91E0A] hover:bg-black text-white text-xs font-bold px-4 py-2 rounded-xl shadow-md border border-brand-yellow/30 active:scale-95 transition-all" onclick="openProductDetail(0)">
-<span>Ordenar ahora</span>
+<span class="">Ordenar ahora</span>
 </button>
 </div>
 <div class="w-32 h-32 rounded-2xl overflow-hidden relative shadow-lg border border-brand-yellow/50 flex-shrink-0">
-<img alt="Tacos al pastor" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsoVdxwBdXikMa8TwPJqz6dF6ZU_5WK97EqKma7AsEoC2TpQjXEiOToH63aJnVbfwILGN6dvzN0C2jMlSxSFpw4W7XYsYKpuNC49q2vw5qIsqiQ091ED3vSqlJrflPiyvVzF5cV97-VFKtDqFI2OOzj307MPvzodT2tiXj9js6-FBeRvszDkY0m3uCFuMiN9L_thdFMpP8yWuOKlgk7uDoaR-1JiB98SgIH51gOQ"/>
+<img alt="Tacos al pastor" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsoVdxwBdXikMa8TwPJqz6dF6ZU_5WK97EqKma7AsEoC2TpQjXEiOToH63aJnVbfwILGN6dvzN0C2jMlSxSFpw4W7XYsYKpuNC49q2vw5qIsqiQ091ED3vSqlJrflPiyvVzF5cV97-VFKtDqFI2OOzj307MPvzodT2tiXj9js6-FBeRvszDkY0m3uCFuMiN9L_thdFMpP8yWuOKlgk7uDoaR-1JiB98SgIH51gOQ">
 </div>
 </div>
 <!-- Platillos Populares Dynamic Section (tres miniaturas como IMAGE_2) -->
@@ -329,15 +263,15 @@
 </div>
 <div class="grid grid-cols-3 gap-2.5" id="homePopularGallery">
 <div class="rounded-2xl overflow-hidden border border-brand-border bg-[#16140F] cursor-pointer hover:border-brand-yellow" onclick="openProductDetail(0)">
-<img alt="Pastor" class="w-full h-20 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArhPdDiO690VUIgqQqrU0L4kOnLl54MDXNa6CXttWJR3gyqZff82outC9oXj6Lz5bzTb63YaQQ3h_uUAvuUFtVve1fCzzNE0y1cOyxKneQc4xcfcsmUR9nxWtEhr8zxB8tTHHfe1Rko8V8a0N2RjR6xJIeCjSwxblR0m0n9HeHVAdAxUV3G-uz7S212X2YIfoG8l-MEai8ceMwOjD-9iIJHeBaaOcA9Wx5alyCCg"/>
+<img alt="Pastor" class="w-full h-20 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArhPdDiO690VUIgqQqrU0L4kOnLl54MDXNa6CXttWJR3gyqZff82outC9oXj6Lz5bzTb63YaQQ3h_uUAvuUFtVve1fCzzNE0y1cOyxKneQc4xcfcsmUR9nxWtEhr8zxB8tTHHfe1Rko8V8a0N2RjR6xJIeCjSwxblR0m0n9HeHVAdAxUV3G-uz7S212X2YIfoG8l-MEai8ceMwOjD-9iIJHeBaaOcA9Wx5alyCCg">
 <p class="p-1.5 text-[11px] font-bold text-center truncate">Al pastor</p>
 </div>
 <div class="rounded-2xl overflow-hidden border border-brand-border bg-[#16140F] cursor-pointer hover:border-brand-yellow" onclick="openProductDetail(4)">
-<img alt="Burrito" class="w-full h-20 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuByMPt0Mqj5x3XAFFt6tuNPZZQzN7NVS_zPflGakxQE3aaCpcC-NEC-u3Rw0Ph8oDHG2uIwMlHPYcb0bYfLBrnazgtmrx7jz8azQESswLkr3AETOCVNFXNUK6qilTuMjP_BkoJvHw-BUc53HAVLJLtx8iwKlRJVrvLRpZ1XUC9gg8kHtKb-bhOKrNUqD0VDQl-x2S4hTxVfsz5w5x3_y8PiOF4yTACuSzrHLHp4Fw"/>
+<img alt="Burrito" class="w-full h-20 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuByMPt0Mqj5x3XAFFt6tuNPZZQzN7NVS_zPflGakxQE3aaCpcC-NEC-u3Rw0Ph8oDHG2uIwMlHPYcb0bYfLBrnazgtmrx7jz8azQESswLkr3AETOCVNFXNUK6qilTuMjP_BkoJvHw-BUc53HAVLJLtx8iwKlRJVrvLRpZ1XUC9gg8kHtKb-bhOKrNUqD0VDQl-x2S4hTxVfsz5w5x3_y8PiOF4yTACuSzrHLHp4Fw">
 <p class="p-1.5 text-[11px] font-bold text-center truncate">Burrito res</p>
 </div>
 <div class="rounded-2xl overflow-hidden border border-brand-border bg-[#16140F] cursor-pointer hover:border-brand-yellow" onclick="openProductDetail(6)">
-<img alt="Quesadilla" class="w-full h-20 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2Qk_49FdtgT287jv6W-GQTUj5mWADGbYazocXWlBA8fa8bNZvkSB9IpfwrEp0YRwOj0MGwCrK-XCLyK0CwafPKAb9r3FS6TBh58UmPfrDd4KJplxDm0ZSQ3YVFAwoGHqMqGhDryCBknRF7HkX6yjPhyf9wqrScsvnJoIHvP6P74_RFo6dNvW6t66a8yl2NBZWwG8OY3nCxEzDfsXL4eoV_I44NLipgqqxwBj_Jg"/>
+<img alt="Quesadilla" class="w-full h-20 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2Qk_49FdtgT287jv6W-GQTUj5mWADGbYazocXWlBA8fa8bNZvkSB9IpfwrEp0YRwOj0MGwCrK-XCLyK0CwafPKAb9r3FS6TBh58UmPfrDd4KJplxDm0ZSQ3YVFAwoGHqMqGhDryCBknRF7HkX6yjPhyf9wqrScsvnJoIHvP6P74_RFo6dNvW6t66a8yl2NBZWwG8OY3nCxEzDfsXL4eoV_I44NLipgqqxwBj_Jg">
 <p class="p-1.5 text-[11px] font-bold text-center truncate">Quesadillas</p>
 </div>
 </div>
@@ -346,15 +280,7 @@
 <!-- ================= PANTALLA 4: CATEGORÍAS (exacto de IMAGE_4) ================= -->
 <main class="screen flex-col flex-1 px-5 pt-3" id="screen-categories">
 <!-- Top Garland -->
-<div class="flex justify-between items-center -mx-5 px-3 py-1 opacity-80 mb-2 border-b border-[#2A241A]/50 bg-[#120F0A]">
-<span class="text-xs">🌮</span>
-<span class="text-xs">🌶️</span>
-<span class="text-xs">🌵</span>
-<span class="text-xs">💀</span>
-<span class="text-xs">✨</span>
-<span class="text-xs">🪅</span>
-<span class="text-xs">🌮</span>
-</div>
+<div class="-mx-5 mb-2 border-b border-[#2A241A]/60 bg-[#120F0A] overflow-hidden"><svg class="w-full h-8" viewBox="0 0 380 32" fill="none" preserveAspectRatio="none"><path d="M0 2 Q 95 10 190 2 Q 285 10 380 2" stroke="#FBC31C" stroke-width="1.5" stroke-dasharray="2,2" fill="none"></path><g transform="translate(6, 4)"><polygon points="0,0 42,0 42,24 21,17 0,24" fill="#EB3018"></polygon><circle cx="21" cy="10" r="3.5" fill="#0C0B08" opacity="0.4"></circle></g><g transform="translate(68, 5)"><polygon points="0,0 42,0 42,24 21,17 0,24" fill="#FBC31C"></polygon><circle cx="21" cy="10" r="3.5" fill="#0C0B08" opacity="0.4"></circle></g><g transform="translate(132, 4)"><polygon points="0,0 42,0 42,24 21,17 0,24" fill="#475323"></polygon><circle cx="21" cy="10" r="3.5" fill="#0C0B08" opacity="0.4"></circle></g><g transform="translate(196, 4)"><polygon points="0,0 42,0 42,24 21,17 0,24" fill="#EB3018"></polygon><circle cx="21" cy="10" r="3.5" fill="#0C0B08" opacity="0.4"></circle></g><g transform="translate(260, 5)"><polygon points="0,0 42,0 42,24 21,17 0,24" fill="#B5873C"></polygon><circle cx="21" cy="10" r="3.5" fill="#0C0B08" opacity="0.4"></circle></g><g transform="translate(324, 4)"><polygon points="0,0 42,0 42,24 21,17 0,24" fill="#FBC31C"></polygon><circle cx="21" cy="10" r="3.5" fill="#0C0B08" opacity="0.4"></circle></g></svg></div>
 <!-- Header -->
 <div class="flex items-center justify-between pb-3 border-b border-brand-border">
 <button class="w-9 h-9 rounded-full bg-[#1A1712] border border-brand-border flex items-center justify-center text-stone-300" onclick="navigateBack()">
@@ -363,20 +289,20 @@
 <h2 class="font-serif text-lg text-stone-100">Categorías</h2>
 <button class="w-9 h-9 rounded-full bg-[#1A1712] border border-brand-border flex items-center justify-center text-brand-yellow relative" onclick="navigateTo('screen-cart')">
 <i class="fa-solid fa-cart-shopping text-sm"></i>
-<span class="cartBadgeCount absolute -top-1 -right-1 bg-brand-red text-white text-[9px] font-bold rounded-full w-4 h-4 flex items-center justify-center">0</span>
+<span class="cartBadgeCount absolute -top-1 -right-1 bg-brand-red text-white text-[9px] font-bold rounded-full w-4 h-4 flex items-center justify-center">3</span>
 </button>
 </div>
 <!-- Search in categories -->
 <div class="relative mt-3">
 <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-stone-500 text-xs"></i>
-<input class="w-full bg-[#181510] text-xs text-stone-200 placeholder-stone-500 rounded-xl pl-9 pr-3 py-2.5 border border-brand-border" id="categorySearchInput" oninput="filterCategoriesList(this.value)" placeholder="Buscar platillos..." type="text"/>
+<input class="w-full bg-[#181510] text-xs text-stone-200 placeholder-stone-500 rounded-xl pl-9 pr-3 py-2.5 border border-brand-border" id="categorySearchInput" oninput="filterCategoriesList(this.value)" placeholder="Buscar platillos..." type="text">
 </div>
 <!-- Category List Grid (con fotos reales estilo IMAGE_4) -->
 <div class="space-y-3 mt-4 mb-6" id="categoriesContainer">
 <!-- Tacos -->
 <div class="cursor-pointer bg-[#14120D] border border-brand-border hover:border-brand-yellow/40 rounded-2xl p-2.5 flex items-center justify-between" onclick="filterCategoryAndOpen('Tacos')">
 <div class="flex items-center gap-3">
-<img alt="Tacos" class="w-16 h-16 rounded-xl object-cover border border-brand-border" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgTKsBbiQlaR1kU60a7yh27Uncs751jZ0b5IK-FohWiRSDiGhc0BKk-XQ2yRtyOF2KHUJnbKyuJDpHl_OJLE8mj3Xu6lVtUrnxURYfP4Yc93m7cUGUDBloy6us-qGdsm3O4FIjOKTli_iQZQ1YH9f_qXTEzTWMLQrf7c-pjS_UZdYFNLMtrIs3dodlFwCW0dU67IVtxEi_lymqIbauWfhs3cg8-OrQuiyQ7rDVlg"/>
+<img alt="Tacos" class="w-16 h-16 rounded-xl object-cover border border-brand-border" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgTKsBbiQlaR1kU60a7yh27Uncs751jZ0b5IK-FohWiRSDiGhc0BKk-XQ2yRtyOF2KHUJnbKyuJDpHl_OJLE8mj3Xu6lVtUrnxURYfP4Yc93m7cUGUDBloy6us-qGdsm3O4FIjOKTli_iQZQ1YH9f_qXTEzTWMLQrf7c-pjS_UZdYFNLMtrIs3dodlFwCW0dU67IVtxEi_lymqIbauWfhs3cg8-OrQuiyQ7rDVlg">
 <div>
 <h3 class="font-serif text-base text-stone-100 font-bold">Tacos</h3>
 <p class="text-xs text-stone-400">Los clásicos de siempre</p>
@@ -387,7 +313,7 @@
 <!-- Burritos -->
 <div class="cursor-pointer bg-[#14120D] border border-brand-border hover:border-brand-yellow/40 rounded-2xl p-2.5 flex items-center justify-between" onclick="filterCategoryAndOpen('Burritos')">
 <div class="flex items-center gap-3">
-<img alt="Burritos" class="w-16 h-16 rounded-xl object-cover border border-brand-border" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnMCNsksK1fjirvHXwO0yTnB8Jgw2xFH4ly4gSrCRa7LKvTZHqaQ1Q8l3njdR-uU6MZSDHvqzjOdZnNKCdfoZ_iyMQAh3qvtWgpPBNFam6EHacOlRMGMVKhCQjZcqmsbSm5pyxhOVhz6c8jQ5RdnipZ37cs_6trElv3Hpt06UADrlRcjqwgWVsoRdefdODJxrvJNGpGDahFPsRF8VDT6sPk2Jfg6bH2DR3nRMYkA"/>
+<img alt="Burritos" class="w-16 h-16 rounded-xl object-cover border border-brand-border" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnMCNsksK1fjirvHXwO0yTnB8Jgw2xFH4ly4gSrCRa7LKvTZHqaQ1Q8l3njdR-uU6MZSDHvqzjOdZnNKCdfoZ_iyMQAh3qvtWgpPBNFam6EHacOlRMGMVKhCQjZcqmsbSm5pyxhOVhz6c8jQ5RdnipZ37cs_6trElv3Hpt06UADrlRcjqwgWVsoRdefdODJxrvJNGpGDahFPsRF8VDT6sPk2Jfg6bH2DR3nRMYkA">
 <div>
 <h3 class="font-serif text-base text-stone-100 font-bold">Burritos</h3>
 <p class="text-xs text-stone-400">Grandes y llenos de sabor</p>
@@ -398,7 +324,7 @@
 <!-- Quesadillas -->
 <div class="cursor-pointer bg-[#14120D] border border-brand-border hover:border-brand-yellow/40 rounded-2xl p-2.5 flex items-center justify-between" onclick="filterCategoryAndOpen('Quesadillas')">
 <div class="flex items-center gap-3">
-<img alt="Quesadillas" class="w-16 h-16 rounded-xl object-cover border border-brand-border" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcgzY90lXihvmDeRXYZgXoBzayVoV_PSgCYWj91ZkFN2vlwSgDH0moHxG4dv6j-HxxQHrnro3DRaS19je1FUKsDia8Sxqy-n3hxkCqSwl2YAYKOeFhKVW4fjOTy6VJan2yjrcXvItXrVRG9m-e5YIGHCDo2t8dEf6kIZgwf6aaWTfnpNuZsJseKV0RC49cebQhFKSCxkfO6e3W0LlC_5oAVzPAJmIaNVraNtKhrA"/>
+<img alt="Quesadillas" class="w-16 h-16 rounded-xl object-cover border border-brand-border" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcgzY90lXihvmDeRXYZgXoBzayVoV_PSgCYWj91ZkFN2vlwSgDH0moHxG4dv6j-HxxQHrnro3DRaS19je1FUKsDia8Sxqy-n3hxkCqSwl2YAYKOeFhKVW4fjOTy6VJan2yjrcXvItXrVRG9m-e5YIGHCDo2t8dEf6kIZgwf6aaWTfnpNuZsJseKV0RC49cebQhFKSCxkfO6e3W0LlC_5oAVzPAJmIaNVraNtKhrA">
 <div>
 <h3 class="font-serif text-base text-stone-100 font-bold">Quesadillas</h3>
 <p class="text-xs text-stone-400">Crujientes y deliciosas</p>
@@ -409,7 +335,7 @@
 <!-- Enchiladas -->
 <div class="cursor-pointer bg-[#14120D] border border-brand-border hover:border-brand-yellow/40 rounded-2xl p-2.5 flex items-center justify-between" onclick="filterCategoryAndOpen('Enchiladas')">
 <div class="flex items-center gap-3">
-<img alt="Enchiladas" class="w-16 h-16 rounded-xl object-cover border border-brand-border" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmxiMW4IWASjfwqhERD6X3KvtrpfC4V9V5_olCgCqj-YH9OhcvpYWYSv0m2vW7uVh8b2XDN9WmRe2oI4qFxQ2vT1yA735sPaXCoVtE87eHjDTi2wVqJXIyw5rWnko1MLaDvnq5vJRb3PXfJ_vCrDkQ226plCgt2pzfGC6hDpLjQaq7QjfkgMHV6VyKqs5ydv8Qe5hh7g6nYXniclLqkFqCuv-skIu0xGPcpaGZIA"/>
+<img alt="Enchiladas" class="w-16 h-16 rounded-xl object-cover border border-brand-border" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmxiMW4IWASjfwqhERD6X3KvtrpfC4V9V5_olCgCqj-YH9OhcvpYWYSv0m2vW7uVh8b2XDN9WmRe2oI4qFxQ2vT1yA735sPaXCoVtE87eHjDTi2wVqJXIyw5rWnko1MLaDvnq5vJRb3PXfJ_vCrDkQ226plCgt2pzfGC6hDpLjQaq7QjfkgMHV6VyKqs5ydv8Qe5hh7g6nYXniclLqkFqCuv-skIu0xGPcpaGZIA">
 <div>
 <h3 class="font-serif text-base text-stone-100 font-bold">Enchiladas</h3>
 <p class="text-xs text-stone-400">Tradición en cada bocado</p>
@@ -420,7 +346,7 @@
 <!-- Pozole -->
 <div class="cursor-pointer bg-[#14120D] border border-brand-border hover:border-brand-yellow/40 rounded-2xl p-2.5 flex items-center justify-between" onclick="filterCategoryAndOpen('Pozole')">
 <div class="flex items-center gap-3">
-<img alt="Pozole" class="w-16 h-16 rounded-xl object-cover border border-brand-border" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCu7Z5aK0Hy0ZcSu5DUjP0F40pdzBlK7x7GPR-V9RBl5Wwi5m4wNi1i96FqeNUMl6oXelkA2jrixr_uHbkxlxEVPwmyblHQwBkKXeH0KcEjWk6RNITq3b8qX9EsakE0qsIduANdMHb8v8RcV7Hz8888k9CdAHPBzqP67EaczMWsaQaVnmg3N-EGeC0ep0yQXTXcWFYI_B_a_nquVwV_-3TBFtxPc4t7UhdYkaMwUA"/>
+<img alt="Pozole" class="w-16 h-16 rounded-xl object-cover border border-brand-border" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCu7Z5aK0Hy0ZcSu5DUjP0F40pdzBlK7x7GPR-V9RBl5Wwi5m4wNi1i96FqeNUMl6oXelkA2jrixr_uHbkxlxEVPwmyblHQwBkKXeH0KcEjWk6RNITq3b8qX9EsakE0qsIduANdMHb8v8RcV7Hz8888k9CdAHPBzqP67EaczMWsaQaVnmg3N-EGeC0ep0yQXTXcWFYI_B_a_nquVwV_-3TBFtxPc4t7UhdYkaMwUA">
 <div>
 <h3 class="font-serif text-base text-stone-100 font-bold">Pozole</h3>
 <p class="text-xs text-stone-400">Sabor de México</p>
@@ -431,7 +357,7 @@
 <!-- Bebidas -->
 <div class="cursor-pointer bg-[#14120D] border border-brand-border hover:border-brand-yellow/40 rounded-2xl p-2.5 flex items-center justify-between" onclick="filterCategoryAndOpen('Bebidas')">
 <div class="flex items-center gap-3">
-<img alt="Bebidas" class="w-16 h-16 rounded-xl object-cover border border-brand-border" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6HkXJOG31rm-0pSq0CWtRgHOVVwLtV1gqshT-GXKlfMLyjQp7neE211c24XS8LHZlwN1YUwkRL4BdAEG3z2NPKsSICThMvRDBD0p4x4Qbm0EdrKZPFGLTM2rAPwTe4Vhe8wxxZofUat7kELCWkl5p47dy_7Ho-lA4N8mfJ8c-eocPEuKK6T3db3DPMkwLQZeX7Hpq0olh-q888EChK0zB0AQkwbFLLY8w7rLjSw"/>
+<img alt="Bebidas" class="w-16 h-16 rounded-xl object-cover border border-brand-border" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6HkXJOG31rm-0pSq0CWtRgHOVVwLtV1gqshT-GXKlfMLyjQp7neE211c24XS8LHZlwN1YUwkRL4BdAEG3z2NPKsSICThMvRDBD0p4x4Qbm0EdrKZPFGLTM2rAPwTe4Vhe8wxxZofUat7kELCWkl5p47dy_7Ho-lA4N8mfJ8c-eocPEuKK6T3db3DPMkwLQZeX7Hpq0olh-q888EChK0zB0AQkwbFLLY8w7rLjSw">
 <div>
 <h3 class="font-serif text-base text-stone-100 font-bold">Bebidas</h3>
 <p class="text-xs text-stone-400">Refresca tu antojo</p>
@@ -444,15 +370,7 @@
 <!-- ================= PANTALLA 5: LISTADO DE PRODUCTOS (exacto de IMAGE_3) ================= -->
 <main class="screen flex-col flex-1 px-5 pt-3" id="screen-products-list">
 <!-- Garland -->
-<div class="flex justify-between items-center -mx-5 px-3 py-1 opacity-80 mb-2 border-b border-[#2A241A]/50 bg-[#120F0A]">
-<span class="text-xs">🌮</span>
-<span class="text-xs">🌶️</span>
-<span class="text-xs">🌵</span>
-<span class="text-xs">💀</span>
-<span class="text-xs">✨</span>
-<span class="text-xs">🪅</span>
-<span class="text-xs">🌮</span>
-</div>
+<div class="-mx-5 mb-2 border-b border-[#2A241A]/60 bg-[#120F0A] overflow-hidden"><svg class="w-full h-8" viewBox="0 0 380 32" fill="none" preserveAspectRatio="none"><path d="M0 2 Q 95 10 190 2 Q 285 10 380 2" stroke="#FBC31C" stroke-width="1.5" stroke-dasharray="2,2" fill="none"></path><g transform="translate(6, 4)"><polygon points="0,0 42,0 42,24 21,17 0,24" fill="#EB3018"></polygon><circle cx="21" cy="10" r="3.5" fill="#0C0B08" opacity="0.4"></circle></g><g transform="translate(68, 5)"><polygon points="0,0 42,0 42,24 21,17 0,24" fill="#FBC31C"></polygon><circle cx="21" cy="10" r="3.5" fill="#0C0B08" opacity="0.4"></circle></g><g transform="translate(132, 4)"><polygon points="0,0 42,0 42,24 21,17 0,24" fill="#475323"></polygon><circle cx="21" cy="10" r="3.5" fill="#0C0B08" opacity="0.4"></circle></g><g transform="translate(196, 4)"><polygon points="0,0 42,0 42,24 21,17 0,24" fill="#EB3018"></polygon><circle cx="21" cy="10" r="3.5" fill="#0C0B08" opacity="0.4"></circle></g><g transform="translate(260, 5)"><polygon points="0,0 42,0 42,24 21,17 0,24" fill="#B5873C"></polygon><circle cx="21" cy="10" r="3.5" fill="#0C0B08" opacity="0.4"></circle></g><g transform="translate(324, 4)"><polygon points="0,0 42,0 42,24 21,17 0,24" fill="#FBC31C"></polygon><circle cx="21" cy="10" r="3.5" fill="#0C0B08" opacity="0.4"></circle></g></svg></div>
 <!-- Header -->
 <div class="flex items-center justify-between pb-3 border-b border-brand-border">
 <button class="w-9 h-9 rounded-full bg-[#1A1712] border border-brand-border flex items-center justify-center text-stone-300" onclick="navigateBack()">
@@ -461,12 +379,12 @@
 <h2 class="font-serif text-lg text-stone-100" id="productsListTitle">Carta de Platillos</h2>
 <button class="w-9 h-9 rounded-full bg-[#1A1712] border border-brand-border flex items-center justify-center text-brand-yellow relative" onclick="navigateTo('screen-cart')">
 <i class="fa-solid fa-bag-shopping text-sm"></i>
-<span class="cartBadgeCount absolute -top-1 -right-1 bg-brand-red text-white text-[9px] font-bold rounded-full w-4 h-4 flex items-center justify-center">0</span>
+<span class="cartBadgeCount absolute -top-1 -right-1 bg-brand-red text-white text-[9px] font-bold rounded-full w-4 h-4 flex items-center justify-center">3</span>
 </button>
 </div>
 <!-- Filter Tabs (Todos, Pastor, Asada, Pollo, Burritos, etc.) -->
 <div class="flex gap-2 overflow-x-auto no-scrollbar py-3">
-<button class="tab-btn px-4 py-1.5 rounded-full text-xs font-bold bg-brand-red text-white flex-shrink-0" onclick="setProductFilter('all')">Todos</button>
+<button class="tab-btn px-4 py-1.5 rounded-full text-xs font-bold bg-[#1C1812] text-stone-400 border border-brand-border flex-shrink-0" onclick="setProductFilter('all')">Todos</button>
 <button class="tab-btn px-4 py-1.5 rounded-full text-xs font-bold bg-[#1C1812] text-stone-400 border border-brand-border flex-shrink-0" onclick="setProductFilter('Pastor')">Pastor</button>
 <button class="tab-btn px-4 py-1.5 rounded-full text-xs font-bold bg-[#1C1812] text-stone-400 border border-brand-border flex-shrink-0" onclick="setProductFilter('Asada')">Asada</button>
 <button class="tab-btn px-4 py-1.5 rounded-full text-xs font-bold bg-[#1C1812] text-stone-400 border border-brand-border flex-shrink-0" onclick="setProductFilter('Pollo')">Pollo</button>
@@ -475,15 +393,181 @@
 <button class="tab-btn px-4 py-1.5 rounded-full text-xs font-bold bg-[#1C1812] text-stone-400 border border-brand-border flex-shrink-0" onclick="setProductFilter('Bebida')">Bebidas</button>
 </div>
 <!-- Products List Container (Tarjeta con borde dorado sutil exactamente como IMAGE_3) -->
-<div class="space-y-3 pb-6" id="fullProductsContainer">
-<!-- Poblado dinámicamente con catálogo completo -->
-</div>
+<div class="space-y-3 pb-6" id="fullProductsContainer"><div class="bg-[#14120D] border border-brand-border rounded-2xl p-3 flex items-center justify-between hover:border-brand-yellow/40 transition-all">
+        <div onclick="openProductDetail(0)" class="flex items-center gap-3 cursor-pointer flex-1 pr-2">
+          <img class="w-16 h-16 rounded-xl object-cover border border-brand-border flex-shrink-0" src="https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?auto=format&amp;fit=crop&amp;w=400&amp;q=80" alt="Tacos al pastor">
+          <div>
+            <h3 class="font-serif text-sm font-bold text-stone-100">Tacos al pastor</h3>
+            <p class="text-[11px] text-stone-400 line-clamp-2 mt-0.5">Tortilla de maíz, carne al pastor, piña, cilantro y cebolla.</p>
+            <span class="font-serif text-sm font-bold text-stone-200 mt-1 block">$22.00</span>
+          </div>
+        </div>
+        <button onclick="addToCartQuick(0)" class="w-8 h-8 rounded-full border border-brand-yellow/40 text-brand-yellow flex items-center justify-center hover:bg-brand-yellow hover:text-black transition-colors shadow-sm flex-shrink-0">
+          <i class="fa-solid fa-plus text-xs"></i>
+        </button>
+      </div><div class="bg-[#14120D] border border-brand-border rounded-2xl p-3 flex items-center justify-between hover:border-brand-yellow/40 transition-all">
+        <div onclick="openProductDetail(1)" class="flex items-center gap-3 cursor-pointer flex-1 pr-2">
+          <img class="w-16 h-16 rounded-xl object-cover border border-brand-border flex-shrink-0" src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&amp;fit=crop&amp;w=400&amp;q=80" alt="Tacos de asada">
+          <div>
+            <h3 class="font-serif text-sm font-bold text-stone-100">Tacos de asada</h3>
+            <p class="text-[11px] text-stone-400 line-clamp-2 mt-0.5">Carne de res, cilantro, cebolla y salsa.</p>
+            <span class="font-serif text-sm font-bold text-stone-200 mt-1 block">$20.00</span>
+          </div>
+        </div>
+        <button onclick="addToCartQuick(1)" class="w-8 h-8 rounded-full border border-brand-yellow/40 text-brand-yellow flex items-center justify-center hover:bg-brand-yellow hover:text-black transition-colors shadow-sm flex-shrink-0">
+          <i class="fa-solid fa-plus text-xs"></i>
+        </button>
+      </div><div class="bg-[#14120D] border border-brand-border rounded-2xl p-3 flex items-center justify-between hover:border-brand-yellow/40 transition-all">
+        <div onclick="openProductDetail(2)" class="flex items-center gap-3 cursor-pointer flex-1 pr-2">
+          <img class="w-16 h-16 rounded-xl object-cover border border-brand-border flex-shrink-0" src="https://images.unsplash.com/photo-1615870216519-2f9fa575fa5c?auto=format&amp;fit=crop&amp;w=400&amp;q=80" alt="Tacos de pollo">
+          <div>
+            <h3 class="font-serif text-sm font-bold text-stone-100">Tacos de pollo</h3>
+            <p class="text-[11px] text-stone-400 line-clamp-2 mt-0.5">Pollo marinado, cilantro, cebolla y salsa.</p>
+            <span class="font-serif text-sm font-bold text-stone-200 mt-1 block">$18.00</span>
+          </div>
+        </div>
+        <button onclick="addToCartQuick(2)" class="w-8 h-8 rounded-full border border-brand-yellow/40 text-brand-yellow flex items-center justify-center hover:bg-brand-yellow hover:text-black transition-colors shadow-sm flex-shrink-0">
+          <i class="fa-solid fa-plus text-xs"></i>
+        </button>
+      </div><div class="bg-[#14120D] border border-brand-border rounded-2xl p-3 flex items-center justify-between hover:border-brand-yellow/40 transition-all">
+        <div onclick="openProductDetail(3)" class="flex items-center gap-3 cursor-pointer flex-1 pr-2">
+          <img class="w-16 h-16 rounded-xl object-cover border border-brand-border flex-shrink-0" src="https://images.unsplash.com/photo-1599974579688-8dbdd335c77f?auto=format&amp;fit=crop&amp;w=400&amp;q=80" alt="Tacos de chorizo">
+          <div>
+            <h3 class="font-serif text-sm font-bold text-stone-100">Tacos de chorizo</h3>
+            <p class="text-[11px] text-stone-400 line-clamp-2 mt-0.5">Chorizo, papa, cilantro y cebolla.</p>
+            <span class="font-serif text-sm font-bold text-stone-200 mt-1 block">$18.00</span>
+          </div>
+        </div>
+        <button onclick="addToCartQuick(3)" class="w-8 h-8 rounded-full border border-brand-yellow/40 text-brand-yellow flex items-center justify-center hover:bg-brand-yellow hover:text-black transition-colors shadow-sm flex-shrink-0">
+          <i class="fa-solid fa-plus text-xs"></i>
+        </button>
+      </div><div class="bg-[#14120D] border border-brand-border rounded-2xl p-3 flex items-center justify-between hover:border-brand-yellow/40 transition-all">
+        <div onclick="openProductDetail(4)" class="flex items-center gap-3 cursor-pointer flex-1 pr-2">
+          <img class="w-16 h-16 rounded-xl object-cover border border-brand-border flex-shrink-0" src="https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&amp;fit=crop&amp;w=400&amp;q=80" alt="Burrito de res">
+          <div>
+            <h3 class="font-serif text-sm font-bold text-stone-100">Burrito de res</h3>
+            <p class="text-[11px] text-stone-400 line-clamp-2 mt-0.5">Frijoles refritos, queso fundido, arroz mexicano y guacamole.</p>
+            <span class="font-serif text-sm font-bold text-stone-200 mt-1 block">$28.00</span>
+          </div>
+        </div>
+        <button onclick="addToCartQuick(4)" class="w-8 h-8 rounded-full border border-brand-yellow/40 text-brand-yellow flex items-center justify-center hover:bg-brand-yellow hover:text-black transition-colors shadow-sm flex-shrink-0">
+          <i class="fa-solid fa-plus text-xs"></i>
+        </button>
+      </div><div class="bg-[#14120D] border border-brand-border rounded-2xl p-3 flex items-center justify-between hover:border-brand-yellow/40 transition-all">
+        <div onclick="openProductDetail(5)" class="flex items-center gap-3 cursor-pointer flex-1 pr-2">
+          <img class="w-16 h-16 rounded-xl object-cover border border-brand-border flex-shrink-0" src="https://images.unsplash.com/photo-1566740933430-b5e70b06d2d5?auto=format&amp;fit=crop&amp;w=400&amp;q=80" alt="Burrito mixto / pastor">
+          <div>
+            <h3 class="font-serif text-sm font-bold text-stone-100">Burrito mixto / pastor</h3>
+            <p class="text-[11px] text-stone-400 line-clamp-2 mt-0.5">Carne al pastor, queso Oaxaca y salsa taquera.</p>
+            <span class="font-serif text-sm font-bold text-stone-200 mt-1 block">$26.00</span>
+          </div>
+        </div>
+        <button onclick="addToCartQuick(5)" class="w-8 h-8 rounded-full border border-brand-yellow/40 text-brand-yellow flex items-center justify-center hover:bg-brand-yellow hover:text-black transition-colors shadow-sm flex-shrink-0">
+          <i class="fa-solid fa-plus text-xs"></i>
+        </button>
+      </div><div class="bg-[#14120D] border border-brand-border rounded-2xl p-3 flex items-center justify-between hover:border-brand-yellow/40 transition-all">
+        <div onclick="openProductDetail(6)" class="flex items-center gap-3 cursor-pointer flex-1 pr-2">
+          <img class="w-16 h-16 rounded-xl object-cover border border-brand-border flex-shrink-0" src="https://images.unsplash.com/photo-1618040996337-56904b7850b9?auto=format&amp;fit=crop&amp;w=400&amp;q=80" alt="Quesadillas al pastor">
+          <div>
+            <h3 class="font-serif text-sm font-bold text-stone-100">Quesadillas al pastor</h3>
+            <p class="text-[11px] text-stone-400 line-clamp-2 mt-0.5">Crujientes y deliciosas con queso fundido y carne al pastor.</p>
+            <span class="font-serif text-sm font-bold text-stone-200 mt-1 block">$24.00</span>
+          </div>
+        </div>
+        <button onclick="addToCartQuick(6)" class="w-8 h-8 rounded-full border border-brand-yellow/40 text-brand-yellow flex items-center justify-center hover:bg-brand-yellow hover:text-black transition-colors shadow-sm flex-shrink-0">
+          <i class="fa-solid fa-plus text-xs"></i>
+        </button>
+      </div><div class="bg-[#14120D] border border-brand-border rounded-2xl p-3 flex items-center justify-between hover:border-brand-yellow/40 transition-all">
+        <div onclick="openProductDetail(7)" class="flex items-center gap-3 cursor-pointer flex-1 pr-2">
+          <img class="w-16 h-16 rounded-xl object-cover border border-brand-border flex-shrink-0" src="https://images.unsplash.com/photo-1599974579688-8dbdd335c77f?auto=format&amp;fit=crop&amp;w=400&amp;q=80" alt="Quesadillas de tinga de pollo">
+          <div>
+            <h3 class="font-serif text-sm font-bold text-stone-100">Quesadillas de tinga de pollo</h3>
+            <p class="text-[11px] text-stone-400 line-clamp-2 mt-0.5">Con chipotle suave, pollo tierno y crema agria.</p>
+            <span class="font-serif text-sm font-bold text-stone-200 mt-1 block">$22.00</span>
+          </div>
+        </div>
+        <button onclick="addToCartQuick(7)" class="w-8 h-8 rounded-full border border-brand-yellow/40 text-brand-yellow flex items-center justify-center hover:bg-brand-yellow hover:text-black transition-colors shadow-sm flex-shrink-0">
+          <i class="fa-solid fa-plus text-xs"></i>
+        </button>
+      </div><div class="bg-[#14120D] border border-brand-border rounded-2xl p-3 flex items-center justify-between hover:border-brand-yellow/40 transition-all">
+        <div onclick="openProductDetail(8)" class="flex items-center gap-3 cursor-pointer flex-1 pr-2">
+          <img class="w-16 h-16 rounded-xl object-cover border border-brand-border flex-shrink-0" src="https://images.unsplash.com/photo-1534352956036-cd81e27dd615?auto=format&amp;fit=crop&amp;w=400&amp;q=80" alt="Enchiladas verdes / rojas">
+          <div>
+            <h3 class="font-serif text-sm font-bold text-stone-100">Enchiladas verdes / rojas</h3>
+            <p class="text-[11px] text-stone-400 line-clamp-2 mt-0.5">Tradición en cada bocado con pollo deshebrado y queso fresco.</p>
+            <span class="font-serif text-sm font-bold text-stone-200 mt-1 block">$24.00</span>
+          </div>
+        </div>
+        <button onclick="addToCartQuick(8)" class="w-8 h-8 rounded-full border border-brand-yellow/40 text-brand-yellow flex items-center justify-center hover:bg-brand-yellow hover:text-black transition-colors shadow-sm flex-shrink-0">
+          <i class="fa-solid fa-plus text-xs"></i>
+        </button>
+      </div><div class="bg-[#14120D] border border-brand-border rounded-2xl p-3 flex items-center justify-between hover:border-brand-yellow/40 transition-all">
+        <div onclick="openProductDetail(9)" class="flex items-center gap-3 cursor-pointer flex-1 pr-2">
+          <img class="w-16 h-16 rounded-xl object-cover border border-brand-border flex-shrink-0" src="https://images.unsplash.com/photo-1547928576-a4a33237cbc3?auto=format&amp;fit=crop&amp;w=400&amp;q=80" alt="Pozole tradicional rojo">
+          <div>
+            <h3 class="font-serif text-sm font-bold text-stone-100">Pozole tradicional rojo</h3>
+            <p class="text-[11px] text-stone-400 line-clamp-2 mt-0.5">Sabor de México con maíz cacahuazintle, rábano, lechuga y orégano.</p>
+            <span class="font-serif text-sm font-bold text-stone-200 mt-1 block">$26.00</span>
+          </div>
+        </div>
+        <button onclick="addToCartQuick(9)" class="w-8 h-8 rounded-full border border-brand-yellow/40 text-brand-yellow flex items-center justify-center hover:bg-brand-yellow hover:text-black transition-colors shadow-sm flex-shrink-0">
+          <i class="fa-solid fa-plus text-xs"></i>
+        </button>
+      </div><div class="bg-[#14120D] border border-brand-border rounded-2xl p-3 flex items-center justify-between hover:border-brand-yellow/40 transition-all">
+        <div onclick="openProductDetail(10)" class="flex items-center gap-3 cursor-pointer flex-1 pr-2">
+          <img class="w-16 h-16 rounded-xl object-cover border border-brand-border flex-shrink-0" src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&amp;fit=crop&amp;w=400&amp;q=80" alt="Agua de jamaica">
+          <div>
+            <h3 class="font-serif text-sm font-bold text-stone-100">Agua de jamaica</h3>
+            <p class="text-[11px] text-stone-400 line-clamp-2 mt-0.5">Refresca tu antojo natural con flor de jamaica pura.</p>
+            <span class="font-serif text-sm font-bold text-stone-200 mt-1 block">$15.00</span>
+          </div>
+        </div>
+        <button onclick="addToCartQuick(10)" class="w-8 h-8 rounded-full border border-brand-yellow/40 text-brand-yellow flex items-center justify-center hover:bg-brand-yellow hover:text-black transition-colors shadow-sm flex-shrink-0">
+          <i class="fa-solid fa-plus text-xs"></i>
+        </button>
+      </div><div class="bg-[#14120D] border border-brand-border rounded-2xl p-3 flex items-center justify-between hover:border-brand-yellow/40 transition-all">
+        <div onclick="openProductDetail(11)" class="flex items-center gap-3 cursor-pointer flex-1 pr-2">
+          <img class="w-16 h-16 rounded-xl object-cover border border-brand-border flex-shrink-0" src="https://images.unsplash.com/photo-1556881286-fc6915169721?auto=format&amp;fit=crop&amp;w=400&amp;q=80" alt="Agua de horchata">
+          <div>
+            <h3 class="font-serif text-sm font-bold text-stone-100">Agua de horchata</h3>
+            <p class="text-[11px] text-stone-400 line-clamp-2 mt-0.5">Receta artesanal con arroz, leche, vainilla y canela recién molida.</p>
+            <span class="font-serif text-sm font-bold text-stone-200 mt-1 block">$15.00</span>
+          </div>
+        </div>
+        <button onclick="addToCartQuick(11)" class="w-8 h-8 rounded-full border border-brand-yellow/40 text-brand-yellow flex items-center justify-center hover:bg-brand-yellow hover:text-black transition-colors shadow-sm flex-shrink-0">
+          <i class="fa-solid fa-plus text-xs"></i>
+        </button>
+      </div><div class="bg-[#14120D] border border-brand-border rounded-2xl p-3 flex items-center justify-between hover:border-brand-yellow/40 transition-all">
+        <div onclick="openProductDetail(12)" class="flex items-center gap-3 cursor-pointer flex-1 pr-2">
+          <img class="w-16 h-16 rounded-xl object-cover border border-brand-border flex-shrink-0" src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&amp;fit=crop&amp;w=400&amp;q=80" alt="Jarritos mexicanos">
+          <div>
+            <h3 class="font-serif text-sm font-bold text-stone-100">Jarritos mexicanos</h3>
+            <p class="text-[11px] text-stone-400 line-clamp-2 mt-0.5">Sabores auténticos de Tamarindo o Mandarina bien fríos.</p>
+            <span class="font-serif text-sm font-bold text-stone-200 mt-1 block">$16.00</span>
+          </div>
+        </div>
+        <button onclick="addToCartQuick(12)" class="w-8 h-8 rounded-full border border-brand-yellow/40 text-brand-yellow flex items-center justify-center hover:bg-brand-yellow hover:text-black transition-colors shadow-sm flex-shrink-0">
+          <i class="fa-solid fa-plus text-xs"></i>
+        </button>
+      </div><div class="bg-[#14120D] border border-brand-border rounded-2xl p-3 flex items-center justify-between hover:border-brand-yellow/40 transition-all">
+        <div onclick="openProductDetail(13)" class="flex items-center gap-3 cursor-pointer flex-1 pr-2">
+          <img class="w-16 h-16 rounded-xl object-cover border border-brand-border flex-shrink-0" src="https://images.unsplash.com/photo-1608270192770-b74aa68d29b7?auto=format&amp;fit=crop&amp;w=400&amp;q=80" alt="Cerveza Desperados">
+          <div>
+            <h3 class="font-serif text-sm font-bold text-stone-100">Cerveza Desperados</h3>
+            <p class="text-[11px] text-stone-400 line-clamp-2 mt-0.5">Con un toque de tequila y corteza de lima.</p>
+            <span class="font-serif text-sm font-bold text-stone-200 mt-1 block">$18.00</span>
+          </div>
+        </div>
+        <button onclick="addToCartQuick(13)" class="w-8 h-8 rounded-full border border-brand-yellow/40 text-brand-yellow flex items-center justify-center hover:bg-brand-yellow hover:text-black transition-colors shadow-sm flex-shrink-0">
+          <i class="fa-solid fa-plus text-xs"></i>
+        </button>
+      </div></div>
 </main>
 <!-- ================= PANTALLA 6: DETALLE DEL PLATILLO ================= -->
 <main class="screen flex-col flex-1 pb-6" id="screen-product-detail">
 <!-- Top Floating Header over picture -->
 <div class="relative w-full h-64 bg-[#14120D] flex items-center justify-center overflow-hidden border-b border-brand-border">
-<img alt="Detalle" class="w-full h-full object-cover" id="detailImg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDugfzIQlzwJVgOzjK8_3lHs4B0lZqUnuXvY7JVoK4BPjgq4L298brcZrC0i_pMIHQYheh4QMnti4p62086sgBFsv-3YtXal9wz8mbZdYBfygLlaVt0YkcNrVGQcDvvGhkfi7xuCTWVAhqaZkz_9ssrn3qJCvaQUicomJ0Ep5nb2Vfm_0ssH7ONHx6afskbvLy3wTn7lqENkFdSD-mwjZ8BaTvdsfNHHmAbvHQFBA"/>
+<img alt="Detalle" class="w-full h-full object-cover" id="detailImg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDugfzIQlzwJVgOzjK8_3lHs4B0lZqUnuXvY7JVoK4BPjgq4L298brcZrC0i_pMIHQYheh4QMnti4p62086sgBFsv-3YtXal9wz8mbZdYBfygLlaVt0YkcNrVGQcDvvGhkfi7xuCTWVAhqaZkz_9ssrn3qJCvaQUicomJ0Ep5nb2Vfm_0ssH7ONHx6afskbvLy3wTn7lqENkFdSD-mwjZ8BaTvdsfNHHmAbvHQFBA">
 <div class="absolute inset-0 bg-gradient-to-t from-[#0C0B08] via-transparent to-black/60"></div>
 <!-- Top Actions Bar -->
 <div class="absolute top-4 left-4 right-4 flex justify-between z-10">
@@ -525,22 +609,22 @@
 <div class="space-y-2 text-xs">
 <label class="flex items-center justify-between p-3 rounded-xl bg-[#16140F] border border-brand-border cursor-pointer">
 <span class="flex items-center gap-2">
-<input class="rounded bg-[#0C0B08] border-brand-border text-brand-red focus:ring-brand-red" id="extraSalsaRoja" type="checkbox"/>
-<span>Salsa roja</span>
+<input class="rounded bg-[#0C0B08] border-brand-border text-brand-red focus:ring-brand-red" id="extraSalsaRoja" type="checkbox">
+<span class="">Salsa roja</span>
 </span>
 <span class="text-brand-yellow font-medium">+$0.00</span>
 </label>
 <label class="flex items-center justify-between p-3 rounded-xl bg-[#16140F] border border-brand-border cursor-pointer">
 <span class="flex items-center gap-2">
-<input checked="" class="rounded bg-[#0C0B08] border-brand-border text-brand-red focus:ring-brand-red" id="extraSalsaVerde" type="checkbox"/>
-<span>Salsa verde</span>
+<input checked="" class="rounded bg-[#0C0B08] border-brand-border text-brand-red focus:ring-brand-red" id="extraSalsaVerde" type="checkbox">
+<span class="">Salsa verde</span>
 </span>
 <span class="text-brand-yellow font-medium">+$0.00</span>
 </label>
 <label class="flex items-center justify-between p-3 rounded-xl bg-[#16140F] border border-brand-border cursor-pointer">
 <span class="flex items-center gap-2">
-<input class="rounded bg-[#0C0B08] border-brand-border text-brand-red focus:ring-brand-red" id="extraAguacate" onchange="calculateDetailTotal()" type="checkbox"/>
-<span>Aguacate fresco</span>
+<input class="rounded bg-[#0C0B08] border-brand-border text-brand-red focus:ring-brand-red" id="extraAguacate" onchange="calculateDetailTotal()" type="checkbox">
+<span class="">Aguacate fresco</span>
 </span>
 <span class="text-brand-yellow font-medium">+$2.00</span>
 </label>
@@ -548,7 +632,7 @@
 </div>
 <!-- Add to Cart Button -->
 <button class="w-full mt-6 py-3.5 rounded-xl bg-gradient-to-r from-brand-red to-[#b91e0a] text-white font-bold text-sm tracking-wide shadow-lg shadow-brand-red/30 active:scale-95 transition-all flex items-center justify-center gap-2" onclick="confirmAddToCart()">
-<span>Agregar al carrito</span>
+<span class="">Agregar al carrito</span>
 <span class="ml-1 text-xs opacity-90" id="detailBtnPrice">• $22.00</span>
 </button>
 </div>
@@ -561,33 +645,79 @@
 <i class="fa-solid fa-chevron-left text-sm"></i>
 </button>
 <h2 class="font-serif text-lg text-stone-100 flex items-center gap-2">
-<span>Tu carrito</span>
-<span class="text-xs text-brand-yellow">(<span class="cartBadgeCount">0</span>)</span>
+<span class="">Tu carrito</span>
+<span class="text-xs text-brand-yellow">(<span class="cartBadgeCount">3</span>)</span>
 </h2>
 <button class="text-xs text-stone-400 hover:text-brand-red" onclick="clearCart()">
 <i class="fa-regular fa-trash-can text-sm"></i>
 </button>
 </div>
 <!-- Cart Items Container -->
-<div class="space-y-3 mt-4 flex-1 overflow-y-auto no-scrollbar" id="cartItemsList">
-<!-- Populated dynamically -->
-</div>
+<div class="space-y-3 mt-4 flex-1 overflow-y-auto no-scrollbar" id="cartItemsList"><div class="bg-[#14120D] border border-brand-border rounded-2xl p-3 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <img class="w-14 h-14 rounded-xl object-cover border border-brand-border" src="https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?auto=format&amp;fit=crop&amp;w=400&amp;q=80" alt="Tacos al pastor">
+            <div>
+              <h4 class="font-serif text-xs font-bold text-stone-100">Tacos al pastor</h4>
+              <p class="text-[10px] text-brand-yellow">$22.00</p>
+              <div class="flex items-center gap-2 mt-1">
+                <button onclick="updateCartItemQty(0, -1)" class="w-5 h-5 rounded bg-[#201B12] text-brand-yellow font-bold text-xs flex items-center justify-center">−</button>
+                <span class="text-xs font-bold px-1">1</span>
+                <button onclick="updateCartItemQty(0, 1)" class="w-5 h-5 rounded bg-[#201B12] text-brand-yellow font-bold text-xs flex items-center justify-center">+</button>
+              </div>
+            </div>
+          </div>
+          <button onclick="removeCartItem(0)" class="text-stone-500 hover:text-brand-red text-sm p-2">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div><div class="bg-[#14120D] border border-brand-border rounded-2xl p-3 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <img class="w-14 h-14 rounded-xl object-cover border border-brand-border" src="https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&amp;fit=crop&amp;w=400&amp;q=80" alt="Burrito de res">
+            <div>
+              <h4 class="font-serif text-xs font-bold text-stone-100">Burrito de res</h4>
+              <p class="text-[10px] text-brand-yellow">$28.00</p>
+              <div class="flex items-center gap-2 mt-1">
+                <button onclick="updateCartItemQty(1, -1)" class="w-5 h-5 rounded bg-[#201B12] text-brand-yellow font-bold text-xs flex items-center justify-center">−</button>
+                <span class="text-xs font-bold px-1">1</span>
+                <button onclick="updateCartItemQty(1, 1)" class="w-5 h-5 rounded bg-[#201B12] text-brand-yellow font-bold text-xs flex items-center justify-center">+</button>
+              </div>
+            </div>
+          </div>
+          <button onclick="removeCartItem(1)" class="text-stone-500 hover:text-brand-red text-sm p-2">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div><div class="bg-[#14120D] border border-brand-border rounded-2xl p-3 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <img class="w-14 h-14 rounded-xl object-cover border border-brand-border" src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&amp;fit=crop&amp;w=400&amp;q=80" alt="Agua de jamaica">
+            <div>
+              <h4 class="font-serif text-xs font-bold text-stone-100">Agua de jamaica</h4>
+              <p class="text-[10px] text-brand-yellow">$15.00</p>
+              <div class="flex items-center gap-2 mt-1">
+                <button onclick="updateCartItemQty(2, -1)" class="w-5 h-5 rounded bg-[#201B12] text-brand-yellow font-bold text-xs flex items-center justify-center">−</button>
+                <span class="text-xs font-bold px-1">1</span>
+                <button onclick="updateCartItemQty(2, 1)" class="w-5 h-5 rounded bg-[#201B12] text-brand-yellow font-bold text-xs flex items-center justify-center">+</button>
+              </div>
+            </div>
+          </div>
+          <button onclick="removeCartItem(2)" class="text-stone-500 hover:text-brand-red text-sm p-2">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div></div>
 <!-- Cart Order Summary -->
 <div class="mt-4 pt-3 border-t border-brand-border space-y-2 text-xs">
 <div class="flex justify-between text-stone-400">
-<span>Subtotal</span>
-<span class="font-semibold text-stone-200" id="cartSubtotal">$0.00</span>
+<span class="">Subtotal</span>
+<span class="font-semibold text-stone-200" id="cartSubtotal">$65.00</span>
 </div>
 <div class="flex justify-between text-stone-400">
-<span>Envío</span>
+<span class="">Envío</span>
 <span class="font-semibold text-stone-200" id="cartShipping">$15.00</span>
 </div>
 <div class="flex justify-between text-sm font-bold text-stone-100 pt-1 border-t border-brand-border/60">
-<span>Total</span>
-<span class="font-serif text-base text-brand-yellow" id="cartTotal">$0.00</span>
+<span class="">Total</span>
+<span class="font-serif text-base text-brand-yellow" id="cartTotal">$80.00</span>
 </div>
 <button class="w-full mt-4 py-3.5 rounded-xl bg-gradient-to-r from-brand-red to-[#b91e0a] text-white font-bold text-sm tracking-wide shadow-lg shadow-brand-red/30 active:scale-95 transition-all flex items-center justify-center gap-2" id="checkoutBtn" onclick="goToDeliveryScreen()">
-<span>Continuar con la compra</span>
+<span class="">Continuar con la compra</span>
 <i class="fa-solid fa-arrow-right text-xs"></i>
 </button>
 </div>
@@ -618,7 +748,7 @@
 <!-- Optional Reference Input -->
 <div class="mt-4">
 <label class="block text-xs font-semibold text-stone-300 mb-1.5">Agregar referencia (opcional)</label>
-<input class="w-full bg-[#181510] text-xs text-stone-200 placeholder-stone-500 rounded-xl px-4 py-3 border border-brand-border focus:outline-none focus:border-brand-yellow" id="addressRefInput" placeholder="Ej. Casa blanca, entre calles..." type="text"/>
+<input class="w-full bg-[#181510] text-xs text-stone-200 placeholder-stone-500 rounded-xl px-4 py-3 border border-brand-border focus:outline-none focus:border-brand-yellow" id="addressRefInput" placeholder="Ej. Casa blanca, entre calles..." type="text">
 </div>
 <!-- Visual Interactive Map Simulation (estilo IMAGE_10) -->
 <div class="mt-4 relative rounded-2xl overflow-hidden border border-brand-border bg-[#1A1915] h-52 flex items-center justify-center">
@@ -641,77 +771,7 @@
 </div>
 </main>
 <!-- ================= PANTALLA 9: MÉTODO DE PAGO ================= -->
-<main class="screen flex-col flex-1 px-5 pt-3 pb-6" id="screen-payment">
-<div class="flex items-center justify-between pb-3 border-b border-brand-border">
-<button class="w-9 h-9 rounded-full bg-[#1A1712] border border-brand-border flex items-center justify-center text-stone-300" onclick="navigateBack()">
-<i class="fa-solid fa-chevron-left text-sm"></i>
-</button>
-<h2 class="font-serif text-lg text-stone-100">Método de pago</h2>
-<div class="w-9"></div>
-</div>
-<div class="space-y-3 mt-4">
-<!-- Tarjeta -->
-<div class="payment-method-card bg-[#16140F] border-2 border-brand-red rounded-2xl p-3.5 cursor-pointer transition-all" id="pay-option-card" onclick="selectPaymentMethod('card')">
-<div class="flex items-center justify-between">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 rounded-xl bg-[#201B12] border border-brand-border flex items-center justify-center text-brand-yellow">
-<i class="fa-regular fa-credit-card text-lg"></i>
-</div>
-<div>
-<p class="text-xs font-bold text-stone-200">Tarjeta de crédito o débito</p>
-<p class="text-[10px] text-stone-400">•••• 4242</p>
-</div>
-</div>
-<div class="w-4 h-4 rounded-full border-2 border-brand-red bg-brand-red flex items-center justify-center text-[8px] text-white">✓</div>
-</div>
-</div>
-<!-- PayPal -->
-<div class="payment-method-card bg-[#16140F] border border-brand-border rounded-2xl p-3.5 cursor-pointer transition-all" id="pay-option-paypal" onclick="selectPaymentMethod('paypal')">
-<div class="flex items-center justify-between">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 rounded-xl bg-[#201B12] border border-brand-border flex items-center justify-center text-sky-400">
-<i class="fa-brands fa-paypal text-lg"></i>
-</div>
-<p class="text-xs font-bold text-stone-200">PayPal</p>
-</div>
-<div class="w-4 h-4 rounded-full border border-stone-500"></div>
-</div>
-</div>
-<!-- Mercado Pago -->
-<div class="payment-method-card bg-[#16140F] border border-brand-border rounded-2xl p-3.5 cursor-pointer transition-all" id="pay-option-mercadopago" onclick="selectPaymentMethod('mercadopago')">
-<div class="flex items-center justify-between">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 rounded-xl bg-[#201B12] border border-brand-border flex items-center justify-center text-cyan-400">
-<i class="fa-solid fa-hand-holding-dollar text-lg"></i>
-</div>
-<p class="text-xs font-bold text-stone-200">Mercado Pago</p>
-</div>
-<div class="w-4 h-4 rounded-full border border-stone-500"></div>
-</div>
-</div>
-<!-- Apple Pay -->
-<div class="payment-method-card bg-[#16140F] border border-brand-border rounded-2xl p-3.5 cursor-pointer transition-all" id="pay-option-apple" onclick="selectPaymentMethod('apple')">
-<div class="flex items-center justify-between">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 rounded-xl bg-[#201B12] border border-brand-border flex items-center justify-center text-white">
-<i class="fa-brands fa-apple text-xl"></i>
-</div>
-<p class="text-xs font-bold text-stone-200">Apple Pay</p>
-</div>
-<div class="w-4 h-4 rounded-full border border-stone-500"></div>
-</div>
-</div>
-</div>
-<div class="flex items-center justify-center gap-2 mt-6 text-[11px] text-stone-500">
-<i class="fa-solid fa-lock text-brand-yellow"></i>
-<span>Tus datos están protegidos</span>
-</div>
-<div class="mt-auto pt-6">
-<button class="w-full py-3.5 rounded-xl bg-gradient-to-r from-brand-red to-[#b91e0a] text-white font-bold text-sm tracking-wide shadow-lg shadow-brand-red/30 active:scale-95 transition-all" onclick="processOrderPlacement()">
-      Continuar
-    </button>
-</div>
-</main>
+<main class="screen flex-col flex-1 px-5 pt-3 pb-6" id="screen-payment"><div class="flex items-center justify-between pb-3 border-b border-brand-border"><button class="w-9 h-9 rounded-full bg-[#1A1712] border border-brand-border flex items-center justify-center text-stone-300" onclick="navigateBack()"><i class="fa-solid fa-chevron-left text-sm"></i></button><h2 class="font-serif text-lg text-stone-100">Métodos de pago</h2><div class="w-9"></div></div><!-- Payment Tabs Filter --><div class="grid grid-cols-4 gap-1.5 mt-3"><button onclick="filterPaymentTab('all')" id="payTab-all" class="pay-tab-btn py-2 text-[11px] font-bold rounded-xl bg-brand-red text-white">Todos</button><button onclick="filterPaymentTab('card')" id="payTab-card" class="pay-tab-btn py-2 text-[11px] font-semibold rounded-xl bg-[#16140F] border border-brand-border text-stone-400">Tarjeta</button><button onclick="filterPaymentTab('digital')" id="payTab-digital" class="pay-tab-btn py-2 text-[11px] font-semibold rounded-xl bg-[#16140F] border border-brand-border text-stone-400">Digital</button><button onclick="filterPaymentTab('wallets')" id="payTab-wallets" class="pay-tab-btn py-2 text-[11px] font-semibold rounded-xl bg-[#16140F] border border-brand-border text-stone-400">Wallets</button></div><div class="space-y-3 mt-4 flex-1"><!-- Tarjeta --><div class="payment-method-card bg-[#16140F] border-2 border-brand-red rounded-2xl p-3.5 cursor-pointer transition-all" id="pay-option-card" data-category="card" onclick="selectPaymentMethod('card')"><div class="flex items-center justify-between"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-xl bg-[#201B12] border border-brand-border flex items-center justify-center text-brand-yellow"><i class="fa-regular fa-credit-card text-lg"></i></div><div><p class="text-xs font-bold text-stone-200">Tarjeta de crédito o débito</p><p class="text-[10px] text-stone-400">Visa, Mastercard, Maestro •••• 4242</p></div></div><div class="w-4 h-4 rounded-full border-2 border-brand-red bg-brand-red flex items-center justify-center text-[8px] text-white" id="check-card">✓</div></div></div><!-- PayPal --><div class="payment-method-card bg-[#16140F] border border-brand-border rounded-2xl p-3.5 cursor-pointer transition-all" id="pay-option-paypal" data-category="digital" onclick="selectPaymentMethod('paypal')"><div class="flex items-center justify-between"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-xl bg-[#201B12] border border-brand-border flex items-center justify-center text-sky-400"><i class="fa-brands fa-paypal text-lg"></i></div><div><p class="text-xs font-bold text-stone-200">PayPal</p><p class="text-[10px] text-stone-400">Pago seguro en 1 clic</p></div></div><div class="w-4 h-4 rounded-full border border-stone-500" id="check-paypal"></div></div></div><!-- Mercado Pago --><div class="payment-method-card bg-[#16140F] border border-brand-border rounded-2xl p-3.5 cursor-pointer transition-all" id="pay-option-mercadopago" data-category="digital" onclick="selectPaymentMethod('mercadopago')"><div class="flex items-center justify-between"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-xl bg-[#201B12] border border-brand-border flex items-center justify-center text-cyan-400"><i class="fa-solid fa-hand-holding-dollar text-lg"></i></div><div><p class="text-xs font-bold text-stone-200">Mercado Pago</p><p class="text-[10px] text-stone-400">Saldo o dinero en cuenta</p></div></div><div class="w-4 h-4 rounded-full border border-stone-500" id="check-mercadopago"></div></div></div><!-- Apple Pay / Google Pay --><div class="payment-method-card bg-[#16140F] border border-brand-border rounded-2xl p-3.5 cursor-pointer transition-all" id="pay-option-apple" data-category="wallets" onclick="selectPaymentMethod('apple')"><div class="flex items-center justify-between"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-xl bg-[#201B12] border border-brand-border flex items-center justify-center text-white"><i class="fa-brands fa-apple text-xl"></i></div><div><p class="text-xs font-bold text-stone-200">Apple Pay / Google Wallet</p><p class="text-[10px] text-stone-400">Biometría y pago inmediato</p></div></div><div class="w-4 h-4 rounded-full border border-stone-500" id="check-apple"></div></div></div></div><div class="flex items-center justify-center gap-2 mt-4 text-[11px] text-stone-500"><i class="fa-solid fa-lock text-brand-yellow"></i><span class="">Encriptación SSL de 256 bits protegida</span></div><div class="mt-auto pt-4"><button class="w-full py-3.5 rounded-xl bg-gradient-to-r from-brand-red to-[#b91e0a] text-white font-bold text-sm tracking-wide shadow-lg shadow-brand-red/30 active:scale-95 transition-all" onclick="processOrderPlacement()">Continuar con el pago</button></div></main>
 <!-- ================= PANTALLA 10: PEDIDO CONFIRMADO ================= -->
 <main class="screen flex-col flex-1 px-5 pt-6 pb-6 text-center justify-between" id="screen-order-confirmed">
 <div class="flex flex-col items-center">
@@ -783,36 +843,36 @@
 <i class="fa-solid fa-fire text-lg text-brand-red"></i>
 </div>
 <div>
-<h3 class="font-serif text-sm font-bold text-stone-100" id="trackingStageTitle">En preparación</h3>
-<p class="text-[11px] text-stone-400" id="trackingStageSubtitle">Tu pedido ya se está preparando en la cocina.</p>
+<h3 class="font-serif text-sm font-bold text-stone-100" id="trackingStageTitle">¡Pedido Entregado!</h3>
+<p class="text-[11px] text-stone-400" id="trackingStageSubtitle">Tu pedido llegó con éxito. ¡A disfrutar!</p>
 </div>
 </div>
 <!-- Stepper horizontal sincronizado -->
 <div class="flex items-center justify-between text-[10px] text-stone-400 mt-4 px-1" id="horizontalStepper">
 <div class="flex flex-col items-center gap-1 font-bold text-brand-yellow" id="step-node-1">
 <div class="w-5 h-5 rounded-full bg-brand-yellow text-black flex items-center justify-center text-[9px]">✓</div>
-<span>Recibido</span>
+<span class="">Recibido</span>
 </div>
 <div class="h-0.5 w-6 bg-brand-yellow" id="step-bar-1"></div>
 <div class="flex flex-col items-center gap-1 font-bold text-brand-yellow" id="step-node-2">
 <div class="w-5 h-5 rounded-full bg-brand-red text-white flex items-center justify-center text-[9px]">
 <i class="fa-solid fa-fire text-[8px]"></i>
 </div>
-<span>En cocina</span>
+<span class="">En cocina</span>
 </div>
-<div class="h-0.5 w-6 bg-stone-700" id="step-bar-2"></div>
-<div class="flex flex-col items-center gap-1 text-stone-500" id="step-node-3">
+<div class="h-0.5 w-6 bg-brand-yellow" id="step-bar-2"></div>
+<div class="flex flex-col items-center gap-1 text-brand-yellow font-bold" id="step-node-3">
 <div class="w-5 h-5 rounded-full bg-[#201B12] text-stone-400 flex items-center justify-center text-[9px]">
 <i class="fa-solid fa-motorcycle text-[8px]"></i>
 </div>
-<span>En camino</span>
+<span class="">En camino</span>
 </div>
-<div class="h-0.5 w-6 bg-stone-700" id="step-bar-3"></div>
-<div class="flex flex-col items-center gap-1 text-stone-500" id="step-node-4">
+<div class="h-0.5 w-6 bg-brand-yellow" id="step-bar-3"></div>
+<div class="flex flex-col items-center gap-1 text-emerald-400 font-bold" id="step-node-4">
 <div class="w-5 h-5 rounded-full bg-[#201B12] text-stone-400 flex items-center justify-center text-[9px]">
 <i class="fa-solid fa-house text-[8px]"></i>
 </div>
-<span>Entregado</span>
+<span class="">Entregado</span>
 </div>
 </div>
 </div>
@@ -820,7 +880,7 @@
 <div class="mt-4 relative rounded-2xl overflow-hidden border border-brand-border bg-[#181612] h-48 flex items-center justify-center" id="trackingMapBox">
 <div class="absolute inset-0 opacity-20" style="background-image: linear-gradient(#2A241A 1px, transparent 1px), linear-gradient(90deg, #2A241A 1px, transparent 1px); background-size: 20px 20px;"></div>
 <!-- Path Route Graphic -->
-<svg class="absolute inset-0 w-full h-full pointer-events-none" viewbox="0 0 350 180">
+<svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 350 180">
 <path d="M 45 135 C 100 135, 120 50, 190 70 S 260 120, 305 50" fill="none" id="deliverySvgPath" stroke="#FBC31C" stroke-dasharray="6,6" stroke-width="3"></path>
 </svg>
 <!-- Origin Restaurant Marker -->
@@ -831,7 +891,7 @@
 <span class="text-[8px] text-stone-400 mt-0.5 font-bold">Desperados</span>
 </div>
 <!-- Dynamic Courier Marker (moves smoothly along path via JS) -->
-<div class="absolute z-20 transition-all duration-700 ease-linear flex flex-col items-center" id="courierMapMarker" style="left: 45px; top: 110px;">
+<div class="absolute z-20 transition-all duration-700 ease-linear flex flex-col items-center" id="courierMapMarker" style="left: calc(87.1428% - 18px); top: calc(27.7779% - 22px);">
 <div class="w-9 h-9 rounded-full bg-brand-yellow text-black flex items-center justify-center shadow-2xl border-2 border-[#0C0B08] animate-pulse">
 <i class="fa-solid fa-motorcycle text-sm"></i>
 </div>
@@ -853,27 +913,25 @@
 </div>
 <div>
 <span class="text-[10px] text-stone-400 uppercase tracking-wider">Tiempo estimado de entrega</span>
-<p class="font-serif text-2xl font-bold text-brand-yellow tracking-tight" id="countdownDisplay">05:00</p>
+<p class="font-serif text-2xl font-bold text-brand-yellow tracking-tight" id="countdownDisplay">00:00</p>
 </div>
 </div>
-<span class="text-xs bg-emerald-950 text-emerald-400 border border-emerald-800 px-2.5 py-1 rounded-full font-bold" id="deliveryStatusBadge">En tiempo</span>
+<span class="text-xs bg-emerald-950 text-emerald-400 border border-emerald-800 px-2.5 py-1 rounded-full font-bold" id="deliveryStatusBadge">Entregado</span>
 </div>
 <!-- Courier Contact Card (repartidores variados y realistas) -->
 <div class="mt-3 bg-[#16140F] border border-brand-border rounded-2xl p-3.5 flex items-center justify-between">
 <div class="flex items-center gap-3">
 <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-brand-red to-brand-yellow p-0.5 flex items-center justify-center">
-<div class="w-full h-full rounded-full bg-[#181510] flex items-center justify-center text-lg" id="courierAvatarEmoji">
-          🛵
-        </div>
+<div class="w-full h-full rounded-full bg-[#181510] flex items-center justify-center text-lg" id="courierAvatarEmoji">🛵</div>
 </div>
 <div>
 <div class="flex items-center gap-1.5">
 <p class="text-xs font-bold text-stone-200" id="courierFullName">Luis R.</p>
 <span class="text-[10px] text-brand-yellow flex items-center">
-<i class="fa-solid fa-star text-[8px] mr-0.5"></i> <span id="courierRating">4.9</span>
+<i class="fa-solid fa-star text-[8px] mr-0.5"></i> <span id="courierRating" class="">4.9</span>
 </span>
 </div>
-<p class="text-[10px] text-stone-400" id="courierVehicle">Repartidor certificado en moto</p>
+<p class="text-[10px] text-stone-400" id="courierVehicle">Moto Yamaha 150cc</p>
 </div>
 </div>
 <div class="flex items-center gap-2">
@@ -905,7 +963,7 @@
 </button>
 </div>
 <h3 class="font-serif text-xl font-bold text-stone-100 mt-2 flex items-center gap-1.5 justify-center">
-<span id="profileNameDisplay">Ana Torres</span>
+<span id="profileNameDisplay" class="">Ana Torres</span>
 <i class="fa-solid fa-pen-to-square text-xs text-brand-yellow opacity-70 group-hover:opacity-100"></i>
 </h3>
 <p class="text-xs text-stone-400" id="profileEmailDisplay">ana.torres@email.com</p>
@@ -918,65 +976,59 @@
 <button class="w-full bg-[#16140F] border border-brand-border rounded-xl p-3 flex items-center justify-between hover:border-brand-yellow/40" onclick="navigateTo('screen-tracking')">
 <span class="flex items-center gap-3 text-stone-200">
 <i class="fa-solid fa-clock-rotate-left text-brand-yellow text-sm"></i>
-<span>Mis pedidos</span>
+<span class="">Mis pedidos</span>
 </span>
 <i class="fa-solid fa-chevron-right text-stone-500 text-[10px]"></i>
 </button>
 <button class="w-full bg-[#16140F] border border-brand-border rounded-xl p-3 flex items-center justify-between hover:border-brand-yellow/40" onclick="navigateTo('screen-delivery')">
 <span class="flex items-center gap-3 text-stone-200">
 <i class="fa-solid fa-location-dot text-brand-yellow text-sm"></i>
-<span>Direcciones</span>
+<span class="">Direcciones</span>
 </span>
 <i class="fa-solid fa-chevron-right text-stone-500 text-[10px]"></i>
 </button>
 <button class="w-full bg-[#16140F] border border-brand-border rounded-xl p-3 flex items-center justify-between hover:border-brand-yellow/40" onclick="navigateTo('screen-payment')">
 <span class="flex items-center gap-3 text-stone-200">
 <i class="fa-regular fa-credit-card text-brand-yellow text-sm"></i>
-<span>Métodos de pago</span>
+<span class="">Métodos de pago</span>
 </span>
 <i class="fa-solid fa-chevron-right text-stone-500 text-[10px]"></i>
 </button>
 <button class="w-full bg-[#16140F] border border-brand-border rounded-xl p-3 flex items-center justify-between hover:border-brand-yellow/40" onclick="showToast('Tienes 1 cupón disponible: DESPERADOS10 (10% OFF)')">
 <span class="flex items-center gap-3 text-stone-200">
 <i class="fa-solid fa-tag text-brand-yellow text-sm"></i>
-<span>Cupones y promociones</span>
+<span class="">Cupones y promociones</span>
 </span>
 <span class="bg-brand-red text-white text-[9px] font-bold px-2 py-0.5 rounded-full">1 nuevo</span>
 </button>
 <button class="w-full bg-[#16140F] border border-brand-border rounded-xl p-3 flex items-center justify-between hover:border-brand-yellow/40" onclick="showToast('Notificaciones activas')">
 <span class="flex items-center gap-3 text-stone-200">
 <i class="fa-regular fa-bell text-brand-yellow text-sm"></i>
-<span>Notificaciones</span>
+<span class="">Notificaciones</span>
 </span>
 <i class="fa-solid fa-chevron-right text-stone-500 text-[10px]"></i>
 </button>
-<button class="w-full bg-[#16140F] border border-brand-border rounded-xl p-3 flex items-center justify-between hover:border-brand-yellow/40" onclick="showToast('Soporte Desperados: WhatsApp +34 600 000 000')">
-<span class="flex items-center gap-3 text-stone-200">
-<i class="fa-regular fa-circle-question text-brand-yellow text-sm"></i>
-<span>Ayuda y soporte</span>
-</span>
-<i class="fa-solid fa-chevron-right text-stone-500 text-[10px]"></i>
-</button>
+<button class="w-full bg-[#16140F] border border-brand-border rounded-xl p-3 flex items-center justify-between hover:border-brand-yellow/40" onclick="navigateTo('screen-faq')"><span class="flex items-center gap-3 text-stone-200"><i class="fa-regular fa-circle-question text-brand-yellow text-sm"></i><span class="">Centro de Ayuda &amp; FAQ</span></span><i class="fa-solid fa-chevron-right text-stone-500 text-[10px]"></i></button>
 <button class="w-full bg-[#16140F] border border-brand-border rounded-xl p-3 flex items-center justify-between hover:border-brand-yellow/40" onclick="openEditProfileModal()">
 <span class="flex items-center gap-3 text-stone-200">
 <i class="fa-solid fa-gear text-brand-yellow text-sm"></i>
-<span>Configuración</span>
+<span class="">Configuración</span>
 </span>
 <i class="fa-solid fa-chevron-right text-stone-500 text-[10px]"></i>
 </button>
 </div>
 <!-- Sign out button -->
-<div class="mt-6">
+<div class="mt-2"><button class="w-full bg-[#16140F] border border-brand-border rounded-xl p-3 flex items-center justify-between hover:border-brand-yellow/40 text-xs" onclick="navigateTo('screen-privacy')"><span class="flex items-center gap-3 text-stone-200"><i class="fa-solid fa-lock text-brand-yellow text-sm"></i><span class="">Política de Privacidad</span></span><i class="fa-solid fa-chevron-right text-stone-500 text-[10px]"></i></button></div><div class="mt-6">
 <button class="w-full py-3 rounded-xl border border-brand-red/40 bg-brand-red/10 text-brand-red font-bold text-xs hover:bg-brand-red hover:text-white transition-colors flex items-center justify-center gap-2" onclick="handleLogout()">
 <i class="fa-solid fa-arrow-right-from-bracket text-xs"></i>
-<span>Cerrar sesión</span>
+<span class="">Cerrar sesión</span>
 </button>
 </div>
-</main>
+</main><!-- ================= PANTALLA: CENTRO DE AYUDA & FAQ ================= --><main class="screen flex-col flex-1 px-5 pt-3 pb-6" id="screen-faq"><div class="flex items-center justify-between pb-3 border-b border-brand-border"><button class="w-9 h-9 rounded-full bg-[#1A1712] border border-brand-border flex items-center justify-center text-stone-300" onclick="navigateBack()"><i class="fa-solid fa-chevron-left text-sm"></i></button><h2 class="font-serif text-lg text-stone-100">Centro de Ayuda &amp; FAQ</h2><div class="w-9"></div></div><!-- Atención Telefónica Card --><div class="mt-4 bg-[#16140F] border border-brand-yellow/40 rounded-2xl p-4 shadow-lg"><div class="flex items-start gap-3"><div class="w-10 h-10 rounded-full bg-brand-yellow/20 text-brand-yellow flex items-center justify-center flex-shrink-0 mt-0.5"><i class="fa-solid fa-phone text-base"></i></div><div><h3 class="font-serif text-sm font-bold text-stone-100">Atención al Cliente Inmediata</h3><p class="text-xs text-stone-400 mt-0.5">Horario de cocina: Mar - Dom, 13:00 a 23:30 h</p><a class="mt-3 inline-flex items-center gap-2 bg-brand-red hover:bg-[#c92510] text-white text-xs font-bold px-4 py-2 rounded-xl shadow" href="tel:663746873"><i class="fa-solid fa-phone text-xs"></i><span class="">Llamar al 663 74 68 73</span></a></div></div></div><!-- Preguntas Frecuentes Accordion --><div class="mt-5"><h3 class="font-serif text-base text-stone-100 mb-3">Preguntas Frecuentes</h3><div class="space-y-2.5 text-xs"><div class="bg-[#16140F] border border-brand-border rounded-xl p-3.5"><p class="font-bold text-brand-yellow mb-1">¿Cuánto tarda en llegar mi pedido?</p><p class="text-stone-400 leading-relaxed">El tiempo habitual de entrega oscila entre 25 y 40 minutos en el área metropolitana de Murcia. Puedes seguir la ubicación en vivo en la pantalla de seguimiento.</p></div><div class="bg-[#16140F] border border-brand-border rounded-xl p-3.5"><p class="font-bold text-brand-yellow mb-1">¿Los ingredientes son auténticos mexicanos?</p><p class="text-stone-400 leading-relaxed">Sí, todos nuestros chiles (habanero, jalapeño, serrano, guajillo) son de cosecha propia y nuestras tortillas se elaboran artesanalmente a diario.</p></div><div class="bg-[#16140F] border border-brand-border rounded-xl p-3.5"><p class="font-bold text-brand-yellow mb-1">¿Cómo cancelo o modifico mi pedido?</p><p class="text-stone-400 leading-relaxed">Comunícate de inmediato al 663 74 68 73 antes de que el pedido entre en fase de cocina.</p></div><div class="bg-[#16140F] border border-brand-border rounded-xl p-3.5"><p class="font-bold text-brand-yellow mb-1">¿Disponen de opciones sin gluten o vegetarianas?</p><p class="text-stone-400 leading-relaxed">Nuestras tortillas de maíz son naturalmente libres de gluten y ofrecemos opciones con frijoles de la olla, queso fresco y aguacate.</p></div></div></div></main><!-- ================= PANTALLA: POLÍTICA DE PRIVACIDAD ================= --><main class="screen flex-col flex-1 px-5 pt-3 pb-6" id="screen-privacy"><div class="flex items-center justify-between pb-3 border-b border-brand-border"><button class="w-9 h-9 rounded-full bg-[#1A1712] border border-brand-border flex items-center justify-center text-stone-300" onclick="navigateBack()"><i class="fa-solid fa-chevron-left text-sm"></i></button><h2 class="font-serif text-lg text-stone-100">Política de Privacidad</h2><div class="w-9"></div></div><div class="mt-4 space-y-4 text-xs text-stone-300 leading-relaxed overflow-y-auto no-scrollbar max-h-[75vh] pr-1"><div class="p-3.5 rounded-xl bg-[#16140F] border border-brand-border"><h4 class="font-bold text-brand-yellow mb-1">1. Responsable del Tratamiento</h4><p class="text-stone-400">Desperados Comida Mexicana S.L., con domicilio en Murcia (España), garantiza la protección de los datos de carácter personal conforme al RGPD (UE 2016/679) y la LOPDGDD 3/2018.</p></div><div class="p-3.5 rounded-xl bg-[#16140F] border border-brand-border"><h4 class="font-bold text-brand-yellow mb-1">2. Finalidad del Tratamiento</h4><p class="text-stone-400">Los datos recabados (nombre, correo electrónico, dirección de entrega y datos de contacto) se utilizan exclusivamente para procesar tus pedidos a domicilio, emitir justificantes de compra y atender consultas.</p></div><div class="p-3.5 rounded-xl bg-[#16140F] border border-brand-border"><h4 class="font-bold text-brand-yellow mb-1">3. Seguridad y Pagos</h4><p class="text-stone-400">No almacenamos información bancaria en nuestros servidores locales. Todas las transacciones se encriptan con certificación PCI-DSS a través de pasarelas seguras.</p></div><div class="p-3.5 rounded-xl bg-[#16140F] border border-brand-border"><h4 class="font-bold text-brand-yellow mb-1">4. Ejercicio de Derechos</h4><p class="text-stone-400">Puedes solicitar el acceso, rectificación, supresión o limitación del tratamiento contactándonos en soporte@desperadosmurcia.com o llamando al 663 74 68 73.</p></div></div></main>
 <!-- ================= FIXED BOTTOM NAVIGATION BAR ================= -->
-<nav class="fixed bottom-0 max-w-md w-full bg-[#0C0B08]/95 backdrop-blur-lg border-t border-[#2A241A] px-6 py-2 z-50 flex items-center justify-between" id="bottomNav">
+<nav class="fixed bottom-0 max-w-md w-full bg-[#0C0B08]/95 backdrop-blur-lg border-t border-[#2A241A] px-6 py-2 z-50 flex items-center justify-between" id="bottomNav" style="display: flex;">
 <!-- Inicio -->
-<button class="flex flex-col items-center gap-1 text-brand-yellow group" id="nav-btn-home" onclick="navigateTo('screen-home')">
+<button class="flex flex-col items-center gap-1 group text-brand-yellow" id="nav-btn-home" onclick="navigateTo('screen-home')">
 <div class="relative">
 <i class="fa-solid fa-house text-lg"></i>
 <span class="nav-indicator absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-brand-red rounded-full"></span>
@@ -995,16 +1047,16 @@
 <button class="flex flex-col items-center gap-1 text-stone-400 hover:text-brand-yellow transition-colors group relative" id="nav-btn-cart" onclick="navigateTo('screen-cart')">
 <div class="relative">
 <i class="fa-solid fa-clipboard-list text-lg group-hover:scale-110 transition-transform"></i>
-<span class="cartBadgeCount absolute -top-1.5 -right-2.5 bg-brand-red text-white text-[9px] font-bold rounded-full w-4 h-4 flex items-center justify-center border border-[#0C0B08]">0</span>
+<span class="cartBadgeCount absolute -top-1.5 -right-2.5 bg-brand-red text-white text-[9px] font-bold rounded-full w-4 h-4 flex items-center justify-center border border-[#0C0B08]">3</span>
 <span class="nav-indicator hidden absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-brand-red rounded-full"></span>
 </div>
 <span class="text-[10px] font-medium tracking-tight">Pedidos</span>
 </button>
 <!-- Perfil -->
-<button class="flex flex-col items-center gap-1 text-stone-400 hover:text-brand-yellow transition-colors group" id="nav-btn-profile" onclick="navigateTo('screen-profile')">
+<button class="flex flex-col items-center gap-1 hover:text-brand-yellow transition-colors group text-stone-400" id="nav-btn-profile" onclick="navigateTo('screen-profile')">
 <div class="relative">
 <i class="fa-regular fa-user text-lg group-hover:scale-110 transition-transform"></i>
-<span class="nav-indicator hidden absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-brand-red rounded-full"></span>
+<span class="nav-indicator absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-brand-red rounded-full hidden"></span>
 </div>
 <span class="text-[10px] font-medium tracking-tight">Perfil</span>
 </button>
@@ -1861,4 +1913,82 @@
     startTrackingTimer();
   });
 </script>
-</body></html>
+
+
+<script>
+  // Funciones añadidas para Side Drawer
+  function openSideDrawer() {
+    const overlay = document.getElementById('sideDrawerOverlay');
+    const drawer = document.getElementById('sideDrawer');
+    if (!overlay || !drawer) return;
+    overlay.classList.remove('hidden');
+    setTimeout(() => {
+      drawer.classList.remove('-translate-x-full');
+    }, 10);
+    
+    // Actualizar info en drawer
+    const nameEl = document.getElementById('drawerUserName');
+    const emailEl = document.getElementById('drawerUserEmail');
+    const avatarEl = document.getElementById('drawerAvatarDisplay');
+    if (nameEl) nameEl.textContent = currentUser.name || 'Invitado';
+    if (emailEl) emailEl.textContent = currentUser.email || 'cliente@desperados.com';
+    if (avatarEl) avatarEl.textContent = currentUser.avatar || '🌮';
+  }
+
+  function closeSideDrawer() {
+    const overlay = document.getElementById('sideDrawerOverlay');
+    const drawer = document.getElementById('sideDrawer');
+    if (!overlay || !drawer) return;
+    drawer.classList.add('-translate-x-full');
+    setTimeout(() => {
+      overlay.classList.add('hidden');
+    }, 280);
+  }
+
+  function drawerNavigate(screenId) {
+    closeSideDrawer();
+    setTimeout(() => navigateTo(screenId), 150);
+  }
+
+  // Enlazar botón superior izquierdo del home con side drawer
+  window.openMenu = openSideDrawer;
+
+  // Avatar Picker
+  let selectedAvatar = '👩🏻';
+  function pickAvatar(emoji) {
+    selectedAvatar = emoji;
+    currentUser.avatar = emoji;
+    document.querySelectorAll('.avatar-choice').forEach(btn => {
+      btn.classList.remove('border-brand-yellow');
+      btn.classList.add('border-brand-border');
+    });
+    if (event && event.currentTarget) {
+      event.currentTarget.classList.remove('border-brand-border');
+      event.currentTarget.classList.add('border-brand-yellow');
+    }
+    const profDisp = document.getElementById('profileAvatarDisplay');
+    if (profDisp) profDisp.textContent = emoji;
+    const drawDisp = document.getElementById('drawerAvatarDisplay');
+    if (drawDisp) drawDisp.textContent = emoji;
+  }
+
+  // Filtrado de Pestañas de Pago
+  function filterPaymentTab(category) {
+    document.querySelectorAll('.pay-tab-btn').forEach(btn => {
+      btn.className = 'pay-tab-btn py-2 text-[11px] font-semibold rounded-xl bg-[#16140F] border border-brand-border text-stone-400';
+    });
+    const activeBtn = document.getElementById(`payTab-${category}`);
+    if (activeBtn) {
+      activeBtn.className = 'pay-tab-btn py-2 text-[11px] font-bold rounded-xl bg-brand-red text-white';
+    }
+
+    const cards = document.querySelectorAll('.payment-method-card');
+    cards.forEach(card => {
+      if (category === 'all' || card.getAttribute('data-category') === category) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+</script></body></html>
